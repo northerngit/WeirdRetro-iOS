@@ -14,6 +14,7 @@
 {
     BOOL started;
     NSMutableArray* array;
+    NSMutableArray* arraySkip;
     
 }
 
@@ -27,9 +28,10 @@
     [super viewDidLoad];
     
     
-    NSString *markup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"japanese" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    NSString *markup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"fantomash" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
     
     array = [NSMutableArray new];
+    arraySkip = [NSMutableArray new];
     
     HTMLDocument *document = [HTMLDocument documentWithString:markup];
     HTMLElement* element = [document firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
@@ -37,43 +39,32 @@
     [self startParsing1:element];
     
     
-    NSLog(@"%@", array);
     
-//    HTMLElement *b = [document firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
-//    NSMutableOrderedSet *children = [b.parentNode mutableChildren];
-//    HTMLElement *wrapper = [[HTMLElement alloc] initWithTagName:@"div"
-//                                                     attributes:@{@"class": @"special"}];
-//    [children insertObject:wrapper atIndex:[children indexOfObject:b]];
-//    b.parentNode = wrapper;
+    
+    
+//    // Create a regular expression
+//    BOOL isCaseSensitive = [[options objectForKey:kRWSearchCaseSensitiveKey] boolValue];
+//    BOOL isWholeWords = [[options objectForKey:kRWSearchWholeWordsKey] boolValue];
+    
+    NSError *error = NULL;
+    NSRegularExpressionOptions regexOptions = NSRegularExpressionCaseInsensitive;
+    
+    NSString *pattern = @"wslideshow.render\\(\\{[^\\}]+images:(\\[\\{[^\\]]+\\])";
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
+    if (error)
+    {
+        NSLog(@"Couldn't create regex with given string and options");
+    }
+    
+    NSRange textRange = NSMakeRange(0, markup.length);
+    NSTextCheckingResult* matchRange = [regex firstMatchInString:markup options:NSMatchingReportProgress range:textRange];
+    NSLog(@"%@", [markup substringWithRange:[matchRange rangeAtIndex:1]]);
+    
+    
+//    NSLog(@"%@", array);
 }
 
-
-//[self startParsing2:element];
-
-//    HTMLElement *b = [document firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
-//    NSMutableOrderedSet *children = [b.parentNode mutableChildren];
-//    HTMLElement *wrapper = [[HTMLElement alloc] initWithTagName:@"div"
-//                                                     attributes:@{@"class": @"special"}];
-//    [children insertObject:wrapper atIndex:[children indexOfObject:b]];
-//    b.parentNode = wrapper;
-
-
-
-
-//- (void) startParsing2:(HTMLElement*)contentElement
-//{
-//    NSArray* elements = [contentElement nodesMatchingSelector:@"div+hr"];
-//    NSLog(@"%@", elements);
-//    
-//    //    for (HTMLNode* childrenNode in contentElement.children)
-//    //    {
-//    //        if ( [childrenNode isKindOfClass:[HTMLElement class]] )
-//    //        {
-//    //            HTMLElement* childrenElement = (HTMLElement*)childrenNode;
-//    //        }
-//    //
-//    //    }
-//}
 
 
 - (void) startParsing1:(HTMLElement*)contentElement
@@ -87,7 +78,7 @@
 
 - (void) parseNode:(HTMLNode*)node level:(NSInteger)level
 {
-    if ( [node isKindOfClass:[HTMLElement class]] )
+    if ( [node isKindOfClass:[HTMLElement class]] && ![arraySkip containsObject:node] )
     {
         HTMLElement* element = (HTMLElement*)node;
         if ( [element.tagName isEqualToString:@"div"] )
@@ -113,7 +104,11 @@
                 {
                     [self parseTextDIV:element];
                 }
-
+                // Video
+                else if ( [class isEqualToString:@"wsite-youtube"] )
+                {
+                    [self parseYoutube:element];
+                }
             }
             else
             {
@@ -142,11 +137,20 @@
                 [self parseNode:childrenNode level:level++];
         }
     }
-
-    
-    ///////////
 }
 
+
+- (HTMLElement*) getNextElementSibling:(HTMLElement*)element
+{
+    for (NSUInteger index = [element.parentNode indexOfChild:element]+1; index < element.parentNode.numberOfChildren; index++)
+    {
+        HTMLNode* node = [element.parentNode childAtIndex:index];
+        if ( [node isKindOfClass:[HTMLElement class]])
+            return (HTMLElement*)node;
+    }
+    
+    return nil;
+}
 
 
 - (void) parseImagedLink:(HTMLElement*)element
@@ -158,27 +162,22 @@
     if ( index + 3 > element.parentElement.numberOfChildren )
         return;
 
-    HTMLNode* spanElement = [element.parentElement childAtIndex:index+1];
+    HTMLElement* spanElement = [self getNextElementSibling:element];
     
-    if ( spanElement &&
-        [spanElement isKindOfClass:[HTMLElement class]] &&
-        [[(HTMLElement*)spanElement tagName] isEqualToString:@"span"] )
+    if ( spanElement && [spanElement.tagName isEqualToString:@"span"] )
     {
-        HTMLNode* imgNode = [[element.parentElement childAtIndex:index+1] firstNodeMatchingSelector:@"img"];
-        HTMLNode* descriptionNode = [element.parentElement childAtIndex:index+2];
+        HTMLElement* imgElement = [spanElement firstNodeMatchingSelector:@"img"];
+        HTMLElement* descriptionElement = [self getNextElementSibling:spanElement];
         
-        NSLog(@"%@", descriptionNode);
-        
-        if ( imgNode && [imgNode isKindOfClass:[HTMLElement class]] &&
-            descriptionNode && [descriptionNode isKindOfClass:[HTMLElement class]])
+        if ( imgElement && descriptionElement )
         {
-            HTMLElement* imgElement = (HTMLElement*)imgNode;
-            HTMLElement* descriptionElement = (HTMLElement*)descriptionNode;
-
             if ( [descriptionElement.tagName isEqualToString:@"div"] && descriptionElement.attributes[@"class"] &&
                 [descriptionElement.attributes[@"class"] isEqualToString:@"paragraph"] )
             {
-                NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @3, @"src":imgElement.attributes[@"src"], @"description":[descriptionElement serializedFragment]}];
+                NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @3, @"src":imgElement.attributes[@"src"], @"description":descriptionElement.innerHTML}];
+                
+                [arraySkip addObject:spanElement];
+                [arraySkip addObject:descriptionElement];
                 
                 [array addObject:dictionary];
             }
@@ -188,10 +187,31 @@
 }
 
 
-
 - (void) parseIMDBSpan:(HTMLElement*)element
 {
 }
+
+
+- (void) parseYoutube:(HTMLElement*)element
+{
+    HTMLElement* iframeElement = [element firstNodeMatchingSelector:@"iframe"];
+    
+    if ( iframeElement )
+    {
+        NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @4, @"src": iframeElement.attributes[@"src"]}];
+        
+        [array addObject:dictionary];
+    }
+}
+
+
+- (void) parseSlides:(HTMLElement*)element
+{
+    NSArray* slidesArray = [element nodesMatchingSelector:@"[class='wslide-link-inner2']"];
+    
+    NSLog(@"%@", slidesArray);
+}
+
 
 
 - (void) parseHR
@@ -222,9 +242,8 @@
 
 - (void) parseTextDIV:(HTMLElement*)element
 {
-    [array addObject:@{@"type":@0, @"description":[element serializedFragment]}];
+    [array addObject:@{@"type":@0, @"description":element.innerHTML}];
 }
-
 
 
 
