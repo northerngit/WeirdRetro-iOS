@@ -15,7 +15,7 @@
     BOOL started;
     NSMutableArray* array;
     NSMutableArray* arraySkip;
-    
+    NSString *markup;
 }
 
 
@@ -28,7 +28,7 @@
     [super viewDidLoad];
     
     
-    NSString *markup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"fantomash" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    markup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"fantomash" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
     
     array = [NSMutableArray new];
     arraySkip = [NSMutableArray new];
@@ -36,38 +36,15 @@
     HTMLDocument *document = [HTMLDocument documentWithString:markup];
     HTMLElement* element = [document firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
 
-    [self startParsing1:element];
+//    [self startParsing:element];
     
+    [self parseSlides];
     
-    
-    
-    
-//    // Create a regular expression
-//    BOOL isCaseSensitive = [[options objectForKey:kRWSearchCaseSensitiveKey] boolValue];
-//    BOOL isWholeWords = [[options objectForKey:kRWSearchWholeWordsKey] boolValue];
-    
-    NSError *error = NULL;
-    NSRegularExpressionOptions regexOptions = NSRegularExpressionCaseInsensitive;
-    
-    NSString *pattern = @"wslideshow.render\\(\\{[^\\}]+images:(\\[\\{[^\\]]+\\])";
-    
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
-    if (error)
-    {
-        NSLog(@"Couldn't create regex with given string and options");
-    }
-    
-    NSRange textRange = NSMakeRange(0, markup.length);
-    NSTextCheckingResult* matchRange = [regex firstMatchInString:markup options:NSMatchingReportProgress range:textRange];
-    NSLog(@"%@", [markup substringWithRange:[matchRange rangeAtIndex:1]]);
-    
-    
-//    NSLog(@"%@", array);
 }
 
 
 
-- (void) startParsing1:(HTMLElement*)contentElement
+- (void) startParsing:(HTMLElement*)contentElement
 {
     for (HTMLNode* childrenNode in contentElement.children)
     {
@@ -205,11 +182,33 @@
 }
 
 
-- (void) parseSlides:(HTMLElement*)element
+- (void) parseSlides
 {
-    NSArray* slidesArray = [element nodesMatchingSelector:@"[class='wslide-link-inner2']"];
+    NSError *error = NULL;
+    NSRegularExpressionOptions regexOptions = NSRegularExpressionCaseInsensitive;
     
-    NSLog(@"%@", slidesArray);
+    NSString *pattern = @"wslideshow.render\\(\\{[^\\}]+images:(\\[\\{[^\\]]+\\])";
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
+    if (error)
+    {
+        NSLog(@"Couldn't create regex with given string and options");
+        return;
+    }
+    
+    NSRange textRange = NSMakeRange(0, markup.length);
+    NSTextCheckingResult* matches = [regex firstMatchInString:markup options:NSMatchingReportProgress range:textRange];
+    
+    if ( matches.numberOfRanges < 2 || [matches rangeAtIndex:1].location == NSNotFound )
+        return;
+    
+    NSArray* imagesArray = [NSJSONSerialization JSONObjectWithData:[[markup substringWithRange:[matches rangeAtIndex:1]] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+
+    if ( error || !imagesArray || imagesArray.count == 0 )
+        return;
+        
+    NSDictionary* dictionary = @{@"type": @4, @"images":imagesArray};
+    [array addObject:dictionary];
 }
 
 
