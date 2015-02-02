@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AC478D6FC8E66A49116B8FBE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0F2BF7B1EF754C407EF799 /* libPods.a */; };
+		CE02648A1A7FAAC200E2407D /* japanese.html in Resources */ = {isa = PBXBuildFile; fileRef = CE0264891A7FAAC200E2407D /* japanese.html */; };
 		CE8E11D31A7F633F00B8566C /* superhero.html in Resources */ = {isa = PBXBuildFile; fileRef = CE8E11D21A7F633F00B8566C /* superhero.html */; };
 		CED3D43C1A7DC44F002F7FDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43B1A7DC44F002F7FDC /* main.m */; };
 		CED3D43F1A7DC44F002F7FDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE0264891A7FAAC200E2407D /* japanese.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = japanese.html; sourceTree = "<group>"; };
 		CE8E11D21A7F633F00B8566C /* superhero.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = superhero.html; sourceTree = "<group>"; };
 		CED3D4361A7DC44F002F7FDC /* Weird Retro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weird Retro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED3D43A1A7DC44F002F7FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		CE8E11D11A7F4BBF00B8566C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE0264891A7FAAC200E2407D /* japanese.html */,
 				CE8E11D21A7F633F00B8566C /* superhero.html */,
 			);
 			name = Resources;
@@ -238,6 +241,7 @@
 			files = (
 				CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */,
 				CED3D44A1A7DC44F002F7FDC /* LaunchScreen.xib in Resources */,
+				CE02648A1A7FAAC200E2407D /* japanese.html in Resources */,
 				CE8E11D31A7F633F00B8566C /* superhero.html in Resources */,
 				CED3D4471A7DC44F002F7FDC /* Images.xcassets in Resources */,
 			);
