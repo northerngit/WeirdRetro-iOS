@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AC478D6FC8E66A49116B8FBE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0F2BF7B1EF754C407EF799 /* libPods.a */; };
+		CE8E11D31A7F633F00B8566C /* superhero.html in Resources */ = {isa = PBXBuildFile; fileRef = CE8E11D21A7F633F00B8566C /* superhero.html */; };
+		CED3D43C1A7DC44F002F7FDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43B1A7DC44F002F7FDC /* main.m */; };
+		CED3D43F1A7DC44F002F7FDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */; };
+		CED3D4421A7DC44F002F7FDC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D4411A7DC44F002F7FDC /* ViewController.m */; };
+		CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4431A7DC44F002F7FDC /* Main.storyboard */; };
+		CED3D4471A7DC44F002F7FDC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4461A7DC44F002F7FDC /* Images.xcassets */; };
+		CED3D44A1A7DC44F002F7FDC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4481A7DC44F002F7FDC /* LaunchScreen.xib */; };
+		CED3D4561A7DC44F002F7FDC /* Weird_RetroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D4551A7DC44F002F7FDC /* Weird_RetroTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CED3D4501A7DC44F002F7FDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CED3D42E1A7DC44F002F7FDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CED3D4351A7DC44F002F7FDC;
+			remoteInfo = "Weird Retro";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CE8E11D21A7F633F00B8566C /* superhero.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = superhero.html; sourceTree = "<group>"; };
+		CED3D4361A7DC44F002F7FDC /* Weird Retro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weird Retro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CED3D43A1A7DC44F002F7FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CED3D43B1A7DC44F002F7FDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CED3D43D1A7DC44F002F7FDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CED3D4401A7DC44F002F7FDC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CED3D4411A7DC44F002F7FDC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CED3D4441A7DC44F002F7FDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CED3D4461A7DC44F002F7FDC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CED3D4491A7DC44F002F7FDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		CED3D44F1A7DC44F002F7FDC /* Weird RetroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weird RetroTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CED3D4541A7DC44F002F7FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CED3D4551A7DC44F002F7FDC /* Weird_RetroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Weird_RetroTests.m; sourceTree = "<group>"; };
+		DD0F2BF7B1EF754C407EF799 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E224A6AEAF271396FFA97523 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F8BF5B3D00D2BA9030603FAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CED3D4331A7DC44F002F7FDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC478D6FC8E66A49116B8FBE /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CED3D44C1A7DC44F002F7FDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		69BFB5EF7ABF60FF7E933FA4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD0F2BF7B1EF754C407EF799 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6B814858E3C93749DEB39768 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E224A6AEAF271396FFA97523 /* Pods.debug.xcconfig */,
+				F8BF5B3D00D2BA9030603FAD /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CE8E11D11A7F4BBF00B8566C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE8E11D21A7F633F00B8566C /* superhero.html */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		CED3D42D1A7DC44F002F7FDC = {
+			isa = PBXGroup;
+			children = (
+				CED3D4381A7DC44F002F7FDC /* Weird Retro */,
+				CED3D4521A7DC44F002F7FDC /* Weird RetroTests */,
+				CED3D4371A7DC44F002F7FDC /* Products */,
+				6B814858E3C93749DEB39768 /* Pods */,
+				69BFB5EF7ABF60FF7E933FA4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		CED3D4371A7DC44F002F7FDC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CED3D4361A7DC44F002F7FDC /* Weird Retro.app */,
+				CED3D44F1A7DC44F002F7FDC /* Weird RetroTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CED3D4381A7DC44F002F7FDC /* Weird Retro */ = {
+			isa = PBXGroup;
+			children = (
+				CE8E11D11A7F4BBF00B8566C /* Resources */,
+				CED3D43D1A7DC44F002F7FDC /* AppDelegate.h */,
+				CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */,
+				CED3D4401A7DC44F002F7FDC /* ViewController.h */,
+				CED3D4411A7DC44F002F7FDC /* ViewController.m */,
+				CED3D4431A7DC44F002F7FDC /* Main.storyboard */,
+				CED3D4461A7DC44F002F7FDC /* Images.xcassets */,
+				CED3D4481A7DC44F002F7FDC /* LaunchScreen.xib */,
+				CED3D4391A7DC44F002F7FDC /* Supporting Files */,
+			);
+			path = "Weird Retro";
+			sourceTree = "<group>";
+		};
+		CED3D4391A7DC44F002F7FDC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CED3D43A1A7DC44F002F7FDC /* Info.plist */,
+				CED3D43B1A7DC44F002F7FDC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CED3D4521A7DC44F002F7FDC /* Weird RetroTests */ = {
+			isa = PBXGroup;
+			children = (
+				CED3D4551A7DC44F002F7FDC /* Weird_RetroTests.m */,
+				CED3D4531A7DC44F002F7FDC /* Supporting Files */,
+			);
+			path = "Weird RetroTests";
+			sourceTree = "<group>";
+		};
+		CED3D4531A7DC44F002F7FDC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CED3D4541A7DC44F002F7FDC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CED3D4351A7DC44F002F7FDC /* Weird Retro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CED3D4591A7DC44F002F7FDC /* Build configuration list for PBXNativeTarget "Weird Retro" */;
+			buildPhases = (
+				BC36C6C3C68FCAC2D1779843 /* Check Pods Manifest.lock */,
+				CED3D4321A7DC44F002F7FDC /* Sources */,
+				CED3D4331A7DC44F002F7FDC /* Frameworks */,
+				CED3D4341A7DC44F002F7FDC /* Resources */,
+				62B9AB1A1924841661D0E13D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Weird Retro";
+			productName = "Weird Retro";
+			productReference = CED3D4361A7DC44F002F7FDC /* Weird Retro.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CED3D44E1A7DC44F002F7FDC /* Weird RetroTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CED3D45C1A7DC44F002F7FDC /* Build configuration list for PBXNativeTarget "Weird RetroTests" */;
+			buildPhases = (
+				CED3D44B1A7DC44F002F7FDC /* Sources */,
+				CED3D44C1A7DC44F002F7FDC /* Frameworks */,
+				CED3D44D1A7DC44F002F7FDC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CED3D4511A7DC44F002F7FDC /* PBXTargetDependency */,
+			);
+			name = "Weird RetroTests";
+			productName = "Weird RetroTests";
+			productReference = CED3D44F1A7DC44F002F7FDC /* Weird RetroTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CED3D42E1A7DC44F002F7FDC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Alex Dougas";
+				TargetAttributes = {
+					CED3D4351A7DC44F002F7FDC = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					CED3D44E1A7DC44F002F7FDC = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = CED3D4351A7DC44F002F7FDC;
+					};
+				};
+			};
+			buildConfigurationList = CED3D4311A7DC44F002F7FDC /* Build configuration list for PBXProject "Weird Retro" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CED3D42D1A7DC44F002F7FDC;
+			productRefGroup = CED3D4371A7DC44F002F7FDC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CED3D4351A7DC44F002F7FDC /* Weird Retro */,
+				CED3D44E1A7DC44F002F7FDC /* Weird RetroTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CED3D4341A7DC44F002F7FDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */,
+				CED3D44A1A7DC44F002F7FDC /* LaunchScreen.xib in Resources */,
+				CE8E11D31A7F633F00B8566C /* superhero.html in Resources */,
+				CED3D4471A7DC44F002F7FDC /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CED3D44D1A7DC44F002F7FDC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		62B9AB1A1924841661D0E13D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC36C6C3C68FCAC2D1779843 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CED3D4321A7DC44F002F7FDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CED3D4421A7DC44F002F7FDC /* ViewController.m in Sources */,
+				CED3D43F1A7DC44F002F7FDC /* AppDelegate.m in Sources */,
+				CED3D43C1A7DC44F002F7FDC /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CED3D44B1A7DC44F002F7FDC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CED3D4561A7DC44F002F7FDC /* Weird_RetroTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CED3D4511A7DC44F002F7FDC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CED3D4351A7DC44F002F7FDC /* Weird Retro */;
+			targetProxy = CED3D4501A7DC44F002F7FDC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CED3D4431A7DC44F002F7FDC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CED3D4441A7DC44F002F7FDC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CED3D4481A7DC44F002F7FDC /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CED3D4491A7DC44F002F7FDC /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CED3D4571A7DC44F002F7FDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CED3D4581A7DC44F002F7FDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CED3D45A1A7DC44F002F7FDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E224A6AEAF271396FFA97523 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Weird Retro/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CED3D45B1A7DC44F002F7FDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8BF5B3D00D2BA9030603FAD /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Weird Retro/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CED3D45D1A7DC44F002F7FDC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Weird RetroTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weird Retro.app/Weird Retro";
+			};
+			name = Debug;
+		};
+		CED3D45E1A7DC44F002F7FDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Weird RetroTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weird Retro.app/Weird Retro";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CED3D4311A7DC44F002F7FDC /* Build configuration list for PBXProject "Weird Retro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CED3D4571A7DC44F002F7FDC /* Debug */,
+				CED3D4581A7DC44F002F7FDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CED3D4591A7DC44F002F7FDC /* Build configuration list for PBXNativeTarget "Weird Retro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CED3D45A1A7DC44F002F7FDC /* Debug */,
+				CED3D45B1A7DC44F002F7FDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CED3D45C1A7DC44F002F7FDC /* Build configuration list for PBXNativeTarget "Weird RetroTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CED3D45D1A7DC44F002F7FDC /* Debug */,
+				CED3D45E1A7DC44F002F7FDC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CED3D42E1A7DC44F002F7FDC /* Project object */;
+}
