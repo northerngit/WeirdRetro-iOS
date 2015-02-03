@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F13222EF-A2CF-4E45-B3A4-687125D44377</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Weird Retro</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0C9F99B073FAF2B1D473F99DB997C1AE8F321C52</key>
+		<string>https://github.com/northerngit/WeirdRetro-iOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Weird Retro.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0C9F99B073FAF2B1D473F99DB997C1AE8F321C52</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/northerngit/WeirdRetro-iOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0C9F99B073FAF2B1D473F99DB997C1AE8F321C52</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0C9F99B073FAF2B1D473F99DB997C1AE8F321C52</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WeirdRetro</string>
+		</dict>
+	</array>
+</dict>
+</plist>

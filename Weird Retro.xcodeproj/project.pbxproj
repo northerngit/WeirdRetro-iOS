@@ -10,10 +10,17 @@
 		AC478D6FC8E66A49116B8FBE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0F2BF7B1EF754C407EF799 /* libPods.a */; };
 		CE02648A1A7FAAC200E2407D /* japanese.html in Resources */ = {isa = PBXBuildFile; fileRef = CE0264891A7FAAC200E2407D /* japanese.html */; };
 		CE1F49EA1A7FF8FC007FEC04 /* fantomash.html in Resources */ = {isa = PBXBuildFile; fileRef = CE1F49E91A7FF8FC007FEC04 /* fantomash.html */; };
+		CE20EDB31A8137060029584F /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE20EDB21A8137060029584F /* PostViewController.m */; };
+		CE21B8191A807084006B7F8D /* NetworkWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE21B8181A807084006B7F8D /* NetworkWorker.m */; };
+		CE4D68401A807D6600CD948A /* HTMLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D683F1A807D6600CD948A /* HTMLConverter.m */; };
+		CE4D68431A80858F00CD948A /* HTMLConvertOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D68421A80858F00CD948A /* HTMLConvertOperation.m */; };
+		CE4D68451A80C6BA00CD948A /* memory.html in Resources */ = {isa = PBXBuildFile; fileRef = CE4D68441A80C6BA00CD948A /* memory.html */; };
+		CE4D684A1A80E9AA00CD948A /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D68491A80E9AA00CD948A /* DataManager.m */; };
+		CE4D684D1A80F2B600CD948A /* EscapePodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D684C1A80F2B600CD948A /* EscapePodsViewController.m */; };
+		CE4D68501A80F39E00CD948A /* EscapePodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D684F1A80F39E00CD948A /* EscapePodsTableViewCell.m */; };
 		CE8E11D31A7F633F00B8566C /* superhero.html in Resources */ = {isa = PBXBuildFile; fileRef = CE8E11D21A7F633F00B8566C /* superhero.html */; };
 		CED3D43C1A7DC44F002F7FDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43B1A7DC44F002F7FDC /* main.m */; };
 		CED3D43F1A7DC44F002F7FDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */; };
-		CED3D4421A7DC44F002F7FDC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D4411A7DC44F002F7FDC /* ViewController.m */; };
 		CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4431A7DC44F002F7FDC /* Main.storyboard */; };
 		CED3D4471A7DC44F002F7FDC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4461A7DC44F002F7FDC /* Images.xcassets */; };
 		CED3D44A1A7DC44F002F7FDC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4481A7DC44F002F7FDC /* LaunchScreen.xib */; };
@@ -33,14 +40,28 @@
 /* Begin PBXFileReference section */
 		CE0264891A7FAAC200E2407D /* japanese.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = japanese.html; sourceTree = "<group>"; };
 		CE1F49E91A7FF8FC007FEC04 /* fantomash.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = fantomash.html; sourceTree = "<group>"; };
+		CE20EDB11A8137060029584F /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
+		CE20EDB21A8137060029584F /* PostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
+		CE21B8171A807084006B7F8D /* NetworkWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkWorker.h; path = Classes/NetworkWorker.h; sourceTree = "<group>"; };
+		CE21B8181A807084006B7F8D /* NetworkWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkWorker.m; path = Classes/NetworkWorker.m; sourceTree = "<group>"; };
+		CE21B81A1A807128006B7F8D /* Managers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Managers.h; path = Classes/Managers.h; sourceTree = "<group>"; };
+		CE4D683E1A807D6600CD948A /* HTMLConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTMLConverter.h; path = Classes/HTMLConverter.h; sourceTree = "<group>"; };
+		CE4D683F1A807D6600CD948A /* HTMLConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTMLConverter.m; path = Classes/HTMLConverter.m; sourceTree = "<group>"; };
+		CE4D68411A80858F00CD948A /* HTMLConvertOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTMLConvertOperation.h; path = Classes/HTMLConvertOperation.h; sourceTree = "<group>"; };
+		CE4D68421A80858F00CD948A /* HTMLConvertOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTMLConvertOperation.m; path = Classes/HTMLConvertOperation.m; sourceTree = "<group>"; };
+		CE4D68441A80C6BA00CD948A /* memory.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = memory.html; sourceTree = "<group>"; };
+		CE4D68481A80E9AA00CD948A /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		CE4D68491A80E9AA00CD948A /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		CE4D684B1A80F2B600CD948A /* EscapePodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EscapePodsViewController.h; sourceTree = "<group>"; };
+		CE4D684C1A80F2B600CD948A /* EscapePodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscapePodsViewController.m; sourceTree = "<group>"; };
+		CE4D684E1A80F39E00CD948A /* EscapePodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EscapePodsTableViewCell.h; sourceTree = "<group>"; };
+		CE4D684F1A80F39E00CD948A /* EscapePodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscapePodsTableViewCell.m; sourceTree = "<group>"; };
 		CE8E11D21A7F633F00B8566C /* superhero.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = superhero.html; sourceTree = "<group>"; };
 		CED3D4361A7DC44F002F7FDC /* Weird Retro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weird Retro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED3D43A1A7DC44F002F7FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED3D43B1A7DC44F002F7FDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CED3D43D1A7DC44F002F7FDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CED3D4401A7DC44F002F7FDC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CED3D4411A7DC44F002F7FDC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CED3D4441A7DC44F002F7FDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CED3D4461A7DC44F002F7FDC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CED3D4491A7DC44F002F7FDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -88,12 +109,29 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CE21B8161A806F06006B7F8D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CE21B81A1A807128006B7F8D /* Managers.h */,
+				CE21B8171A807084006B7F8D /* NetworkWorker.h */,
+				CE21B8181A807084006B7F8D /* NetworkWorker.m */,
+				CE4D683E1A807D6600CD948A /* HTMLConverter.h */,
+				CE4D683F1A807D6600CD948A /* HTMLConverter.m */,
+				CE4D68411A80858F00CD948A /* HTMLConvertOperation.h */,
+				CE4D68421A80858F00CD948A /* HTMLConvertOperation.m */,
+				CE4D68481A80E9AA00CD948A /* DataManager.h */,
+				CE4D68491A80E9AA00CD948A /* DataManager.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		CE8E11D11A7F4BBF00B8566C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				CE0264891A7FAAC200E2407D /* japanese.html */,
 				CE8E11D21A7F633F00B8566C /* superhero.html */,
 				CE1F49E91A7FF8FC007FEC04 /* fantomash.html */,
+				CE4D68441A80C6BA00CD948A /* memory.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -121,15 +159,20 @@
 		CED3D4381A7DC44F002F7FDC /* Weird Retro */ = {
 			isa = PBXGroup;
 			children = (
+				CE21B8161A806F06006B7F8D /* Classes */,
 				CE8E11D11A7F4BBF00B8566C /* Resources */,
 				CED3D43D1A7DC44F002F7FDC /* AppDelegate.h */,
 				CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */,
-				CED3D4401A7DC44F002F7FDC /* ViewController.h */,
-				CED3D4411A7DC44F002F7FDC /* ViewController.m */,
 				CED3D4431A7DC44F002F7FDC /* Main.storyboard */,
 				CED3D4461A7DC44F002F7FDC /* Images.xcassets */,
 				CED3D4481A7DC44F002F7FDC /* LaunchScreen.xib */,
 				CED3D4391A7DC44F002F7FDC /* Supporting Files */,
+				CE4D684B1A80F2B600CD948A /* EscapePodsViewController.h */,
+				CE4D684C1A80F2B600CD948A /* EscapePodsViewController.m */,
+				CE4D684E1A80F39E00CD948A /* EscapePodsTableViewCell.h */,
+				CE4D684F1A80F39E00CD948A /* EscapePodsTableViewCell.m */,
+				CE20EDB11A8137060029584F /* PostViewController.h */,
+				CE20EDB21A8137060029584F /* PostViewController.m */,
 			);
 			path = "Weird Retro";
 			sourceTree = "<group>";
@@ -247,6 +290,7 @@
 				CE1F49EA1A7FF8FC007FEC04 /* fantomash.html in Resources */,
 				CE02648A1A7FAAC200E2407D /* japanese.html in Resources */,
 				CE8E11D31A7F633F00B8566C /* superhero.html in Resources */,
+				CE4D68451A80C6BA00CD948A /* memory.html in Resources */,
 				CED3D4471A7DC44F002F7FDC /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,8 +342,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CED3D4421A7DC44F002F7FDC /* ViewController.m in Sources */,
+				CE4D68431A80858F00CD948A /* HTMLConvertOperation.m in Sources */,
+				CE4D684A1A80E9AA00CD948A /* DataManager.m in Sources */,
+				CE4D684D1A80F2B600CD948A /* EscapePodsViewController.m in Sources */,
+				CE4D68401A807D6600CD948A /* HTMLConverter.m in Sources */,
 				CED3D43F1A7DC44F002F7FDC /* AppDelegate.m in Sources */,
+				CE20EDB31A8137060029584F /* PostViewController.m in Sources */,
+				CE21B8191A807084006B7F8D /* NetworkWorker.m in Sources */,
+				CE4D68501A80F39E00CD948A /* EscapePodsTableViewCell.m in Sources */,
 				CED3D43C1A7DC44F002F7FDC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

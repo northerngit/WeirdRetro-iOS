@@ -1,50 +1,76 @@
 //
-//  ViewController.m
+//  HTMLConvertOperation.m
 //  Weird Retro
 //
-//  Created by User i7 on 01/02/15.
+//  Created by User i7 on 03/02/15.
 //  Copyright (c) 2015 Alex Dougas. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "HTMLConvertOperation.h"
 #import "HTMLReader.h"
 #import "HTMLParser.h"
 
-@interface ViewController ()
+
+@interface HTMLConvertOperation ()
 {
     BOOL started;
     NSMutableArray* array;
     NSMutableArray* arraySkip;
-    NSString *markup;
 }
 
+@property (nonatomic, strong) HTMLDocument* htmlDocument;
 
 @end
 
-@implementation ViewController
 
-- (void) viewDidLoad
+
+@implementation HTMLConvertOperation
+
+
+//- (id) initWithURL:(NSURL *)url successFailureBlock:(CustomOperationCompletionBlock)successFailureBlock
+//{
+//    
+//}
+
+
+- (void)main
 {
-    [super viewDidLoad];
-    
-    
-    markup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"fantomash" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    if ( !self.htmlMarkup || self.htmlMarkup.length == 0 )
+        return;
     
     array = [NSMutableArray new];
     arraySkip = [NSMutableArray new];
     
-    HTMLDocument *document = [HTMLDocument documentWithString:markup];
-    HTMLElement* element = [document firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
+    self.htmlDocument = [HTMLDocument documentWithString:self.htmlMarkup];
 
-//    [self startParsing:element];
+    HTMLElement* elementContent = [self.htmlDocument firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
     
-    [self parseSlides];
+    if ( self.type == 0 )
+        [self startParsingTheMemory:elementContent];
+    else if ( self.type == 1 )
+        [self startParsingThePost:elementContent];
     
+    if ( self.successFailureBlock )
+        self.successFailureBlock(array);
+}
+
+
+//- (BOOL)isFinished {
+//    return started;
+//}
+
+//////////////
+
+- (void) parsingMenuBar
+{
+//    NSArray* menuItems = [self.htmlDocument nodesMatchingSelector:@"ul[class='wsite-menu']>li>a"];
 }
 
 
 
-- (void) startParsing:(HTMLElement*)contentElement
+
+
+- (void) startParsingThePost:(HTMLElement*)contentElement
 {
     for (HTMLNode* childrenNode in contentElement.children)
     {
@@ -52,6 +78,19 @@
     }
     
 }
+
+
+- (void) startParsingTheMemory:(HTMLElement*)contentElement
+{
+    for (HTMLNode* childrenNode in contentElement.children)
+    {
+        [self parseNode:childrenNode level:0];
+    }
+    
+    [array filterUsingPredicate:[NSPredicate predicateWithFormat:@"type = %@", @3]];
+//    NSLog(@"%@", array);
+}
+
 
 - (void) parseNode:(HTMLNode*)node level:(NSInteger)level
 {
@@ -138,20 +177,22 @@
     NSUInteger index = [element.parentElement indexOfChild:element];
     if ( index + 3 > element.parentElement.numberOfChildren )
         return;
-
+    
     HTMLElement* spanElement = [self getNextElementSibling:element];
     
     if ( spanElement && [spanElement.tagName isEqualToString:@"span"] )
     {
         HTMLElement* imgElement = [spanElement firstNodeMatchingSelector:@"img"];
         HTMLElement* descriptionElement = [self getNextElementSibling:spanElement];
+        HTMLElement* anchorElement = [descriptionElement firstNodeMatchingSelector:@"a"];
         
-        if ( imgElement && descriptionElement )
+        
+        if ( imgElement && descriptionElement && anchorElement && anchorElement.attributes[@"href"] )
         {
             if ( [descriptionElement.tagName isEqualToString:@"div"] && descriptionElement.attributes[@"class"] &&
                 [descriptionElement.attributes[@"class"] isEqualToString:@"paragraph"] )
             {
-                NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @3, @"src":imgElement.attributes[@"src"], @"description":descriptionElement.innerHTML}];
+                NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @3, @"src":imgElement.attributes[@"src"], @"description":descriptionElement.innerHTML, @"link":anchorElement.attributes[@"href"]}];
                 
                 [arraySkip addObject:spanElement];
                 [arraySkip addObject:descriptionElement];
@@ -159,7 +200,7 @@
                 [array addObject:dictionary];
             }
         }
-    
+        
     }
 }
 
@@ -196,21 +237,20 @@
         return;
     }
     
-    NSRange textRange = NSMakeRange(0, markup.length);
-    NSTextCheckingResult* matches = [regex firstMatchInString:markup options:NSMatchingReportProgress range:textRange];
+    NSRange textRange = NSMakeRange(0, self.htmlMarkup.length);
+    NSTextCheckingResult* matches = [regex firstMatchInString:self.htmlMarkup options:NSMatchingReportProgress range:textRange];
     
     if ( matches.numberOfRanges < 2 || [matches rangeAtIndex:1].location == NSNotFound )
         return;
     
-    NSArray* imagesArray = [NSJSONSerialization JSONObjectWithData:[[markup substringWithRange:[matches rangeAtIndex:1]] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-
+    NSArray* imagesArray = [NSJSONSerialization JSONObjectWithData:[[self.htmlMarkup substringWithRange:[matches rangeAtIndex:1]] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    
     if ( error || !imagesArray || imagesArray.count == 0 )
         return;
-        
+    
     NSDictionary* dictionary = @{@"type": @4, @"images":imagesArray};
     [array addObject:dictionary];
 }
-
 
 
 - (void) parseHR
@@ -227,7 +267,7 @@
     if ( imgElement )
     {
         NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @1, @"src":imgElement.attributes[@"src"]}];
-
+        
         if ( descriptionDivElement )
         {
             NSString* description = [descriptionDivElement.textContent stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -247,11 +287,5 @@
 
 
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    
-}
 
 @end
