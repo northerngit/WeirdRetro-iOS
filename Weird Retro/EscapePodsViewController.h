@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ECSlidingViewController/ECSlidingViewController.h>
 
-@interface EscapePodsViewController : UITableViewController
+
+@interface EscapePodsViewController : UITableViewController <ECSlidingViewControllerDelegate>
 
 @end

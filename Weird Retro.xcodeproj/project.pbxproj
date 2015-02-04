@@ -12,6 +12,8 @@
 		CE1F49EA1A7FF8FC007FEC04 /* fantomash.html in Resources */ = {isa = PBXBuildFile; fileRef = CE1F49E91A7FF8FC007FEC04 /* fantomash.html */; };
 		CE20EDB31A8137060029584F /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE20EDB21A8137060029584F /* PostViewController.m */; };
 		CE21B8191A807084006B7F8D /* NetworkWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE21B8181A807084006B7F8D /* NetworkWorker.m */; };
+		CE22825C1A8222AB00B91271 /* MEMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22825B1A8222AB00B91271 /* MEMenuViewController.m */; };
+		CE22825F1A82249B00B91271 /* MEZoomAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22825E1A82249B00B91271 /* MEZoomAnimationController.m */; };
 		CE4D68401A807D6600CD948A /* HTMLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D683F1A807D6600CD948A /* HTMLConverter.m */; };
 		CE4D68431A80858F00CD948A /* HTMLConvertOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D68421A80858F00CD948A /* HTMLConvertOperation.m */; };
 		CE4D68451A80C6BA00CD948A /* memory.html in Resources */ = {isa = PBXBuildFile; fileRef = CE4D68441A80C6BA00CD948A /* memory.html */; };
@@ -45,6 +47,10 @@
 		CE21B8171A807084006B7F8D /* NetworkWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkWorker.h; path = Classes/NetworkWorker.h; sourceTree = "<group>"; };
 		CE21B8181A807084006B7F8D /* NetworkWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkWorker.m; path = Classes/NetworkWorker.m; sourceTree = "<group>"; };
 		CE21B81A1A807128006B7F8D /* Managers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Managers.h; path = Classes/Managers.h; sourceTree = "<group>"; };
+		CE22825A1A8222AB00B91271 /* MEMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEMenuViewController.h; sourceTree = "<group>"; };
+		CE22825B1A8222AB00B91271 /* MEMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEMenuViewController.m; sourceTree = "<group>"; };
+		CE22825D1A82249B00B91271 /* MEZoomAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEZoomAnimationController.h; sourceTree = "<group>"; };
+		CE22825E1A82249B00B91271 /* MEZoomAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEZoomAnimationController.m; sourceTree = "<group>"; };
 		CE4D683E1A807D6600CD948A /* HTMLConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTMLConverter.h; path = Classes/HTMLConverter.h; sourceTree = "<group>"; };
 		CE4D683F1A807D6600CD948A /* HTMLConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTMLConverter.m; path = Classes/HTMLConverter.m; sourceTree = "<group>"; };
 		CE4D68411A80858F00CD948A /* HTMLConvertOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTMLConvertOperation.h; path = Classes/HTMLConvertOperation.h; sourceTree = "<group>"; };
@@ -171,8 +177,12 @@
 				CE4D684C1A80F2B600CD948A /* EscapePodsViewController.m */,
 				CE4D684E1A80F39E00CD948A /* EscapePodsTableViewCell.h */,
 				CE4D684F1A80F39E00CD948A /* EscapePodsTableViewCell.m */,
+				CE22825A1A8222AB00B91271 /* MEMenuViewController.h */,
+				CE22825B1A8222AB00B91271 /* MEMenuViewController.m */,
 				CE20EDB11A8137060029584F /* PostViewController.h */,
 				CE20EDB21A8137060029584F /* PostViewController.m */,
+				CE22825D1A82249B00B91271 /* MEZoomAnimationController.h */,
+				CE22825E1A82249B00B91271 /* MEZoomAnimationController.m */,
 			);
 			path = "Weird Retro";
 			sourceTree = "<group>";
@@ -345,11 +355,13 @@
 				CE4D68431A80858F00CD948A /* HTMLConvertOperation.m in Sources */,
 				CE4D684A1A80E9AA00CD948A /* DataManager.m in Sources */,
 				CE4D684D1A80F2B600CD948A /* EscapePodsViewController.m in Sources */,
+				CE22825C1A8222AB00B91271 /* MEMenuViewController.m in Sources */,
 				CE4D68401A807D6600CD948A /* HTMLConverter.m in Sources */,
 				CED3D43F1A7DC44F002F7FDC /* AppDelegate.m in Sources */,
 				CE20EDB31A8137060029584F /* PostViewController.m in Sources */,
 				CE21B8191A807084006B7F8D /* NetworkWorker.m in Sources */,
 				CE4D68501A80F39E00CD948A /* EscapePodsTableViewCell.m in Sources */,
+				CE22825F1A82249B00B91271 /* MEZoomAnimationController.m in Sources */,
 				CED3D43C1A7DC44F002F7FDC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,8 +16,15 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <AFNetworking/UIKit+AFNetworking.h>
 
+#import "UIViewController+ECSlidingViewController.h"
+#import "MEZoomAnimationController.h"
+//#import "METransitions.h"
+
 
 @interface EscapePodsViewController ()
+
+@property (nonatomic, strong) MEZoomAnimationController *transition;
+//@property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
 
 @end
 
@@ -32,7 +39,6 @@
         [self.tableView reloadData];
     }];
 
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -41,13 +47,35 @@
 }
 
 
+- (IBAction)menuButtonTapped:(id)sender {
+    [self.slidingViewController anchorTopViewToRightAnimated:YES];
+}
 
 
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
+    self.transition = [[MEZoomAnimationController alloc] init];
+    self.slidingViewController.delegate = self.transition;
+
+//    NSLog(@"%@", transition);
+    
+    self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
+    self.slidingViewController.customAnchoredGestures = @[];
+//    [self.navigationController.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
+    [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
+
+
+//- (MEZoomAnimationController *)zoomAnimationController {
+//    if (_zoomAnimationController) return _zoomAnimationController;
+//    
+//    _zoomAnimationController = [[MEZoomAnimationController alloc] init];
+//    
+//    return _zoomAnimationController;
+//}
 
 
 
@@ -146,17 +174,17 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ( [segue.identifier isEqualToString:@"ShowPost"])
-    {
-        UITableViewCell* cell = (UITableViewCell*)sender;
-        NSIndexPath* path = [self.tableView indexPathForCell:cell];
-        
-        PostViewController* controller = segue.destinationViewController;
-        controller.postURL = DATAMANAGER.articles[path.row][@"link"];
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ( [segue.identifier isEqualToString:@"ShowPost"])
+//    {
+//        UITableViewCell* cell = (UITableViewCell*)sender;
+//        NSIndexPath* path = [self.tableView indexPathForCell:cell];
+//        
+//        PostViewController* controller = segue.destinationViewController;
+//        controller.postURL = DATAMANAGER.articles[path.row][@"link"];
+//    }
+//}
 
 
 @end
