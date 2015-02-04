@@ -68,11 +68,27 @@
         {
             [self drawImageItem:item];
         }
+        else if ( [item[@"type"] integerValue] == 2 )
+        {
+            [self drawSeparator];
+        }
     }
     
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
 }
+
+
+
+- (void) drawSeparator
+{
+    UIView* separator = [[UIView alloc] initWithFrame:CGRectMake(10, height, self.view.frame.size.width-20, 1)];
+    [self.scrollView addSubview:separator];
+    
+    separator.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
+    height += separator.frame.size.height + 20;
+}
+
 
 
 - (void) drawTextItem:(NSDictionary*)item
@@ -120,6 +136,9 @@
 
     [self.scrollView addSubview:imageView];
 
+    
+//    NSLog(@"%@", item);
+    
     
     [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
 

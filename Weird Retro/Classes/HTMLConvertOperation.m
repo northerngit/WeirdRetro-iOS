@@ -27,12 +27,6 @@
 @implementation HTMLConvertOperation
 
 
-//- (id) initWithURL:(NSURL *)url successFailureBlock:(CustomOperationCompletionBlock)successFailureBlock
-//{
-//    
-//}
-
-
 - (void)main
 {
     if ( !self.htmlMarkup || self.htmlMarkup.length == 0 )
@@ -54,18 +48,12 @@
         self.successFailureBlock(array);
 }
 
-
-//- (BOOL)isFinished {
-//    return started;
-//}
-
 //////////////
 
 - (void) parsingMenuBar
 {
 //    NSArray* menuItems = [self.htmlDocument nodesMatchingSelector:@"ul[class='wsite-menu']>li>a"];
 }
-
 
 
 
@@ -77,6 +65,9 @@
         [self parseNode:childrenNode level:0];
     }
     
+    // Remove separator isf it's last
+    if ( [[array lastObject][@"type"] integerValue] == 2 )
+        [array removeLastObject];
 }
 
 
@@ -88,7 +79,6 @@
     }
     
     [array filterUsingPredicate:[NSPredicate predicateWithFormat:@"type = %@", @3]];
-//    NSLog(@"%@", array);
 }
 
 
@@ -146,6 +136,10 @@
         else if ( [element.tagName isEqualToString:@"hr"] && element.attributes[@"class"] && [element.attributes[@"class"] isEqualToString:@"styled-hr"] )
         {
             [self parseHR];
+        }
+        else if ( [element.tagName isEqualToString:@"h2"] && element.attributes[@"class"] && [element.attributes[@"class"] isEqualToString:@"wsite-content-title"] )
+        {
+            // OK
         }
         else
         {
@@ -255,7 +249,8 @@
 
 - (void) parseHR
 {
-    [array addObject:@{@"type":@2}];
+    if ( [[array lastObject][@"type"] integerValue] != 2 )
+        [array addObject:@{@"type":@2}];
 }
 
 

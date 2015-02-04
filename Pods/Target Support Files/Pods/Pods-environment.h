@@ -78,6 +78,12 @@
 #define COCOAPODS_VERSION_MINOR_DTFoundation_UIKit 7
 #define COCOAPODS_VERSION_PATCH_DTFoundation_UIKit 4
 
+// ECSlidingViewController
+#define COCOAPODS_POD_AVAILABLE_ECSlidingViewController
+#define COCOAPODS_VERSION_MAJOR_ECSlidingViewController 2
+#define COCOAPODS_VERSION_MINOR_ECSlidingViewController 0
+#define COCOAPODS_VERSION_PATCH_ECSlidingViewController 3
+
 // HTMLReader
 #define COCOAPODS_POD_AVAILABLE_HTMLReader
 #define COCOAPODS_VERSION_MAJOR_HTMLReader 0

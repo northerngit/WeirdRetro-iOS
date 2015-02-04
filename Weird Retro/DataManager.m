@@ -45,7 +45,6 @@
     [NETWORK loadingHTMLFile:@"memory-banks.html" withCompletion:^(NSError *error, NSString *htmlMarkup) {
         if ( !error )
         {
-            
             [CONVERTER convertMemoryBanksToStructure:htmlMarkup withCompletion:^(NSArray *postsList) {
                 
                 self.articles = [NSMutableArray arrayWithArray:postsList];

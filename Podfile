@@ -6,12 +6,11 @@ pod 'HTMLReader'
 pod 'AFNetworking', '~> 2.0'
 pod 'MBProgressHUD', '~> 0.8'
 pod 'DTCoreText'
+pod 'ECSlidingViewController'
 
 target 'Weird Retro' do
-
 end
 
 target 'Weird RetroTests' do
-
 end
 

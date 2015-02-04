@@ -31,12 +31,14 @@ PODS:
     - DTFoundation/Core
   - DTFoundation/UIKit (1.7.4):
     - DTFoundation/Core
+  - ECSlidingViewController (2.0.3)
   - HTMLReader (0.5.9)
   - MBProgressHUD (0.9)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - DTCoreText
+  - ECSlidingViewController
   - HTMLReader
   - MBProgressHUD (~> 0.8)
 
@@ -44,6 +46,7 @@ SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
   DTCoreText: 1fc0aadfa238d14c6cc56035af4e2b76b958e3b1
   DTFoundation: 721a63964fb9acd64cb8c9d3d1642ee60bac3d6a
+  ECSlidingViewController: e79fe856bfb1a99a39c995377a1943e50f7647eb
   HTMLReader: 0833fa2af5fd2019bc2d7a6e8066a07fd0fe87f1
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
 
