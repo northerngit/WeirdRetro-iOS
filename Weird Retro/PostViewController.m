@@ -17,6 +17,7 @@
 @interface PostViewController ()
 {
     CGFloat height;
+    NSOperationQueue* queue;
 }
 
 @end
@@ -36,6 +37,8 @@
     [super viewWillAppear:animated];
     
     height = 20;
+    queue = [[NSOperationQueue alloc] init];
+    queue.maxConcurrentOperationCount = 1;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [DATAMANAGER updatingPostFromBackendFile:self.postURL completion:^(NSError *error) {
@@ -90,29 +93,52 @@
     [self.scrollView addSubview:label];
     
     height += label.frame.size.height + 20;
-    
-//    DTCoreTextLayouter* layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attrString];
-//    DTCoreTextLayoutFrame* frame = [layouter layoutFrameWithRect:CGRectMake(0, 0, 320, 1000) range:NSMakeRange(0, 0)];
-//    NSLog(@"%f", );
 }
 
 
 - (void) drawImageItem:(NSDictionary*)item
 {
-    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, self.view.frame.size.width-30)];
+    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 10)];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [imageView setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:item[@"src"]]]];
     
+    __weak UIImageView* _imageView = imageView;
+    
+    NSURLRequest* request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:item[@"src"]]]];
+
     [self.scrollView addSubview:imageView];
-    
-    height += imageView.frame.size.height + 20;
 
     
-    //    DTCoreTextLayouter* layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attrString];
-    //    DTCoreTextLayoutFrame* frame = [layouter layoutFrameWithRect:CGRectMake(0, 0, 320, 1000) range:NSMakeRange(0, 0)];
-    //    NSLog(@"%f", );
+    [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+
+        [queue addOperationWithBlock:^{
+            
+            dispatch_queue_t mainQueue = dispatch_get_main_queue();
+            dispatch_async(mainQueue, ^{
+                
+                CGFloat heightNeeded = self.view.frame.size.width * (image.size.height / image.size.width);
+                heightNeeded = heightNeeded/1.5;
+
+                _imageView.frame = CGRectMake(0, _imageView.frame.origin.y, self.view.frame.size.width, heightNeeded);
+                _imageView.image = image;
+                
+                for (NSUInteger i = [self.scrollView.subviews indexOfObject:_imageView]+1; i < self.scrollView.subviews.count; i++)
+                {
+                    CGRect r = [[self.scrollView.subviews objectAtIndex:i] frame];
+                    r.origin.y += heightNeeded + 20;
+                    [[self.scrollView.subviews objectAtIndex:i] setFrame:r];
+                }
+                
+                height += heightNeeded + 20;
+                self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+            });
+            
+            
+        }];
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        
+    }];
+    
 }
-
-
 
 @end
