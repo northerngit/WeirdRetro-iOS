@@ -14,6 +14,9 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 
+#define HEIGHT_IMAGE_PLACEHOLDER 50
+
+
 @interface PostViewController ()
 {
     CGFloat height;
@@ -98,12 +101,22 @@
 
 - (void) drawImageItem:(NSDictionary*)item
 {
-    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 10)];
+    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, HEIGHT_IMAGE_PLACEHOLDER)];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
+
+    height += HEIGHT_IMAGE_PLACEHOLDER;
     
     __weak UIImageView* _imageView = imageView;
     
     NSURLRequest* request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:item[@"src"]]]];
+
+    if ( ![[UIImageView sharedImageCache] cachedImageForRequest:request] )
+    {
+        UIActivityIndicatorView* indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [imageView addSubview:indicator];
+        indicator.center = CGPointMake(imageView.frame.size.width/2, imageView.frame.size.height/2);
+        [indicator startAnimating];
+    }
 
     [self.scrollView addSubview:imageView];
 
@@ -120,15 +133,18 @@
 
                 _imageView.frame = CGRectMake(0, _imageView.frame.origin.y, self.view.frame.size.width, heightNeeded);
                 _imageView.image = image;
+
+                for (UIView* subview in _imageView.subviews)
+                    [subview removeFromSuperview];
                 
                 for (NSUInteger i = [self.scrollView.subviews indexOfObject:_imageView]+1; i < self.scrollView.subviews.count; i++)
                 {
                     CGRect r = [[self.scrollView.subviews objectAtIndex:i] frame];
-                    r.origin.y += heightNeeded + 20;
+                    r.origin.y += heightNeeded + 20 - HEIGHT_IMAGE_PLACEHOLDER;
                     [[self.scrollView.subviews objectAtIndex:i] setFrame:r];
                 }
                 
-                height += heightNeeded + 20;
+                height += heightNeeded + 20 - HEIGHT_IMAGE_PLACEHOLDER;
                 self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
             });
             
