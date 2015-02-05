@@ -40,18 +40,40 @@
 }
 
 
-- (void) convertMemoryBanksToStructure:(NSString*)htmlText withCompletion:(void(^)(NSArray* postsList))completion
+- (void) convertBlogPostPage:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion
+{
+    HTMLConvertOperation* operation = [[HTMLConvertOperation alloc] init];
+    operation.type = PageTypeBlogPage;
+    operation.htmlMarkup = htmlText;
+    
+    operation.successFailureBlock = ^(WRPage* pageObject) {
+        
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_async(mainQueue, ^{
+            
+            completion(pageObject);
+            
+        });
+        
+    };
+    
+    [operation start];
+}
+
+
+
+- (void) convertMemoryBanksToStructure:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion
 {
     HTMLConvertOperation* operation = [[HTMLConvertOperation alloc] init];
     operation.type = 0;
     operation.htmlMarkup = htmlText;
     
-    operation.successFailureBlock = ^(NSArray* items) {
+    operation.successFailureBlock = ^(WRPage* pageObject) {
         
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         dispatch_async(mainQueue, ^{
             
-            completion(items);
+            completion(pageObject);
 
         });
         
@@ -61,18 +83,18 @@
 }
 
 
-- (void) convertPostToStructure:(NSString*)htmlText withCompletion:(void(^)(NSArray* postsList))completion
+- (void) convertPostToStructure:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion
 {
     HTMLConvertOperation* operation = [[HTMLConvertOperation alloc] init];
     operation.type = 1;
     operation.htmlMarkup = htmlText;
     
-    operation.successFailureBlock = ^(NSArray* items) {
+    operation.successFailureBlock = ^(WRPage* pageObject) {
         
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         dispatch_async(mainQueue, ^{
             
-            completion(items);
+            completion(pageObject);
             
         });
         

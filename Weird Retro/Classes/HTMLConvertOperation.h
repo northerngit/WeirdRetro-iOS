@@ -7,14 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WRPage.h"
 
-typedef void(^CustomOperationCompletionBlock)(NSArray* items);
+
+typedef void(^CustomOperationCompletionBlock)(WRPage* pageObject);
 
 @interface HTMLConvertOperation : NSOperation
 
 @property (nonatomic, assign) CustomOperationCompletionBlock successFailureBlock;
 @property (nonatomic, strong) NSString* htmlMarkup;
-@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) PageType type;
 
 //- (id)initWithURL:(NSURL *)url successFailureBlock:(CustomOperationCompletionBlock)successFailureBlock;
 

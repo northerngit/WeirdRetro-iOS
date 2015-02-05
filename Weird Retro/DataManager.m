@@ -7,6 +7,7 @@
 //
 
 #import "Managers.h"
+#import "WRPage.h"
 
 
 @implementation DataManager
@@ -39,15 +40,36 @@
 
 
 
+- (void) loadBlogPostsFromBackendWithCompletion:(void(^)(NSError* error))completion
+{
+    [NETWORK loadingHTMLFile:@"captains-blog" withCompletion:^(NSError *error, NSString *htmlMarkup) {
+        if ( !error )
+        {
+//            [CONVERTER convertBlogPostPage:htmlMarkup withCompletion:^(WRPage* pageObject) {
+//                
+//                self.articles = [NSMutableArray arrayWithArray:pageObject.items];
+//                
+//                if ( completion )
+//                    completion(nil);
+//            }];
+            
+        }
+        
+        if ( completion )
+            return completion(error);
+    }];
+}
+
+
 
 - (void) updatingStructureFromBackendWithCompletion:(void(^)(NSError* error))completion
 {
     [NETWORK loadingHTMLFile:@"memory-banks.html" withCompletion:^(NSError *error, NSString *htmlMarkup) {
         if ( !error )
         {
-            [CONVERTER convertMemoryBanksToStructure:htmlMarkup withCompletion:^(NSArray *postsList) {
-                
-                self.articles = [NSMutableArray arrayWithArray:postsList];
+            [CONVERTER convertMemoryBanksToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
+            
+                self.articles = [NSMutableArray arrayWithArray:pageObject.items];
                 
                 if ( completion )
                     completion(nil);
@@ -66,9 +88,9 @@
     [NETWORK loadingHTMLFile:filePath withCompletion:^(NSError *error, NSString *htmlMarkup) {
         if ( !error )
         {
-            [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(NSArray *postsList) {
+            [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
                 
-                self.posts[filePath] = postsList;
+                self.posts[filePath] = pageObject.items;
                 
                 if ( completion )
                     completion(nil);

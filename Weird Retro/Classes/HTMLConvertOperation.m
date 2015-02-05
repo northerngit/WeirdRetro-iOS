@@ -19,6 +19,7 @@
 }
 
 @property (nonatomic, strong) HTMLDocument* htmlDocument;
+@property (nonatomic, strong) WRPage* pageObject;
 
 @end
 
@@ -37,23 +38,79 @@
     
     self.htmlDocument = [HTMLDocument documentWithString:self.htmlMarkup];
 
-    HTMLElement* elementContent = [self.htmlDocument firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
+    self.pageObject = [[WRPage alloc] init];
     
+    NSArray* metaTags = [self.htmlDocument nodesMatchingSelector:@"meta"];
+    for (HTMLElement* metaTag in metaTags)
+    {
+        if ( metaTag.attributes[@"property"] && metaTag.attributes[@"content"] )
+        {
+            if ( [metaTag.attributes[@"property"] isEqualToString:@"og:title"] )
+                self.pageObject.title = metaTag.attributes[@"content"];
+            if ( [metaTag.attributes[@"property"] isEqualToString:@"og:description"] )
+                self.pageObject.info = metaTag.attributes[@"content"];
+            if ( [metaTag.attributes[@"property"] isEqualToString:@"og:url"] )
+                self.pageObject.url = metaTag.attributes[@"url"];
+        }
+        else if ( metaTag.attributes[@"name"] && metaTag.attributes[@"content"] &&
+                 [metaTag.attributes[@"name"] isEqualToString:@"keywords"] )
+        {
+            self.pageObject.keywords = metaTag.attributes[@"content"];
+        }
+    }
+
+    HTMLElement* elementContent = [self.htmlDocument firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
+
     if ( self.type == 0 )
+    {
         [self startParsingTheMemory:elementContent];
+    }
     else if ( self.type == 1 )
+    {
         [self startParsingThePost:elementContent];
+    }
+    else if ( self.type == PageTypeBlogPage )
+        [self startParsingTheBlogPage:elementContent];
+
+    self.pageObject.type = self.type;
+    self.pageObject.items = array;
     
     if ( self.successFailureBlock )
-        self.successFailureBlock(array);
+        self.successFailureBlock(self.pageObject);
 }
 
+
 //////////////
+
 
 - (void) parsingMenuBar
 {
 //    NSArray* menuItems = [self.htmlDocument nodesMatchingSelector:@"ul[class='wsite-menu']>li>a"];
 }
+
+
+
+
+
+- (void) startParsingTheBlogPage:(HTMLElement*)contentElement
+{
+    NSArray* blogPosts = [contentElement nodesMatchingSelector:@"div[class='blog-post']"];
+    
+    for (HTMLElement* blogNode in blogPosts)
+    {
+        HTMLElement* blogTitle = [blogNode firstNodeMatchingSelector:@"a[class~='blog-title-link']"];
+        HTMLElement* blogDate = [blogNode firstNodeMatchingSelector:@"p[class='blog-title-link']>span[class='date-text']"];
+        HTMLElement* blogComments = [blogNode firstNodeMatchingSelector:@"p[class='blog-comments']>a[class='blog-link']"];
+        
+        
+//        [self parseNode:childrenNode level:0];
+    }
+    
+    // Remove separator isf it's last
+    if ( [[array lastObject][@"type"] integerValue] == 2 )
+        [array removeLastObject];
+}
+
 
 
 
@@ -77,8 +134,6 @@
     {
         [self parseNode:childrenNode level:0];
     }
-    
-    
     
     [array filterUsingPredicate:[NSPredicate predicateWithFormat:@"type = %@", @3]];
 }

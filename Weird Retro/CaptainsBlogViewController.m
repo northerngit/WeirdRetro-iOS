@@ -22,11 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [DATAMANAGER updatingStructureFromBackendWithCompletion:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//        [self.tableView reloadData];
-    }];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [DATAMANAGER loadLatest:^(NSError *error) {
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+////        [self.tableView reloadData];
+//    }];
 }
 
 
