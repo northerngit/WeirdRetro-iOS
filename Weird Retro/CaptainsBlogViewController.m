@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Alex Dougas. All rights reserved.
 //
 
-#import "EscapePodsViewController.h"
+#import "CaptainsBlogViewController.h"
 #import "PostViewController.h"
 
 #import "Managers.h"
@@ -16,10 +16,8 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <AFNetworking/UIKit+AFNetworking.h>
 
-#import "RootViewController.h"
 
-
-@implementation EscapePodsViewController
+@implementation CaptainsBlogViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,7 +25,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [DATAMANAGER updatingStructureFromBackendWithCompletion:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
     }];
 }
 
@@ -126,17 +124,17 @@
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ( [segue.identifier isEqualToString:@"ShowPost"])
-    {
-        UITableViewCell* cell = (UITableViewCell*)sender;
-        NSIndexPath* path = [self.tableView indexPathForCell:cell];
-        
-        PostViewController* controller = segue.destinationViewController;
-        controller.postURL = DATAMANAGER.articles[path.row][@"link"];
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ( [segue.identifier isEqualToString:@"ShowPost"])
+//    {
+//        UITableViewCell* cell = (UITableViewCell*)sender;
+//        NSIndexPath* path = [self.tableView indexPathForCell:cell];
+//        
+//        PostViewController* controller = segue.destinationViewController;
+//        controller.postURL = DATAMANAGER.articles[path.row][@"link"];
+//    }
+//}
 
 
 @end

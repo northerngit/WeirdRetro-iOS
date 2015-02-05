@@ -10,7 +10,7 @@
 #import <ECSlidingViewController/ECSlidingViewController.h>
 #import "RootViewController.h"
 
-@interface EscapePodsViewController : RootViewController <ECSlidingViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface CaptainsBlogViewController : RootViewController <ECSlidingViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView* tableView;
 

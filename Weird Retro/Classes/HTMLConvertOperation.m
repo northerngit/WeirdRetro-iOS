@@ -78,6 +78,8 @@
         [self parseNode:childrenNode level:0];
     }
     
+    
+    
     [array filterUsingPredicate:[NSPredicate predicateWithFormat:@"type = %@", @3]];
 }
 

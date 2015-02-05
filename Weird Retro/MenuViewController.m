@@ -1,35 +1,20 @@
-// MEMenuViewController.m
-// TransitionFun
 //
-// Copyright (c) 2013, Michael Enriquez (http://enriquez.me)
+//  MenuViewController.m
+//  Weird Retro
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
+//  Created by User i7 on 03/02/15.
+//  Copyright (c) 2015 Alex Dougas. All rights reserved.
 //
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 
-#import "MEMenuViewController.h"
+#import "MenuViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
 
-@interface MEMenuViewController ()
+@interface MenuViewController ()
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) UINavigationController *transitionsNavigationController;
 @end
 
-@implementation MEMenuViewController
+@implementation MenuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,6 +29,26 @@
     [super viewWillDisappear:animated];
     [self.view endEditing:YES];
 }
+
+
+- (IBAction)clickMenuItem:(UIButton*)sender
+{
+    switch ( sender.tag ) {
+        case 0:
+            self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EscapePodsViewController"];
+            break;
+        case 1:
+            self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CaptainsBlogViewController"];
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self.slidingViewController resetTopViewAnimated:YES];
+}
+
+
 
 #pragma mark - Properties
 
