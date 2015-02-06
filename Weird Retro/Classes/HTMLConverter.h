@@ -17,7 +17,7 @@
 
 - (void) convertMemoryBanksToStructure:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion;
 - (void) convertPostToStructure:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion;
-
+- (void) convertBlogPostPage:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion;
 
 @property (nonatomic, strong) NSOperationQueue* operations;
 

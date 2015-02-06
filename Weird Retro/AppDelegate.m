@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Managers.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +17,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blogpage" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    
+    
+    [CONVERTER convertBlogPostPage:htmlMarkup withCompletion:^(WRPage* pageObject) {
+        
+//        self.articles = [NSMutableArray arrayWithArray:pageObject.items];
+//        
+//        if ( completion )
+//            completion(nil);
+    }];
 
     
     

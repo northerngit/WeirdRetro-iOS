@@ -41,6 +41,13 @@
             self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CaptainsBlogViewController"];
             break;
             
+        case 2:
+            self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SuppliesViewController"];
+            break;
+            
+        case 3:
+            self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ContactViewController"];
+            break;
         default:
             break;
     }

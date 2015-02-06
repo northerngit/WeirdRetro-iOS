@@ -8,7 +8,7 @@
 
 #import "Managers.h"
 
-#import "PostViewController.h"
+#import "BlogPostViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <DTCoreText/DTCoreText.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
@@ -17,7 +17,7 @@
 #define ELEMENTS_SPACING 10
 
 
-@interface PostViewController ()
+@interface BlogPostViewController ()
 {
     CGFloat height;
     NSOperationQueue* queue;
@@ -26,7 +26,7 @@
 @end
 
 
-@implementation PostViewController
+@implementation BlogPostViewController
 
 
 - (void)viewDidLoad
@@ -43,7 +43,7 @@
     queue = [[NSOperationQueue alloc] init];
     queue.maxConcurrentOperationCount = 1;
     
-    self.post = [DATAMANAGER object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", self.postURL]];
+    self.post = [DATAMANAGER object:@"BlogPost" predicate:[NSPredicate predicateWithFormat:@"url = %@", self.postURL]];
     
     self.title = self.post.title;
     
@@ -60,8 +60,9 @@
         }];
     }
     
-    UIBarButtonItem* menuButton = [[UIBarButtonItem alloc] initWithTitle:@"S" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
-    self.navigationItem.rightBarButtonItem = menuButton;
+    UIBarButtonItem* menuButtonSharing = [[UIBarButtonItem alloc] initWithTitle:@"S" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
+    UIBarButtonItem* menuButtonComments = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(commentsButtonTapped:)];
+    self.navigationItem.rightBarButtonItems = @[menuButtonSharing, menuButtonComments];
 }
 
 
@@ -70,6 +71,11 @@
 {
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[UIActivityTypePostToFacebook, UIActivityTypeMessage, UIActivityTypePostToTwitter] applicationActivities:nil];
     [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+
+- (IBAction)commentsButtonTapped:(id)sender
+{
 }
 
 

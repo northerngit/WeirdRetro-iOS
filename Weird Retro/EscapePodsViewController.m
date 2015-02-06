@@ -17,18 +17,47 @@
 #import <AFNetworking/UIKit+AFNetworking.h>
 
 #import "RootViewController.h"
+#import "Post.h"
+
+@interface EscapePodsViewController ()
+@property (nonatomic, strong) NSArray *posts;
+@end
 
 
 @implementation EscapePodsViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+}
+
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
+
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if ( self.posts.count == 0 )
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [DATAMANAGER updatingStructureFromBackendWithCompletion:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self.tableView reloadData];
+        [self reloadData];
     }];
+    
+}
+
+- (void) reloadData
+{
+    self.posts = [DATAMANAGER objects:@"Post"];
+    [self.tableView reloadData];
 }
 
 
@@ -43,7 +72,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return DATAMANAGER.articles.count;
+    return self.posts.count;
 }
 
 
@@ -55,22 +84,23 @@
         cell = [[EscapePodsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"EscapePodsTableViewCell"];
     }
 
-    NSString *html = DATAMANAGER.articles[indexPath.row][@"description"];
-    NSData *data = [html dataUsingEncoding:NSUTF8StringEncoding];
-
-    NSDictionary *options = @{DTDefaultFontName:@"HelveticaNeue-Light",
-                              DTDefaultLinkColor:[UIColor redColor],
-                              DTDefaultLinkDecoration:@NO,
-                              DTDefaultFontSize:@13,
-                              DTUseiOS6Attributes:@YES};
-
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];
-    [attrString removeAttribute:@"CTForegroundColorFromContext" range:NSMakeRange(0, attrString.length)];
-    [attrString removeAttribute:@"NSLink" range:NSMakeRange(0, attrString.length)];
-
+    Post* post = self.posts[indexPath.row];
+    
+//    NSString *html = self.posts[indexPath.row];
+//    NSData *data = [html dataUsingEncoding:NSUTF8StringEncoding];
+//
+//    NSDictionary *options = @{DTDefaultFontName:@"HelveticaNeue-Light",
+//                              DTDefaultLinkColor:[UIColor redColor],
+//                              DTDefaultLinkDecoration:@NO,
+//                              DTDefaultFontSize:@13,
+//                              DTUseiOS6Attributes:@YES};
+//
+//    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];
+//    [attrString removeAttribute:@"CTForegroundColorFromContext" range:NSMakeRange(0, attrString.length)];
+//    [attrString removeAttribute:@"NSLink" range:NSMakeRange(0, attrString.length)];
     
     cell.imgThumbnail.image = nil;
-    [cell.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:DATAMANAGER.articles[indexPath.row][@"src"]]]];
+    [cell.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:post.thumbnailUrl]]];
     
     //    __block NSRange foundRange = NSMakeRange(NSNotFound, 0);
     //    [attrString enumerateAttribute:DTLinkAttribute inRange:NSMakeRange(0, [attrString length]) options:0 usingBlock:^(NSString *value, NSRange range, BOOL *stop) {
@@ -82,8 +112,16 @@
     //
     //
 
-    cell.lblDescription.attributedText = attrString;
+    cell.lblTitle.text = post.title;
+    CGRect rectTitle = [cell.lblTitle.text boundingRectWithSize:cell.lblTitle.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.lblTitle.font} context:nil];
+    cell.lblTitle.frame = CGRectMake(cell.lblTitle.frame.origin.x, cell.lblTitle.frame.origin.y, rectTitle.size.width, rectTitle.size.height);
 
+//    DLog(@"%f", cell.lblTitle.frame.size.height + cell.lblTitle.frame.origin.y);
+//    cell.lblTitle.frame.origin.y + cell.lblTitle.frame.size.height + 5
+    
+    cell.lblDescription.text = post.info;
+    cell.lblDescription.frame = CGRectMake(cell.lblDescription.frame.origin.x, 0, cell.lblDescription.frame.size.width, cell.lblDescription.frame.size.height);
+    
     return cell;
 }
 
@@ -134,7 +172,7 @@
         NSIndexPath* path = [self.tableView indexPathForCell:cell];
         
         PostViewController* controller = segue.destinationViewController;
-        controller.postURL = DATAMANAGER.articles[path.row][@"link"];
+        controller.postURL = [(Post*)self.posts[path.row] url];
     }
 }
 

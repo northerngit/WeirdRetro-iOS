@@ -9,7 +9,7 @@
 #import "HTMLConvertOperation.h"
 #import "HTMLReader.h"
 #import "HTMLParser.h"
-
+#import "HTMLTextNode.h"
 
 @interface HTMLConvertOperation ()
 {
@@ -40,25 +40,6 @@
 
     self.pageObject = [[WRPage alloc] init];
     
-    NSArray* metaTags = [self.htmlDocument nodesMatchingSelector:@"meta"];
-    for (HTMLElement* metaTag in metaTags)
-    {
-        if ( metaTag.attributes[@"property"] && metaTag.attributes[@"content"] )
-        {
-            if ( [metaTag.attributes[@"property"] isEqualToString:@"og:title"] )
-                self.pageObject.title = metaTag.attributes[@"content"];
-            if ( [metaTag.attributes[@"property"] isEqualToString:@"og:description"] )
-                self.pageObject.info = metaTag.attributes[@"content"];
-            if ( [metaTag.attributes[@"property"] isEqualToString:@"og:url"] )
-                self.pageObject.url = metaTag.attributes[@"url"];
-        }
-        else if ( metaTag.attributes[@"name"] && metaTag.attributes[@"content"] &&
-                 [metaTag.attributes[@"name"] isEqualToString:@"keywords"] )
-        {
-            self.pageObject.keywords = metaTag.attributes[@"content"];
-        }
-    }
-
     HTMLElement* elementContent = [self.htmlDocument firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
 
     if ( self.type == 0 )
@@ -67,6 +48,25 @@
     }
     else if ( self.type == 1 )
     {
+        NSArray* metaTags = [self.htmlDocument nodesMatchingSelector:@"meta"];
+        for (HTMLElement* metaTag in metaTags)
+        {
+            if ( metaTag.attributes[@"property"] && metaTag.attributes[@"content"] )
+            {
+                if ( [metaTag.attributes[@"property"] isEqualToString:@"og:title"] )
+                    self.pageObject.title = metaTag.attributes[@"content"];
+                if ( [metaTag.attributes[@"property"] isEqualToString:@"og:description"] )
+                    self.pageObject.info = metaTag.attributes[@"content"];
+                if ( [metaTag.attributes[@"property"] isEqualToString:@"og:url"] )
+                    self.pageObject.url = metaTag.attributes[@"url"];
+            }
+            else if ( metaTag.attributes[@"name"] && metaTag.attributes[@"content"] &&
+                     [metaTag.attributes[@"name"] isEqualToString:@"keywords"] )
+            {
+                self.pageObject.keywords = metaTag.attributes[@"content"];
+            }
+        }
+        
         [self startParsingThePost:elementContent];
     }
     else if ( self.type == PageTypeBlogPage )
@@ -95,20 +95,49 @@
 - (void) startParsingTheBlogPage:(HTMLElement*)contentElement
 {
     NSArray* blogPosts = [contentElement nodesMatchingSelector:@"div[class='blog-post']"];
+
+    NSMutableArray* blogPostsParsed = [NSMutableArray new];
     
     for (HTMLElement* blogNode in blogPosts)
     {
+        WRPage* blogPost = [[WRPage alloc] init];
+        
         HTMLElement* blogTitle = [blogNode firstNodeMatchingSelector:@"a[class~='blog-title-link']"];
-        HTMLElement* blogDate = [blogNode firstNodeMatchingSelector:@"p[class='blog-title-link']>span[class='date-text']"];
+        HTMLElement* blogDate = [blogNode firstNodeMatchingSelector:@"p[class='blog-date']>span[class='date-text']"];
         HTMLElement* blogComments = [blogNode firstNodeMatchingSelector:@"p[class='blog-comments']>a[class='blog-link']"];
+        HTMLElement* blogContent = [blogNode firstNodeMatchingSelector:@"div[class='blog-content']"];
         
+        blogPost.title = blogTitle.textContent;
+        blogPost.url = blogTitle.attributes[@"href"];
+        blogPost.blogPostIdentity = blogNode.attributes[@"id"];
+        blogPost.blogPostDate = blogDate.textContent;
+
+        NSString* numberString = @"";
+        NSScanner *scanner = [NSScanner scannerWithString:blogComments.textContent];
+        NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+        [scanner scanCharactersFromSet:numbers intoString:&numberString];
+        blogPost.blogPostCountComments = [numberString integerValue];
         
-//        [self parseNode:childrenNode level:0];
+        for (HTMLNode* childrenNode in blogContent.children)
+            [self parseNode:childrenNode level:0];
+        
+        for (NSDictionary* item in array)
+            if ( [item[@"type"] integerValue] == 1 )
+            {
+                blogPost.thumbnailUrl = item[@"src"];
+                break;
+            }
+        
+        blogPost.items = [NSArray arrayWithArray:array];
+        
+        [array removeAllObjects];
+        [arraySkip removeAllObjects];
+        
+        [blogPostsParsed addObject:blogPost];
     }
     
-    // Remove separator isf it's last
-    if ( [[array lastObject][@"type"] integerValue] == 2 )
-        [array removeLastObject];
+    array = blogPostsParsed;
 }
 
 
@@ -122,9 +151,12 @@
         [self parseNode:childrenNode level:0];
     }
     
-    // Remove separator isf it's last
+    // Remove separator isf it's last element
     if ( [[array lastObject][@"type"] integerValue] == 2 )
         [array removeLastObject];
+
+    // Remove first image.
+    [array removeObjectAtIndex:0];
 }
 
 
@@ -136,6 +168,20 @@
     }
     
     [array filterUsingPredicate:[NSPredicate predicateWithFormat:@"type = %@", @3]];
+    
+    NSMutableArray* postsArray = [NSMutableArray new];
+    for ( NSDictionary* postParams in array )
+    {
+        WRPage* postPage = [[WRPage alloc] init];
+        postPage.title = postParams[@"title"];
+        postPage.info = postParams[@"info"];
+        postPage.thumbnailUrl = postParams[@"src"];
+        postPage.url = postParams[@"link"];
+        
+        [postsArray addObject:postPage];
+    }
+    
+    array = postsArray;
 }
 
 
@@ -243,7 +289,24 @@
             if ( [descriptionElement.tagName isEqualToString:@"div"] && descriptionElement.attributes[@"class"] &&
                 [descriptionElement.attributes[@"class"] isEqualToString:@"paragraph"] )
             {
-                NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @3, @"src":imgElement.attributes[@"src"], @"description":descriptionElement.innerHTML, @"link":anchorElement.attributes[@"href"]}];
+                NSString* info = @"";
+                for (HTMLNode* textNode in descriptionElement.children) {
+                    if ( [textNode isKindOfClass:[HTMLTextNode class]] )
+                        info = [info stringByAppendingString:[textNode.textContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+                }
+
+                
+                if ( [info hasPrefix:@"-"] )
+                    info = [[info substringFromIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+                NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{
+                    @"type": @3,
+                    @"src":imgElement.attributes[@"src"],
+                    @"fullContent":descriptionElement.innerHTML,
+                    @"link":anchorElement.attributes[@"href"],
+                    @"title":[anchorElement.textContent stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]],
+                    @"info":info
+                }];
                 
                 [arraySkip addObject:spanElement];
                 [arraySkip addObject:descriptionElement];

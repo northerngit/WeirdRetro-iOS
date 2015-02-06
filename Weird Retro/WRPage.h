@@ -24,11 +24,15 @@ typedef NS_ENUM(NSUInteger, PageType) {
 @property (strong, nonatomic) NSString* url;
 @property (strong, nonatomic) NSString* info;
 @property (strong, nonatomic) NSString* keywords;
+@property (strong, nonatomic) NSString* blogPostIdentity;
+@property (strong, nonatomic) NSString* thumbnailUrl;
 
 @property (strong, nonatomic) NSArray* items;
 
-@property (strong, nonatomic) NSString* postDate;
-@property (strong, nonatomic) NSArray* comments;
+@property (strong, nonatomic) NSString* blogPostDate;
+
+@property (assign, nonatomic) NSInteger blogPostCountComments;
+@property (strong, nonatomic) NSArray* blogPostComments;
 
 @property (assign, nonatomic) PageType type;
 

@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Post.h"
+#import "BlogPost.h"
 
 
-@interface PostViewController : UIViewController
+@interface BlogPostViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
 @property (strong, nonatomic) NSString* postURL;
-@property (strong, nonatomic) Post* post;
+@property (strong, nonatomic) BlogPost* post;
 
 
 @end

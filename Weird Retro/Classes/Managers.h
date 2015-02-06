@@ -13,3 +13,5 @@
 
 #import "DataManager.h"
 #define DATAMANAGER [DataManager sharedInstance]
+
+#import "Debug.h"

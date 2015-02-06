@@ -7,32 +7,60 @@
 //
 
 #import "CaptainsBlogViewController.h"
-#import "PostViewController.h"
+#import "BlogPostViewController.h"
 
 #import "Managers.h"
 #import "EscapePodsTableViewCell.h"
+#import "BlogPostTableViewCell.h"
 
 #import <DTCoreText/DTCoreText.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <AFNetworking/UIKit+AFNetworking.h>
+#import "BlogPost.h"
+
+
+@interface CaptainsBlogViewController ()
+@property (nonatomic, strong) NSArray *blogPosts;
+@end
 
 
 @implementation CaptainsBlogViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [DATAMANAGER loadLatest:^(NSError *error) {
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-////        [self.tableView reloadData];
-//    }];
+    if ( self.blogPosts.count == 0 )
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [DATAMANAGER loadBlogPostsFromBackendWithCompletion:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self reloadData];
+    }];
+}
+
+- (void) reloadData
+{
+    self.blogPosts = [DATAMANAGER objects:@"BlogPost" predicate:nil sortKey:@"dateBlogPost" ascending:NO];
+    [self.tableView reloadData];
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 #pragma mark - Table view data source
 
@@ -41,100 +69,50 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return DATAMANAGER.articles.count;
+    return self.blogPosts.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    EscapePodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EscapePodsTableViewCell" forIndexPath:indexPath];
+    BlogPostTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BlogPostTableViewCell" forIndexPath:indexPath];
     
     if ( !cell )
     {
-        cell = [[EscapePodsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"EscapePodsTableViewCell"];
+        cell = [[BlogPostTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BlogPostTableViewCell"];
     }
-
-    NSString *html = DATAMANAGER.articles[indexPath.row][@"description"];
-    NSData *data = [html dataUsingEncoding:NSUTF8StringEncoding];
-
-    NSDictionary *options = @{DTDefaultFontName:@"HelveticaNeue-Light",
-                              DTDefaultLinkColor:[UIColor redColor],
-                              DTDefaultLinkDecoration:@NO,
-                              DTDefaultFontSize:@13,
-                              DTUseiOS6Attributes:@YES};
-
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];
-    [attrString removeAttribute:@"CTForegroundColorFromContext" range:NSMakeRange(0, attrString.length)];
-    [attrString removeAttribute:@"NSLink" range:NSMakeRange(0, attrString.length)];
-
     
+    BlogPost* blogPost = self.blogPosts[indexPath.row];
+
     cell.imgThumbnail.image = nil;
-    [cell.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:DATAMANAGER.articles[indexPath.row][@"src"]]]];
+    [cell.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:blogPost.thumbnailUrl]]];
+    cell.lblDescription.text = blogPost.title;
+
     
-    //    __block NSRange foundRange = NSMakeRange(NSNotFound, 0);
-    //    [attrString enumerateAttribute:DTLinkAttribute inRange:NSMakeRange(0, [attrString length]) options:0 usingBlock:^(NSString *value, NSRange range, BOOL *stop) {
-    //
-    //        *stop = YES;
-    //        foundRange = range;
-    //
-    //    }];
-    //
-    //
-
-    cell.lblDescription.attributedText = attrString;
-
     return cell;
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 85.0f;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ( [segue.identifier isEqualToString:@"ShowPost"])
-//    {
-//        UITableViewCell* cell = (UITableViewCell*)sender;
-//        NSIndexPath* path = [self.tableView indexPathForCell:cell];
-//        
-//        PostViewController* controller = segue.destinationViewController;
-//        controller.postURL = DATAMANAGER.articles[path.row][@"link"];
-//    }
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ( [segue.identifier isEqualToString:@"ShowBlogPost"])
+    {
+        UITableViewCell* cell = (UITableViewCell*)sender;
+        NSIndexPath* path = [self.tableView indexPathForCell:cell];
+        
+        BlogPostViewController* controller = segue.destinationViewController;
+        controller.postURL = [(BlogPost*)self.blogPosts[path.row] url];
+    }
+}
 
 
 @end
