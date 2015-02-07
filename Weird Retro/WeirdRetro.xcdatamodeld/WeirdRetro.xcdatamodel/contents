@@ -19,12 +19,21 @@
         <attribute name="dateLastView" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="keywords" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="thumbnailUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="section" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Section" inverseName="posts" inverseEntity="Section" syncable="YES"/>
+    </entity>
+    <entity name="Section" representedClassName="Section" syncable="YES">
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="section" inverseEntity="Post" syncable="YES"/>
     </entity>
     <elements>
         <element name="BlogPost" positionX="-54" positionY="45" width="128" height="208"/>
-        <element name="Post" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="Post" positionX="-63" positionY="-18" width="128" height="193"/>
+        <element name="Section" positionX="-54" positionY="99" width="128" height="103"/>
     </elements>
 </model>

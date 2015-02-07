@@ -1,26 +1,20 @@
 //
-//  Post.m
+//  Section.m
 //  Weird Retro
 //
 //  Created by User i7 on 07/02/15.
 //  Copyright (c) 2015 Alex Dougas. All rights reserved.
 //
 
-#import "Post.h"
 #import "Section.h"
+#import "Post.h"
 
 
-@implementation Post
+@implementation Section
 
-@dynamic content;
-@dynamic dateLastUpdated;
-@dynamic dateLastView;
-@dynamic info;
-@dynamic keywords;
 @dynamic title;
 @dynamic url;
-@dynamic thumbnailUrl;
 @dynamic order;
-@dynamic section;
+@dynamic posts;
 
 @end

@@ -411,14 +411,14 @@ static DataManager *sharedInstance = nil;
 
 
 
-- (int)countObjects:(NSString *)entityName predicate:(NSPredicate*)predicate fromContext:(NSManagedObjectContext*)contextNew
+- (NSUInteger)countObjects:(NSString *)entityName predicate:(NSPredicate*)predicate fromContext:(NSManagedObjectContext*)contextNew
 {
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:contextNew];
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:entity];
     [req setPredicate:predicate];
     
-    int count = -1;
+    NSUInteger count = -1;
     
     @try
     {
@@ -667,39 +667,121 @@ static DataManager *sharedInstance = nil;
 
 - (void) updatingStructureFromBackendWithCompletion:(void(^)(NSError* error))completion
 {
-    [NETWORK loadingHTMLFile:@"memory-banks.html" withCompletion:^(NSError *error, NSString *htmlMarkup) {
-        if ( !error )
+    NSArray* sections = [self objects:@"Section"];
+    if ( !sections )
+    {
+        NSArray* sectionsParameters = @[@{@"title":@"Comics corner", @"url":@"comics-corner.html"},
+                              @{@"title":@"Cracked Culture", @"url":@"cracked-culture.html"},
+                              @{@"title":@"Cult Cinema", @"url":@"cult-cinema.html"},
+                              @{@"title":@"Editorial Sarcasm", @"url":@"editorial-sarcasm.html"},
+                              @{@"title":@"Far-Out Fiction", @"url":@"far-out-fiction.html"},
+                              @{@"title":@"Retro Gaming", @"url":@"retro-gaming.html"},
+                              @{@"title":@"Wacky World", @"url":@"wacky-world.html"},
+                              @{@"title":@"Weird Music", @"url":@"weird-music.html"}];
+        
+        NSInteger index = 0;
+        
+        for (NSDictionary* sectionParameters in sectionsParameters)
         {
-            [CONVERTER convertMemoryBanksToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
-
-                NSArray* postsInfoObjects = pageObject.items;
-                
-                for (WRPage* postInfo in postsInfoObjects)
-                {
-                    Post* post = [self object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", postInfo.url]];
-                    
-                    if ( !post )
-                    {
-                        post = [self object:@"Post"];
-                        post.url = postInfo.url;
-                    }
-                    
-                    post.title = postInfo.title;
-                    post.info = postInfo.info;
-                    post.thumbnailUrl = postInfo.thumbnailUrl;
-                }
-                
-                [self saveWithSuccess:nil failure:nil];
-                
-                if ( completion )
-                    completion(nil);
-            }];
+            Section* section = [self object:@"Section"];
+            section.order = @(index);
+            section.title = sectionParameters[@"title"];
+            section.url = sectionParameters[@"url"];
             
+            index++;
         }
         
-        if ( completion )
-            return completion(error);
-    }];
+        [self saveWithSuccess:nil failure:nil];
+    }
+    
+//    NSMutableDictionary* articles = [NSMutableDictionary new];
+    
+    __block NSInteger index = 0;
+    
+    for (Section* section in sections)
+    {
+        [NETWORK loadingHTMLFile:section.url withCompletion:^(NSError *error, NSString *htmlMarkup) {
+            if ( !error )
+            {
+                [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
+                    
+                    NSArray* items = pageObject.items;
+                    NSMutableArray* sectionExistItems = [NSMutableArray arrayWithArray:[section.posts allObjects]];
+                    
+                    NSInteger postIndex = 0;
+                    for (NSDictionary* postParams in items)
+                    {
+                        NSArray* postsTmp = [sectionExistItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"url = %@", postParams[@"link"]]];
+                        
+                        Post* post = nil;
+                        if ( postsTmp.count > 0 )
+                        {
+                            post = postsTmp[0];
+                            [sectionExistItems removeObject:post];
+                        }
+
+                        if ( !post )
+                        {
+                            post = [self object:@"Post"];
+                            post.url = postParams[@"link"];
+                        }
+
+                        post.title = postParams[@"title"];
+                        post.info = postParams[@"info"];
+                        post.thumbnailUrl = postParams[@"src"];
+                        post.section = section;
+                        post.order = @(postIndex);
+                        
+                        postIndex++;
+                        
+                        ///////////////
+                    }
+                    
+                    [DATAMANAGER saveWithSuccess:nil failure:nil];
+
+                    index++;
+                    if ( index == sections.count && completion )
+                        completion(nil);
+
+                }];
+            }
+        }];
+    }
+    
+    
+//    [NETWORK loadingHTMLFile:@"memory-banks.html" withCompletion:^(NSError *error, NSString *htmlMarkup) {
+//        if ( !error )
+//        {
+//            [CONVERTER convertMemoryBanksToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
+//
+//                NSArray* postsInfoObjects = pageObject.items;
+//                
+//                for (WRPage* postInfo in postsInfoObjects)
+//                {
+//                    Post* post = [self object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", postInfo.url]];
+//                    
+//                    if ( !post )
+//                    {
+//                        post = [self object:@"Post"];
+//                        post.url = postInfo.url;
+//                    }
+//                    
+//                    post.title = postInfo.title;
+//                    post.info = postInfo.info;
+//                    post.thumbnailUrl = postInfo.thumbnailUrl;
+//                }
+//                
+//                [self saveWithSuccess:nil failure:nil];
+//                
+//                if ( completion )
+//                    completion(nil);
+//            }];
+//            
+//        }
+//        
+//        if ( completion )
+//            return completion(error);
+//    }];
 }
 
 

@@ -19,15 +19,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blogpage" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-    
-    
-    [CONVERTER convertBlogPostPage:htmlMarkup withCompletion:^(WRPage* pageObject) {
-        
-//        self.articles = [NSMutableArray arrayWithArray:pageObject.items];
+
+//    [CONVERTER convertBlogPostPage:htmlMarkup withCompletion:^(WRPage* pageObject) {
 //        
-//        if ( completion )
-//            completion(nil);
-    }];
+////        self.articles = [NSMutableArray arrayWithArray:pageObject.items];
+////        
+////        if ( completion )
+////            completion(nil);
+//    }];
 
     
     

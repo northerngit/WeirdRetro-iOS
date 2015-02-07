@@ -5,6 +5,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "Section.h"
 
 typedef void(^SuccessSaving)(BOOL hasChanges);
 typedef void(^FailureSaving)(NSError *error);
@@ -43,7 +44,7 @@ typedef void(^FailureSaving)(NSError *error);
 - (NSArray *)objects:(NSString *)entityName predicate:(NSPredicate *)predicate resultType:(NSFetchRequestResultType)resultType;
 - (NSArray *)objects:(NSString *)entityName predicate:(NSPredicate *)predicate fromContext:(NSManagedObjectContext*)contextNew;
 
-- (int) countObjects:(NSString *)entityName predicate:(NSPredicate*)predicate fromContext:(NSManagedObjectContext*)contextNew;
+- (NSUInteger) countObjects:(NSString *)entityName predicate:(NSPredicate*)predicate fromContext:(NSManagedObjectContext*)contextNew;
 
 - (NSArray*) objects:(NSString *)entityName predicate:(NSPredicate *)predicate sortKey:(NSString*)sortKey ascending:(BOOL) ascending;
 - (NSArray *)objects:(NSString *)entityName predicate:(NSPredicate *)predicate sortDescriptors:(NSArray*)descriptors;
