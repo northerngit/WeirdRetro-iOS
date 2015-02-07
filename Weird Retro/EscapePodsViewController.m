@@ -35,7 +35,6 @@
     [super viewDidLoad];
 }
 
-
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -75,12 +74,8 @@
     MutableOrderedDictionary* dict = [MutableOrderedDictionary dictionary];
     NSSortDescriptor* descriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
     
-//    DLog(@"D: %d", sections.count);
-
     for (Section* section in sections)
     {
-        DLog(@"%@, %@", section.order, section.title);
-
         NSArray* posts = [section.posts sortedArrayUsingDescriptors:@[descriptor]];
         dict[section.title] = posts;
     }
@@ -127,9 +122,12 @@
     cell.lblTitle.text = post.title;
     CGRect rectTitle = [cell.lblTitle.text boundingRectWithSize:cell.lblTitle.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.lblTitle.font} context:nil];
     cell.lblTitle.frame = CGRectMake(cell.lblTitle.frame.origin.x, cell.lblTitle.frame.origin.y, rectTitle.size.width, rectTitle.size.height);
+    
 
     cell.lblDescription.text = post.info;
-    cell.lblDescription.frame = CGRectMake(cell.lblDescription.frame.origin.x, 0, cell.lblDescription.frame.size.width, cell.lblDescription.frame.size.height);
+    cell.lblDescription.frame = CGRectMake(cell.lblDescription.frame.origin.x, 10, cell.lblDescription.frame.size.width, cell.lblDescription.frame.size.height);
+    
+    DLog(@"%f", cell.lblTitle.frame.size.height);
     
     cell.backgroundColor = [UIColor clearColor];
     cell.contentView.backgroundColor = [UIColor clearColor];

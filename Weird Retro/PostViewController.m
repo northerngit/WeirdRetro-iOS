@@ -12,6 +12,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <DTCoreText/DTCoreText.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "YTPlayerView.h"
 
 #define HEIGHT_IMAGE_PLACEHOLDER 50
 #define ELEMENTS_SPACING 10
@@ -104,12 +105,35 @@
         }
         else if ( [item[@"type"] integerValue] == 4 )
         {
+            [self drawYoutube:item];
+        }
+        else if ( [item[@"type"] integerValue] == 5 )
+        {
             [self drawSlides:item];
         }
     }
     
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+}
+
+
+
+- (void) drawYoutube:(NSDictionary*)item
+{
+    DLog(@"%@", item);
+    
+    YTPlayerView* youtubeView = [[YTPlayerView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 100)];
+    youtubeView.backgroundColor = [UIColor blackColor];
+//    [youtubeView loadVideoByURL:[@"http:" stringByAppendingString:item[@"src"]] startSeconds:0.f suggestedQuality:kYTPlaybackQualityMedium];
+    
+//    [youtubeView loadWithVideoId:@"zGN8w5AzSIU"];
+    
+    [self.scrollView addSubview:youtubeView];
+    height += youtubeView.frame.size.height + ELEMENTS_SPACING;
+
+//    DLog(@"%f", youtubeView.webView.frame.size.height);
+
 }
 
 
@@ -144,10 +168,12 @@
 
 - (void) drawTextItem:(NSDictionary*)item
 {
-    NSDictionary *options = @{DTDefaultFontName:@"HelveticaNeue-Light",
-                              DTDefaultLinkColor:[UIColor redColor],
+    NSDictionary *options = @{DTDefaultFontName:@"Lato-Regular",
+                              DTDefaultLinkColor:[UIColor colorWithRed:190.f/255.f green:160.f/255.f blue:0 alpha:1.0],
+                              DTDefaultTextColor:[UIColor colorWithRed:98.f/255.f green:98.f/255.f blue:98.f/255.f alpha:1.0],
                               DTDefaultLinkDecoration:@NO,
                               DTDefaultFontSize:@13,
+                              DTDefaultLineHeightMultiplier:@1.3f,
                               DTUseiOS6Attributes:@YES};
     
     NSData *data = [item[@"description"] dataUsingEncoding:NSUTF8StringEncoding];
@@ -169,8 +195,8 @@
 
 - (void) drawLinkItem:(NSDictionary*)item
 {
-    NSDictionary *options = @{DTDefaultFontName:@"HelveticaNeue-Light",
-                              DTDefaultLinkColor:[UIColor redColor],
+    NSDictionary *options = @{DTDefaultFontName:@"Lato-Light",
+                              DTDefaultLinkColor:[UIColor colorWithRed:190.f/255.f green:160.f/255.f blue:0 alpha:1.0],
                               DTDefaultLinkDecoration:@NO,
                               DTDefaultFontSize:@12,
                               DTUseiOS6Attributes:@YES};
@@ -284,33 +310,6 @@
     height += ELEMENTS_SPACING*2 + scrollView.frame.size.height + 20;
 }
 
-
-
-
-
-
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-//{
-//    if(scrollView != self.scrollView)
-//        self.scrollView.scrollEnabled = NO;
-//    else
-//        self.scrollView.scrollEnabled = YES;
-//}
-//
-////- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-////{
-////    if(self.scrollView != innerView)
-////    {
-////        if(innerView.contentOffset.x + innerView.frame.size.width == innerView.contentSize.width)
-////        {
-////            outerView.scrollEnabled = NO;
-////        }
-////        else
-////        {
-////            outerView.scrollEnabled = YES;
-////        }
-////    }
-////}
 
 
 @end

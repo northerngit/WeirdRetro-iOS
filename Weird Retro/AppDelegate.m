@@ -20,6 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self importFonts];
+//    [self printAvailableFonts];
     
 //    NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"fantomash" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
 

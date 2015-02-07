@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class Post;
+
 @interface EscapePodsTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel* lblTitle;
 @property (strong, nonatomic) IBOutlet UILabel* lblDescription;
 @property (strong, nonatomic) IBOutlet UIImageView* imgThumbnail;
+@property (strong, nonatomic) Post* post;
 
 @end

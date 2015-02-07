@@ -363,7 +363,7 @@
     if ( error || !imagesArray || imagesArray.count == 0 )
         return;
     
-    NSDictionary* dictionary = @{@"type": @4, @"images":imagesArray};
+    NSDictionary* dictionary = @{@"type": @5, @"images":imagesArray};
     [array addObject:dictionary];
 }
 

@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Escape Pods-->
+        <!--ESCAPE PODS-->
         <scene sceneID="fXD-ad-ZQx">
             <objects>
                 <tableViewController id="xLR-t7-ROY" customClass="EscapePodsViewController" sceneMemberID="viewController">
@@ -21,19 +21,19 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRe-OX-NtL">
-                                            <rect key="frame" x="80" y="10" width="232" height="67"/>
+                                            <rect key="frame" x="80" y="12" width="232" height="39"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7m-0p-qjS">
-                                            <rect key="frame" x="80" y="37" width="232" height="43"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LzV-QG-Lxg">
                                             <rect key="frame" x="8" y="8" width="64" height="71"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7m-0p-qjS">
+                                            <rect key="frame" x="80" y="51" width="207" height="34"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="ZRe-OX-NtL" firstAttribute="top" secondItem="dz5-VE-K8Z" secondAttribute="top" constant="8" id="JEg-5H-XKP"/>
@@ -54,14 +54,14 @@
                             <outlet property="delegate" destination="xLR-t7-ROY" id="XTZ-h0-6vw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Escape Pods" id="9BP-CY-npT"/>
+                    <navigationItem key="navigationItem" title="ESCAPE PODS" id="9BP-CY-npT"/>
                     <connections>
                         <outlet property="tableView" destination="pJg-7U-wke" id="hTh-9k-DHf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x15-o1-uMp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="488" y="400"/>
+            <point key="canvasLocation" x="488" y="393"/>
         </scene>
         <!--Contact-->
         <scene sceneID="sxE-Zt-B1R">

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9323736E87B109712EC39843"
+               BlueprintIdentifier = "A6CCAADB40378986729ADC7C"
                BuildableName = "libPods-Weird Retro-DTFoundation.a"
                BlueprintName = "Pods-Weird Retro-DTFoundation"
                ReferencedContainer = "container:Pods.xcodeproj">

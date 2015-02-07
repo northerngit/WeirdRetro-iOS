@@ -102,3 +102,9 @@
 #define COCOAPODS_VERSION_MINOR_OrderedDictionary 2
 #define COCOAPODS_VERSION_PATCH_OrderedDictionary 0
 
+// youtube-ios-player-helper
+#define COCOAPODS_POD_AVAILABLE_youtube_ios_player_helper
+#define COCOAPODS_VERSION_MAJOR_youtube_ios_player_helper 0
+#define COCOAPODS_VERSION_MINOR_youtube_ios_player_helper 1
+#define COCOAPODS_VERSION_PATCH_youtube_ios_player_helper 1
+
