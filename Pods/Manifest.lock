@@ -34,6 +34,7 @@ PODS:
   - ECSlidingViewController (2.0.3)
   - HTMLReader (0.5.9)
   - MBProgressHUD (0.9)
+  - OrderedDictionary (1.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - ECSlidingViewController
   - HTMLReader
   - MBProgressHUD (~> 0.8)
+  - OrderedDictionary
 
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
@@ -49,5 +51,6 @@ SPEC CHECKSUMS:
   ECSlidingViewController: e79fe856bfb1a99a39c995377a1943e50f7647eb
   HTMLReader: 0833fa2af5fd2019bc2d7a6e8066a07fd0fe87f1
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
+  OrderedDictionary: f7dffc6f0b866461964952a66ed8497d15cf2028
 
 COCOAPODS: 0.35.0

@@ -7,6 +7,7 @@ pod 'AFNetworking', '~> 2.0'
 pod 'MBProgressHUD', '~> 0.8'
 pod 'DTCoreText'
 pod 'ECSlidingViewController'
+pod 'OrderedDictionary'
 
 target 'Weird Retro' do
 end

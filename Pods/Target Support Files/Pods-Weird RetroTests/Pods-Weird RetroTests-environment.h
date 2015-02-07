@@ -96,3 +96,9 @@
 #define COCOAPODS_VERSION_MINOR_MBProgressHUD 9
 #define COCOAPODS_VERSION_PATCH_MBProgressHUD 0
 
+// OrderedDictionary
+#define COCOAPODS_POD_AVAILABLE_OrderedDictionary
+#define COCOAPODS_VERSION_MAJOR_OrderedDictionary 1
+#define COCOAPODS_VERSION_MINOR_OrderedDictionary 2
+#define COCOAPODS_VERSION_PATCH_OrderedDictionary 0
+
