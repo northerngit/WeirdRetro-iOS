@@ -31,6 +31,15 @@
     UIBarButtonItem* menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTapped:)];
     
     self.navigationItem.leftBarButtonItem = menuButton;
+    
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8f]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes: @{
+                                                                       NSFontAttributeName: [UIFont fontWithName:@"Courier-Bold" size:18.0f],
+                                                                       NSForegroundColorAttributeName: [UIColor whiteColor] }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

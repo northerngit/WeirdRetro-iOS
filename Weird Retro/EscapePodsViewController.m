@@ -33,21 +33,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8f]];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes: @{
-            NSFontAttributeName: [UIFont fontWithName:@"Courier-Bold" size:18.0f],
-            NSForegroundColorAttributeName: [UIColor whiteColor] }];
-    
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
-    
     [self reloadData];
 }
 
@@ -111,31 +102,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EscapePodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EscapePodsTableViewCell" forIndexPath:indexPath];
     
-    if ( !cell )
-        cell = [[EscapePodsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"EscapePodsTableViewCell"];
-
     Post* post = self.sections[self.sections.allKeys[indexPath.section]][indexPath.row];
-    
-    cell.imgThumbnail.image = nil;
-    [cell.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:post.thumbnailUrl]]];
-
-    cell.lblTitle.text = post.title;
-    CGRect rectTitle = [cell.lblTitle.text boundingRectWithSize:cell.lblTitle.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.lblTitle.font} context:nil];
-    cell.lblTitle.frame = CGRectMake(cell.lblTitle.frame.origin.x, cell.lblTitle.frame.origin.y, rectTitle.size.width, rectTitle.size.height);
-    
-
-    cell.lblDescription.text = post.info;
-    cell.lblDescription.frame = CGRectMake(cell.lblDescription.frame.origin.x, 10, cell.lblDescription.frame.size.width, cell.lblDescription.frame.size.height);
-    
-    DLog(@"%f", cell.lblTitle.frame.size.height);
+    cell.post = post;
     
     cell.backgroundColor = [UIColor clearColor];
     cell.contentView.backgroundColor = [UIColor clearColor];
-
     
     return cell;
 }
 
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100.0f;
+}
 
 #pragma mark - Navigation
 
