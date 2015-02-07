@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Managers.h"
+#import <dlfcn.h>
 
 @interface AppDelegate ()
 
@@ -16,22 +17,56 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blogpage" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [self importFonts];
+    
+//    NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"fantomash" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
 
 //    [CONVERTER convertBlogPostPage:htmlMarkup withCompletion:^(WRPage* pageObject) {
-//        
-////        self.articles = [NSMutableArray arrayWithArray:pageObject.items];
-////        
-////        if ( completion )
-////            completion(nil);
 //    }];
 
-    
+//    [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
+//    }];
     
     return YES;
 }
+
+
+- (void) printAvailableFonts {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSArray *familyNames = [UIFont familyNames];
+    for (NSString *family in familyNames) {
+        NSArray *fonts = [UIFont fontNamesForFamilyName:family];
+        if (fonts) {
+            [dict setObject:fonts forKey:family];
+        }
+    }
+    
+    DLog(@"fonts = %@", dict);
+}
+
+- (void) importFonts {
+    BOOL GSFontAddFromFile(const char * path);
+    NSUInteger newFontCount = 0;
+    NSBundle *frameworkBundle = [NSBundle bundleWithIdentifier:@"com.apple.GraphicsServices"];
+    const char *frameworkPath = [[frameworkBundle executablePath] UTF8String];
+    if (frameworkPath) {
+        void *graphicsServices = dlopen(frameworkPath, RTLD_NOLOAD | RTLD_LAZY);
+        if (graphicsServices) {
+            BOOL (*GSFontAddFromFile)(const char *) = dlsym(graphicsServices, "GSFontAddFromFile");
+            if (GSFontAddFromFile) {
+                for (NSString *fontFile in [[NSBundle mainBundle] pathsForResourcesOfType:@"ttf" inDirectory:nil])
+                    newFontCount += GSFontAddFromFile([fontFile UTF8String]);
+                
+                for (NSString *fontFile in [[NSBundle mainBundle] pathsForResourcesOfType:@"otf" inDirectory:nil])
+                    newFontCount += GSFontAddFromFile([fontFile UTF8String]);
+            }
+        }
+    }
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

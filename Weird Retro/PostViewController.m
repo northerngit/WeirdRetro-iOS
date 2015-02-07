@@ -39,6 +39,8 @@
 {
     [super viewWillAppear:animated];
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+
     height = 20;
     queue = [[NSOperationQueue alloc] init];
     queue.maxConcurrentOperationCount = 1;
@@ -96,6 +98,14 @@
         {
             [self drawSeparator];
         }
+        else if ( [item[@"type"] integerValue] == 3 )
+        {
+            [self drawLinkItem:item];
+        }
+        else if ( [item[@"type"] integerValue] == 4 )
+        {
+            [self drawSlides:item];
+        }
     }
     
     
@@ -119,7 +129,7 @@
     UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(30, height, self.view.frame.size.width-60, 300)];
     [self.scrollView addSubview:lblTitle];
 
-    lblTitle.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:23.0];
+    lblTitle.font = [UIFont fontWithName:@"KomikaAxis" size:23.0];
     lblTitle.numberOfLines = 0;
     lblTitle.text = self.post.title;
     lblTitle.textAlignment = NSTextAlignmentCenter;
@@ -130,7 +140,6 @@
     lblTitle.frame = CGRectMake(lblTitle.frame.origin.x, lblTitle.frame.origin.y, lblTitle.frame.size.width, rect.size.height);
     height += ELEMENTS_SPACING*2 + lblTitle.frame.size.height;
 }
-
 
 
 - (void) drawTextItem:(NSDictionary*)item
@@ -149,11 +158,43 @@
     
     DTAttributedLabel* label = [[DTAttributedLabel alloc] initWithFrame:CGRectMake(15, height, self.view.frame.size.width-30, 10000)];
     label.attributedString = attrString;
+    label.backgroundColor = [UIColor clearColor];
     [label sizeToFit];
     
     [self.scrollView addSubview:label];
     
     height += label.frame.size.height + 20;
+}
+
+
+- (void) drawLinkItem:(NSDictionary*)item
+{
+    NSDictionary *options = @{DTDefaultFontName:@"HelveticaNeue-Light",
+                              DTDefaultLinkColor:[UIColor redColor],
+                              DTDefaultLinkDecoration:@NO,
+                              DTDefaultFontSize:@12,
+                              DTUseiOS6Attributes:@YES};
+    
+    NSData *data = [item[@"fullContent"] dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];
+    [attrString removeAttribute:@"CTForegroundColorFromContext" range:NSMakeRange(0, attrString.length)];
+    [attrString removeAttribute:@"NSLink" range:NSMakeRange(0, attrString.length)];
+
+    DTAttributedLabel* label = [[DTAttributedLabel alloc] initWithFrame:CGRectMake(95, height, self.view.frame.size.width-120, 10000)];
+    label.attributedString = attrString;
+    label.backgroundColor = [UIColor clearColor];
+    [label sizeToFit];
+
+    /////////
+    
+    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, height, 60, 60)];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [imageView setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:item[@"src"]]]];
+    height += label.frame.size.height + 20;
+    
+    [self.scrollView addSubview:label];
+    [self.scrollView addSubview:imageView];
 }
 
 
@@ -178,9 +219,6 @@
 
     [self.scrollView addSubview:imageView];
 
-    
-//    NSLog(@"%@", item);
-    
     
     [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
 
@@ -209,7 +247,6 @@
                 self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
             });
             
-            
         }];
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
@@ -217,5 +254,63 @@
     }];
     
 }
+
+
+- (void) drawSlides:(NSDictionary*)item
+{
+    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 500)];
+    scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 100);
+    scrollView.clipsToBounds = NO;
+    scrollView.pagingEnabled = YES;
+    scrollView.delegate = self;
+    
+    CGFloat f = 0;
+    for (NSDictionary* imagePagameters in item[@"images"])
+    {
+        UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(f, 0, 300, scrollView.frame.size.height)];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+//        DLog(@"%@", [NETWORK.baseURL stringByAppendingPathComponent:imagePagameters[@"url"]]);
+        [imageView setImageWithURL:[NSURL URLWithString:[@"http://www.weirdretro.org.uk/uploads" stringByAppendingPathComponent:imagePagameters[@"url"]]]];
+        [scrollView addSubview:imageView];
+
+        f += 300 + 5;
+
+    }
+
+    scrollView.contentSize = CGSizeMake(f, scrollView.frame.size.height);
+    [self.scrollView addSubview:scrollView];
+    
+    height += ELEMENTS_SPACING*2 + scrollView.frame.size.height + 20;
+}
+
+
+
+
+
+
+//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+//{
+//    if(scrollView != self.scrollView)
+//        self.scrollView.scrollEnabled = NO;
+//    else
+//        self.scrollView.scrollEnabled = YES;
+//}
+//
+////- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+////{
+////    if(self.scrollView != innerView)
+////    {
+////        if(innerView.contentOffset.x + innerView.frame.size.width == innerView.contentSize.width)
+////        {
+////            outerView.scrollEnabled = NO;
+////        }
+////        else
+////        {
+////            outerView.scrollEnabled = YES;
+////        }
+////    }
+////}
+
 
 @end

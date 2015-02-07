@@ -28,6 +28,10 @@
 		CE345AEA1A8547E6002B0747 /* RootTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE345AE91A8547E6002B0747 /* RootTableTableViewController.m */; };
 		CE345AED1A85C54D002B0747 /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = CE345AEC1A85C54D002B0747 /* Section.m */; };
 		CE345AF01A85C577002B0747 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = CE345AEF1A85C577002B0747 /* Post.m */; };
+		CE345AF41A862260002B0747 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE345AF31A862260002B0747 /* bg.png */; };
+		CE345AF71A862609002B0747 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE345AF51A862609002B0747 /* logo.png */; };
+		CE345AF81A862609002B0747 /* vintage-tan-paper-texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE345AF61A862609002B0747 /* vintage-tan-paper-texture.jpg */; };
+		CE345AFA1A8627CF002B0747 /* Komika Axis.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE345AF91A8627CF002B0747 /* Komika Axis.ttf */; };
 		CE4D68401A807D6600CD948A /* HTMLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D683F1A807D6600CD948A /* HTMLConverter.m */; };
 		CE4D68431A80858F00CD948A /* HTMLConvertOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D68421A80858F00CD948A /* HTMLConvertOperation.m */; };
 		CE4D68451A80C6BA00CD948A /* memory.html in Resources */ = {isa = PBXBuildFile; fileRef = CE4D68441A80C6BA00CD948A /* memory.html */; };
@@ -91,6 +95,10 @@
 		CE345AEC1A85C54D002B0747 /* Section.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Section.m; path = Model/Section.m; sourceTree = "<group>"; };
 		CE345AEE1A85C577002B0747 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Post.h; path = Model/Post.h; sourceTree = "<group>"; };
 		CE345AEF1A85C577002B0747 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Post.m; path = Model/Post.m; sourceTree = "<group>"; };
+		CE345AF31A862260002B0747 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		CE345AF51A862609002B0747 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		CE345AF61A862609002B0747 /* vintage-tan-paper-texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "vintage-tan-paper-texture.jpg"; sourceTree = "<group>"; };
+		CE345AF91A8627CF002B0747 /* Komika Axis.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Komika Axis.ttf"; sourceTree = "<group>"; };
 		CE4D683E1A807D6600CD948A /* HTMLConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTMLConverter.h; path = Classes/HTMLConverter.h; sourceTree = "<group>"; };
 		CE4D683F1A807D6600CD948A /* HTMLConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTMLConverter.m; path = Classes/HTMLConverter.m; sourceTree = "<group>"; };
 		CE4D68411A80858F00CD948A /* HTMLConvertOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTMLConvertOperation.h; path = Classes/HTMLConvertOperation.h; sourceTree = "<group>"; };
@@ -245,6 +253,10 @@
 			isa = PBXGroup;
 			children = (
 				CE212EF91A832D7A007EFD6E /* Example HTMLs */,
+				CE345AF31A862260002B0747 /* bg.png */,
+				CE345AF51A862609002B0747 /* logo.png */,
+				CE345AF61A862609002B0747 /* vintage-tan-paper-texture.jpg */,
+				CE345AF91A8627CF002B0747 /* Komika Axis.ttf */,
 				CED3D4431A7DC44F002F7FDC /* Main.storyboard */,
 				CED3D4461A7DC44F002F7FDC /* Images.xcassets */,
 				CED3D4481A7DC44F002F7FDC /* LaunchScreen.xib */,
@@ -394,10 +406,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE345AFA1A8627CF002B0747 /* Komika Axis.ttf in Resources */,
 				CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */,
 				CE0BEFD21A84618A00207752 /* blogpage.html in Resources */,
+				CE345AF41A862260002B0747 /* bg.png in Resources */,
 				CED3D44A1A7DC44F002F7FDC /* LaunchScreen.xib in Resources */,
+				CE345AF71A862609002B0747 /* logo.png in Resources */,
 				CE1F49EA1A7FF8FC007FEC04 /* fantomash.html in Resources */,
+				CE345AF81A862609002B0747 /* vintage-tan-paper-texture.jpg in Resources */,
 				CE02648A1A7FAAC200E2407D /* japanese.html in Resources */,
 				CE8E11D31A7F633F00B8566C /* superhero.html in Resources */,
 				CE4D68451A80C6BA00CD948A /* memory.html in Resources */,
@@ -597,6 +613,7 @@
 			baseConfigurationReference = E224A6AEAF271396FFA97523 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "Weird Retro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -609,6 +626,7 @@
 			baseConfigurationReference = F8BF5B3D00D2BA9030603FAD /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "Weird Retro/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

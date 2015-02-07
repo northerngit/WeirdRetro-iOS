@@ -692,10 +692,11 @@ static DataManager *sharedInstance = nil;
         }
         
         [self saveWithSuccess:nil failure:nil];
+        
+        sections = [self objects:@"Section"];
     }
     
-//    NSMutableDictionary* articles = [NSMutableDictionary new];
-    
+
     __block NSInteger index = 0;
     
     for (Section* section in sections)
@@ -748,40 +749,6 @@ static DataManager *sharedInstance = nil;
         }];
     }
     
-    
-//    [NETWORK loadingHTMLFile:@"memory-banks.html" withCompletion:^(NSError *error, NSString *htmlMarkup) {
-//        if ( !error )
-//        {
-//            [CONVERTER convertMemoryBanksToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
-//
-//                NSArray* postsInfoObjects = pageObject.items;
-//                
-//                for (WRPage* postInfo in postsInfoObjects)
-//                {
-//                    Post* post = [self object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", postInfo.url]];
-//                    
-//                    if ( !post )
-//                    {
-//                        post = [self object:@"Post"];
-//                        post.url = postInfo.url;
-//                    }
-//                    
-//                    post.title = postInfo.title;
-//                    post.info = postInfo.info;
-//                    post.thumbnailUrl = postInfo.thumbnailUrl;
-//                }
-//                
-//                [self saveWithSuccess:nil failure:nil];
-//                
-//                if ( completion )
-//                    completion(nil);
-//            }];
-//            
-//        }
-//        
-//        if ( completion )
-//            return completion(error);
-//    }];
 }
 
 
@@ -793,15 +760,12 @@ static DataManager *sharedInstance = nil;
             [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
                 
                 Post* post = [self object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", filePath]];
-//                DLog(@"%@", post.content);
                 
                 if ( post )
                     post.content = pageObject.items;
 
                 [self saveWithSuccess:nil failure:nil];
 
-//                self.posts[filePath] = pageObject.items;
-                
                 if ( completion )
                     completion(nil);
             }];

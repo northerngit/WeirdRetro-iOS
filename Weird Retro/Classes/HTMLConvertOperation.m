@@ -68,6 +68,7 @@
         }
         
         [self startParsingThePost:elementContent];
+        [self parseSlides];
     }
     else if ( self.type == PageTypeBlogPage )
         [self startParsingTheBlogPage:elementContent];

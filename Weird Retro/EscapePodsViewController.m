@@ -39,6 +39,16 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8f]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes: @{
+            NSFontAttributeName: [UIFont fontWithName:@"Courier-Bold" size:18.0f],
+            NSForegroundColorAttributeName: [UIColor whiteColor] }];
+    
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+    
     [self reloadData];
 }
 
@@ -109,9 +119,7 @@
     if ( !cell )
         cell = [[EscapePodsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"EscapePodsTableViewCell"];
 
-    
     Post* post = self.sections[self.sections.allKeys[indexPath.section]][indexPath.row];
-    
     
     cell.imgThumbnail.image = nil;
     [cell.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:post.thumbnailUrl]]];
@@ -123,6 +131,9 @@
     cell.lblDescription.text = post.info;
     cell.lblDescription.frame = CGRectMake(cell.lblDescription.frame.origin.x, 0, cell.lblDescription.frame.size.width, cell.lblDescription.frame.size.height);
     
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
+
     
     return cell;
 }
@@ -133,14 +144,15 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    if ( [segue.identifier isEqualToString:@"ShowPost"])
-//    {
-//        UITableViewCell* cell = (UITableViewCell*)sender;
-//        NSIndexPath* path = [self.tableView indexPathForCell:cell];
-//        
-//        PostViewController* controller = segue.destinationViewController;
-//        controller.postURL = [(Post*)self.posts[path.row] url];
-//    }
+    if ( [segue.identifier isEqualToString:@"ShowPost"])
+    {
+        UITableViewCell* cell = (UITableViewCell*)sender;
+        NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+        
+        PostViewController* controller = segue.destinationViewController;
+        Post* post = self.sections[self.sections.allKeys[indexPath.section]][indexPath.row];
+        controller.postURL = post.url;
+    }
 }
 
 

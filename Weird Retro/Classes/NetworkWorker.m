@@ -49,8 +49,7 @@
 
 - (void) loadingHTMLFile:(NSString*)filePath withCompletion:(void(^)(NSError* error, NSString* htmlMarkup))completion
 {
-//    NSOperationQueue* queue = [NSOperationQueue new];
-    
+//    NSURL *URL = [NSURL URLWithString:@"http://www.weirdretro.org.uk/cult-cinema.html"];
     NSURL *URL = [NSURL URLWithString:[self.baseURL stringByAppendingPathComponent:filePath]];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
