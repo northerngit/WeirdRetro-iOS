@@ -746,6 +746,8 @@ static DataManager *sharedInstance = nil;
 
                 }];
             }
+            else
+                DLog(@"%@", error.localizedDescription);
         }];
     }
     
