@@ -22,10 +22,10 @@
     [self importFonts];
 //    [self printAvailableFonts];
     
-//    NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"fantomash" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
+    NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"postwithcomments" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
 
-//    [CONVERTER convertBlogPostPage:htmlMarkup withCompletion:^(WRPage* pageObject) {
-//    }];
+    [CONVERTER convertBlogPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
+    }];
 
 //    [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
 //    }];

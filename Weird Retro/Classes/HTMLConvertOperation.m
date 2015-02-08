@@ -46,7 +46,7 @@
     {
         [self startParsingTheMemory:elementContent];
     }
-    else if ( self.type == 1 )
+    else if ( self.type == PageTypePost || self.type == PageTypeBlogPost )
     {
         NSArray* metaTags = [self.htmlDocument nodesMatchingSelector:@"meta"];
         for (HTMLElement* metaTag in metaTags)
@@ -67,8 +67,15 @@
             }
         }
         
-        [self startParsingThePost:elementContent];
-        [self parseSlides];
+        if ( self.type == PageTypePost )
+        {
+            [self startParsingThePost:elementContent];
+            [self parseSlides];
+        }
+        else if ( self.type == PageTypeBlogPost )
+        {
+            WRPage* blogPost = [self parseBlogPost:elementContent];
+        }
     }
     else if ( self.type == PageTypeBlogPage )
         [self startParsingTheBlogPage:elementContent];
@@ -101,40 +108,7 @@
     
     for (HTMLElement* blogNode in blogPosts)
     {
-        WRPage* blogPost = [[WRPage alloc] init];
-        
-        HTMLElement* blogTitle = [blogNode firstNodeMatchingSelector:@"a[class~='blog-title-link']"];
-        HTMLElement* blogDate = [blogNode firstNodeMatchingSelector:@"p[class='blog-date']>span[class='date-text']"];
-        HTMLElement* blogComments = [blogNode firstNodeMatchingSelector:@"p[class='blog-comments']>a[class='blog-link']"];
-        HTMLElement* blogContent = [blogNode firstNodeMatchingSelector:@"div[class='blog-content']"];
-        
-        blogPost.title = blogTitle.textContent;
-        blogPost.url = blogTitle.attributes[@"href"];
-        blogPost.blogPostIdentity = blogNode.attributes[@"id"];
-        blogPost.blogPostDate = blogDate.textContent;
-
-        NSString* numberString = @"";
-        NSScanner *scanner = [NSScanner scannerWithString:blogComments.textContent];
-        NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-        [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
-        [scanner scanCharactersFromSet:numbers intoString:&numberString];
-        blogPost.blogPostCountComments = [numberString integerValue];
-        
-        for (HTMLNode* childrenNode in blogContent.children)
-            [self parseNode:childrenNode level:0];
-        
-        for (NSDictionary* item in array)
-            if ( [item[@"type"] integerValue] == 1 )
-            {
-                blogPost.thumbnailUrl = item[@"src"];
-                break;
-            }
-        
-        blogPost.items = [NSArray arrayWithArray:array];
-        
-        [array removeAllObjects];
-        [arraySkip removeAllObjects];
-        
+        WRPage* blogPost = [self parseBlogPost:blogNode];
         [blogPostsParsed addObject:blogPost];
     }
     
@@ -142,21 +116,116 @@
 }
 
 
+- (WRPage*) parseBlogPost:(HTMLElement*)blogNode
+{
+    WRPage* blogPost = [[WRPage alloc] init];
+    
+    HTMLElement* blogTitle = [blogNode firstNodeMatchingSelector:@"a[class~='blog-title-link']"];
+    HTMLElement* blogDate = [blogNode firstNodeMatchingSelector:@"p[class='blog-date']>span[class='date-text']"];
+    HTMLElement* blogComments = [blogNode firstNodeMatchingSelector:@"p[class='blog-comments']>a[class='blog-link']"];
+    HTMLElement* blogContent = [blogNode firstNodeMatchingSelector:@"div[class='blog-content']"];
+    
+    blogPost.title = blogTitle.textContent;
+    blogPost.url = blogTitle.attributes[@"href"];
+    blogPost.blogPostIdentity = blogNode.attributes[@"id"];
+    blogPost.blogPostDate = blogDate.textContent;
+    
+    NSString* numberString = @"";
+    NSScanner *scanner = [NSScanner scannerWithString:blogComments.textContent];
+    NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
+    [scanner scanCharactersFromSet:numbers intoString:&numberString];
+    blogPost.blogPostCountComments = [numberString integerValue];
+    
+    for (HTMLNode* childrenNode in blogContent.children)
+        [self parseNode:childrenNode level:0];
+    
+    for (NSDictionary* item in array)
+        if ( [item[@"type"] integerValue] == 1 )
+        {
+            blogPost.thumbnailUrl = item[@"src"];
+            break;
+        }
+    
+    blogPost.items = [NSArray arrayWithArray:array];
+    
+    [array removeAllObjects];
+    [arraySkip removeAllObjects];
+    
+    
+    ///////// Comments ////////
+    
+    HTMLElement* blogCommentsArea = [blogNode firstNodeMatchingSelector:@"div[id='commentArea']"];
+    NSArray* commentsNodes = [blogCommentsArea nodesMatchingSelector:@"div[class~='blogCommentWrap']"];
+
+    for (HTMLNode *commentNode in commentsNodes)
+    {
+        if (![commentNode isKindOfClass:[HTMLElement class]])
+            continue;
+        
+        HTMLElement* commentElement = (HTMLElement*)commentNode;
+        NSInteger commentLevel = 0;
+        NSArray* commentElementClasses = [commentElement.attributes[@"class"] componentsSeparatedByString:@" "];
+        for (NSString* commentElementClass in commentElementClasses)
+        {
+            if ( [commentElementClass hasPrefix:@"blogCommentLevel"])
+            {
+                NSString* commentElementLevelString = [commentElementClass substringFromIndex:[@"blogCommentLevel" length]];
+                commentLevel = [commentElementLevelString integerValue];
+                break;
+            }
+        }
+        
+        HTMLElement* commentAuthorElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentHeadingInner']>div[class='blogCommentAuthor']"];
+        HTMLElement* commentDateElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentHeadingInner']>div[class='blogCommentDate']"];
+        
+        HTMLElement* commentTextElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentText']"];
+        HTMLElement* commentReplyButtonElement = [commentElement firstNodeMatchingSelector:@"span[class~='blog-button'][class~='reply-comment']"];
+        
+        NSString* s = commentReplyButtonElement[@"onclick"];
+        
+        /////////////////
+        
+        NSError *error = NULL;
+        NSRegularExpressionOptions regexOptions = NSRegularExpressionCaseInsensitive;
+        
+        NSString *pattern = @".+user_id=(\\d+)&blog_id=(\\d+)&post_id=(\\d+)&comment_id=(\\d+).+";
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
+        if (error)
+        {
+            NSLog(@"Couldn't create regex with given string and options");
+        }
+        
+        NSRange textRange = NSMakeRange(0, s.length);
+        NSTextCheckingResult* matches = [regex firstMatchInString:s options:NSMatchingReportProgress range:textRange];
+        
+        if ( matches.numberOfRanges == 5 )
+        {
+            NSString* commentUserId = [s substringWithRange:[matches rangeAtIndex:1]];
+            NSString* commentBlogId = [s substringWithRange:[matches rangeAtIndex:2]];
+            NSString* commentPostId = [s substringWithRange:[matches rangeAtIndex:3]];
+            NSString* commentCommentId = [s substringWithRange:[matches rangeAtIndex:4]];
+        }
+
+        /////////////////
+        
+        
+    }
+    
+    return blogPost;
+}
+
 
 
 
 - (void) startParsingThePost:(HTMLElement*)contentElement
 {
     for (HTMLNode* childrenNode in contentElement.children)
-    {
         [self parseNode:childrenNode level:0];
-    }
     
-    // Remove separator isf it's last element
     if ( [[array lastObject][@"type"] integerValue] == 2 )
         [array removeLastObject];
 
-    // Remove first image.
     [array removeObjectAtIndex:0];
 }
 

@@ -37,6 +37,7 @@
 		CE068A1B1A873A7C00D69CFC /* japanese.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A161A873A7C00D69CFC /* japanese.html */; };
 		CE068A1C1A873A7C00D69CFC /* memory.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A171A873A7C00D69CFC /* memory.html */; };
 		CE068A1D1A873A7C00D69CFC /* superhero.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A181A873A7C00D69CFC /* superhero.html */; };
+		CE068A1F1A87495D00D69CFC /* postwithcomments.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A1E1A87495D00D69CFC /* postwithcomments.html */; };
 		CE0BEFD51A847E5200207752 /* BlogPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BEFD41A847E5200207752 /* BlogPostTableViewCell.m */; };
 		CE0BEFD71A8482CA00207752 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BEFD61A8482CA00207752 /* CoreData.framework */; };
 		CE0BEFDE1A84850B00207752 /* WeirdRetro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE0BEFDC1A84850B00207752 /* WeirdRetro.xcdatamodeld */; };
@@ -106,6 +107,7 @@
 		CE068A161A873A7C00D69CFC /* japanese.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = japanese.html; path = Examples/japanese.html; sourceTree = "<group>"; };
 		CE068A171A873A7C00D69CFC /* memory.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = memory.html; path = Examples/memory.html; sourceTree = "<group>"; };
 		CE068A181A873A7C00D69CFC /* superhero.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = superhero.html; path = Examples/superhero.html; sourceTree = "<group>"; };
+		CE068A1E1A87495D00D69CFC /* postwithcomments.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = postwithcomments.html; path = Examples/postwithcomments.html; sourceTree = "<group>"; };
 		CE0BEFD31A847E5200207752 /* BlogPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogPostTableViewCell.h; sourceTree = "<group>"; };
 		CE0BEFD41A847E5200207752 /* BlogPostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogPostTableViewCell.m; sourceTree = "<group>"; };
 		CE0BEFD61A8482CA00207752 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -289,6 +291,7 @@
 		CE212EF91A832D7A007EFD6E /* Example HTMLs */ = {
 			isa = PBXGroup;
 			children = (
+				CE068A1E1A87495D00D69CFC /* postwithcomments.html */,
 				CE068A141A873A7C00D69CFC /* blogpage.html */,
 				CE068A151A873A7C00D69CFC /* fantomash.html */,
 				CE068A161A873A7C00D69CFC /* japanese.html */,
@@ -499,6 +502,7 @@
 				CE068A061A873A5B00D69CFC /* Lato-Heavy.ttf in Resources */,
 				CE068A021A873A5B00D69CFC /* Lato-Bold.ttf in Resources */,
 				CE068A1A1A873A7C00D69CFC /* fantomash.html in Resources */,
+				CE068A1F1A87495D00D69CFC /* postwithcomments.html in Resources */,
 				CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */,
 				CE068A1D1A873A7C00D69CFC /* superhero.html in Resources */,
 				CE068A031A873A5B00D69CFC /* Lato-BoldItalic.ttf in Resources */,

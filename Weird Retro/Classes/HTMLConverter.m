@@ -86,7 +86,29 @@
 - (void) convertPostToStructure:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion
 {
     HTMLConvertOperation* operation = [[HTMLConvertOperation alloc] init];
-    operation.type = 1;
+    operation.type = PageTypePost;
+    operation.htmlMarkup = htmlText;
+    
+    operation.successFailureBlock = ^(WRPage* pageObject) {
+        
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_async(mainQueue, ^{
+            
+            completion(pageObject);
+            
+        });
+        
+    };
+    
+    [operation start];
+}
+
+
+
+- (void) convertBlogPostToStructure:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion
+{
+    HTMLConvertOperation* operation = [[HTMLConvertOperation alloc] init];
+    operation.type = PageTypeBlogPost;
     operation.htmlMarkup = htmlText;
     
     operation.successFailureBlock = ^(WRPage* pageObject) {
