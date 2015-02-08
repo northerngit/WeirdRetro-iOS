@@ -5,6 +5,8 @@
 //  Copyright (c) 2015 Alex Dougas. All rights reserved.
 //
 
+#import "Debug.h"
+
 #import "NetworkWorker.h"
 #define NETWORK [NetworkWorker sharedInstance]
 
@@ -13,5 +15,3 @@
 
 #import "DataManager.h"
 #define DATAMANAGER [DataManager sharedInstance]
-
-#import "Debug.h"

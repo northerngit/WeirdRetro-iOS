@@ -7,14 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Post.h"
+
+
+@protocol CommonPost <NSObject>
+
+- (NSString*) title;
+- (NSString*) content;
+
+@end
 
 
 @interface PostViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
 @property (strong, nonatomic) NSString* postURL;
-@property (strong, nonatomic) Post* post;
 
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "CaptainsBlogViewController.h"
-#import "BlogPostViewController.h"
+#import "PostViewController.h"
 
 #import "Managers.h"
 #import "EscapePodsTableViewCell.h"
@@ -83,11 +83,7 @@
     }
     
     BlogPost* blogPost = self.blogPosts[indexPath.row];
-
-    cell.imgThumbnail.image = nil;
-    [cell.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:blogPost.thumbnailUrl]]];
-    cell.lblDescription.text = blogPost.title;
-
+    cell.blogPost = blogPost;
     
     return cell;
 }
@@ -110,7 +106,7 @@
         UITableViewCell* cell = (UITableViewCell*)sender;
         NSIndexPath* path = [self.tableView indexPathForCell:cell];
         
-        BlogPostViewController* controller = segue.destinationViewController;
+        PostViewController* controller = segue.destinationViewController;
         controller.postURL = [(BlogPost*)self.blogPosts[path.row] url];
     }
 }

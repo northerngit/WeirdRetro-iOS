@@ -47,8 +47,6 @@
     
     rectTitle = [self.lblDescription.text boundingRectWithSize:CGSizeMake(self.contentView.frame.size.width - 80, 200) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:self.lblDescription.font} context:nil];
     
-//    DLog(@"%f, %f - %@", rectTitle.size.width, rectTitle.size.height, self.lblTitle.text);
-
     self.lblDescription.frame = CGRectMake(self.lblDescription.frame.origin.x,
                                            self.lblTitle.frame.origin.y + self.lblTitle.frame.size.height + 5,
                                            rectTitle.size.width,
@@ -60,7 +58,6 @@
         self.lblDescription.frame = r;
     }
     
-//    DLog(@"%f, %f - %@", heightOfDecription, rectTitle.size.height, self.lblTitle.text);
 }
 
 - (void) setPost:(Post *)post

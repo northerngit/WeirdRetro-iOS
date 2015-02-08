@@ -5,7 +5,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "Post.h"
 #import "Section.h"
+#import "BlogPost.h"
+
 
 typedef void(^SuccessSaving)(BOOL hasChanges);
 typedef void(^FailureSaving)(NSError *error);

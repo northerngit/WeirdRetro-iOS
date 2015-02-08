@@ -18,11 +18,16 @@
 #define ELEMENTS_SPACING 10
 
 
+
+
+
 @interface PostViewController ()
 {
     CGFloat height;
     NSOperationQueue* queue;
 }
+
+@property (strong, nonatomic) NSManagedObject<CommonPost>* post;
 
 @end
 
@@ -48,9 +53,12 @@
     
     self.post = [DATAMANAGER object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", self.postURL]];
     
-    self.title = self.post.title;
+    if ( !self.post )
+        self.post = [DATAMANAGER object:@"BlogPost" predicate:[NSPredicate predicateWithFormat:@"url = %@", self.postURL]];
     
-    if ( self.post && self.post.content )
+    self.title = [self.post title];
+    
+    if ( self.post && [self.post content] )
     {
         [self reloadPost];
     }
@@ -65,6 +73,11 @@
     
     UIBarButtonItem* menuButton = [[UIBarButtonItem alloc] initWithTitle:@"S" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
     self.navigationItem.rightBarButtonItem = menuButton;
+    
+//    UIBarButtonItem* menuButtonSharing = [[UIBarButtonItem alloc] initWithTitle:@"S" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
+//    UIBarButtonItem* menuButtonComments = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(commentsButtonTapped:)];
+//    self.navigationItem.rightBarButtonItems = @[menuButtonSharing, menuButtonComments];
+
 }
 
 
@@ -116,7 +129,6 @@
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
 }
-
 
 
 - (void) drawYoutube:(NSDictionary*)item
