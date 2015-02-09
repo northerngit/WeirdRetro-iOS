@@ -12,6 +12,16 @@
         <attribute name="thumbnailUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="blogPost" inverseEntity="Comment" syncable="YES"/>
+    </entity>
+    <entity name="Comment" representedClassName="Comment" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="commentId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="indent" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="blogPost" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BlogPost" inverseName="comments" inverseEntity="BlogPost" syncable="YES"/>
     </entity>
     <entity name="Post" representedClassName="Post" syncable="YES">
         <attribute name="content" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -32,8 +42,9 @@
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="section" inverseEntity="Post" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BlogPost" positionX="-54" positionY="45" width="128" height="208"/>
+        <element name="BlogPost" positionX="-54" positionY="45" width="128" height="223"/>
         <element name="Post" positionX="-63" positionY="-18" width="128" height="193"/>
         <element name="Section" positionX="-54" positionY="99" width="128" height="103"/>
+        <element name="Comment" positionX="-63" positionY="99" width="128" height="148"/>
     </elements>
 </model>

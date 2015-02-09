@@ -73,4 +73,42 @@
 }
 
 
+
+- (void) replyComment:(NSString*)comment postId:(NSString*)postId commentId:(NSString*)commentId
+                 name:(NSString*)name email:(NSString*)email website:(NSString*)website
+               notify:(BOOL)notify
+       withCompletion:(void(^)(NSError* error))completion
+{
+    AFHTTPRequestOperationManager* replyManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.weebly.com/"]];
+    
+    replyManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSMutableDictionary* parmaeters = [NSMutableDictionary dictionaryWithDictionary:@{
+                            @"pos":@"postcomment",
+                            @"user_id":kUserId,
+                            @"blogId":kBlogId,
+                            @"postid":postId,
+                            @"name":name,
+                            @"email":email,
+                            @"website":website,
+                            @"commentv2":comment,
+                            @"notify":@(notify)}];
+    if ( commentId )
+        parmaeters[@"parentId"] = commentId;
+    
+    
+    [replyManager POST:@"weebly/publicBackend.php" parameters:parmaeters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSString* newStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        DLog(@"%@", newStr);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        DLog(@"%@", error.localizedDescription);
+        
+    }];
+}
+
+
+
 @end

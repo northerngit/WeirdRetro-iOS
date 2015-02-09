@@ -11,4 +11,10 @@
 
 @interface ContactViewController : UITableViewController <ECSlidingViewControllerDelegate>
 
+@property (strong, nonatomic) IBOutlet UITextField* tfFirstName;
+@property (strong, nonatomic) IBOutlet UITextField* tfLastName;
+@property (strong, nonatomic) IBOutlet UITextField* tfEmail;
+@property (strong, nonatomic) IBOutlet UITextView* tvContent;
+@property (strong, nonatomic) IBOutlet UIButton* commentType;
+
 @end

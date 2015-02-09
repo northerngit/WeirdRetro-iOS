@@ -70,15 +70,28 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }];
     }
+//    
+//    UIBarButtonItem* menuButton = [[UIBarButtonItem alloc] initWithTitle:@"S" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
+//    self.navigationItem.rightBarButtonItem = menuButton;
     
-    UIBarButtonItem* menuButton = [[UIBarButtonItem alloc] initWithTitle:@"S" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
-    self.navigationItem.rightBarButtonItem = menuButton;
+
+    UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonTapped:)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    self.navigationItem.hidesBackButton = YES;
     
 //    UIBarButtonItem* menuButtonSharing = [[UIBarButtonItem alloc] initWithTitle:@"S" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
 //    UIBarButtonItem* menuButtonComments = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(commentsButtonTapped:)];
 //    self.navigationItem.rightBarButtonItems = @[menuButtonSharing, menuButtonComments];
 
 }
+
+
+
+- (IBAction)backButtonTapped:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 
 
@@ -180,14 +193,7 @@
 
 - (void) drawTextItem:(NSDictionary*)item
 {
-    NSDictionary *options = @{DTDefaultFontName:@"Lato-Regular",
-                              DTDefaultLinkColor:[UIColor colorWithRed:190.f/255.f green:160.f/255.f blue:0 alpha:1.0],
-                              DTDefaultTextColor:[UIColor colorWithRed:98.f/255.f green:98.f/255.f blue:98.f/255.f alpha:1.0],
-                              DTDefaultLinkDecoration:@NO,
-                              DTDefaultFontSize:@13,
-                              DTDefaultLineHeightMultiplier:@1.3f,
-                              DTUseiOS6Attributes:@YES};
-    
+    NSDictionary *options = kMainTextOptions;
     NSData *data = [item[@"description"] dataUsingEncoding:NSUTF8StringEncoding];
 
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];

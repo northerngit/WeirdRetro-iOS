@@ -10,6 +10,7 @@
 #import "HTMLReader.h"
 #import "HTMLParser.h"
 #import "HTMLTextNode.h"
+#import "Managers.h"
 
 @interface HTMLConvertOperation ()
 {
@@ -74,15 +75,20 @@
         }
         else if ( self.type == PageTypeBlogPost )
         {
-            WRPage* blogPost = [self parseBlogPost:elementContent];
+            self.pageObject = [self parseBlogPost:elementContent];
         }
     }
     else if ( self.type == PageTypeBlogPage )
         [self startParsingTheBlogPage:elementContent];
 
-    self.pageObject.type = self.type;
-    self.pageObject.items = array;
     
+    ////////////
+    self.pageObject.type = self.type;
+    if ( self.type != PageTypeBlogPost )
+        self.pageObject.items = array;
+    
+    
+    ////////////
     if ( self.successFailureBlock )
         self.successFailureBlock(self.pageObject);
 }
@@ -127,7 +133,7 @@
     
     blogPost.title = blogTitle.textContent;
     blogPost.url = blogTitle.attributes[@"href"];
-    blogPost.blogPostIdentity = blogNode.attributes[@"id"];
+    blogPost.blogPostId = [blogNode.attributes[@"id"] substringFromIndex:[@"blog-post-" length]];
     blogPost.blogPostDate = blogDate.textContent;
     
     NSString* numberString = @"";
@@ -154,14 +160,20 @@
     
     
     ///////// Comments ////////
-    
     HTMLElement* blogCommentsArea = [blogNode firstNodeMatchingSelector:@"div[id='commentArea']"];
+    
+    // Comments list
     NSArray* commentsNodes = [blogCommentsArea nodesMatchingSelector:@"div[class~='blogCommentWrap']"];
-
+    NSMutableArray* commentsArray = [NSMutableArray new];
+    
     for (HTMLNode *commentNode in commentsNodes)
     {
         if (![commentNode isKindOfClass:[HTMLElement class]])
             continue;
+        
+        
+        
+        NSMutableDictionary* commentParameters = [NSMutableDictionary new];
         
         HTMLElement* commentElement = (HTMLElement*)commentNode;
         NSInteger commentLevel = 0;
@@ -175,21 +187,42 @@
                 break;
             }
         }
+        commentParameters[@"level"] = @(commentLevel);
+
+        
         
         HTMLElement* commentAuthorElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentHeadingInner']>div[class='blogCommentAuthor']"];
+        HTMLElement* commentAuthorAnchorElement = [commentAuthorElement firstNodeMatchingSelector:@"a[class='name']"];
+        if ( commentAuthorAnchorElement )
+        {
+            commentParameters[@"link"] = commentAuthorAnchorElement.attributes[@"href"];
+            commentParameters[@"name"] = commentAuthorAnchorElement.textContent;
+        }
+        else
+        {
+            commentParameters[@"name"] = commentAuthorElement.textContent;
+        }
+        
+        
+        
         HTMLElement* commentDateElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentHeadingInner']>div[class='blogCommentDate']"];
+        commentParameters[@"date"] = commentDateElement.textContent;
         
         HTMLElement* commentTextElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentText']"];
+        commentParameters[@"comment"] = commentTextElement.textContent;
+
         HTMLElement* commentReplyButtonElement = [commentElement firstNodeMatchingSelector:@"span[class~='blog-button'][class~='reply-comment']"];
         
         NSString* s = commentReplyButtonElement[@"onclick"];
+        
+        
         
         /////////////////
         
         NSError *error = NULL;
         NSRegularExpressionOptions regexOptions = NSRegularExpressionCaseInsensitive;
         
-        NSString *pattern = @".+user_id=(\\d+)&blog_id=(\\d+)&post_id=(\\d+)&comment_id=(\\d+).+";
+        NSString *pattern = @".+comment_id=(\\d+).+";
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
         if (error)
         {
@@ -199,18 +232,20 @@
         NSRange textRange = NSMakeRange(0, s.length);
         NSTextCheckingResult* matches = [regex firstMatchInString:s options:NSMatchingReportProgress range:textRange];
         
-        if ( matches.numberOfRanges == 5 )
+        if ( matches.numberOfRanges == 2 )
         {
-            NSString* commentUserId = [s substringWithRange:[matches rangeAtIndex:1]];
-            NSString* commentBlogId = [s substringWithRange:[matches rangeAtIndex:2]];
-            NSString* commentPostId = [s substringWithRange:[matches rangeAtIndex:3]];
-            NSString* commentCommentId = [s substringWithRange:[matches rangeAtIndex:4]];
+            NSString* commentCommentId = [s substringWithRange:[matches rangeAtIndex:1]];
+            commentParameters[@"commentId"] = commentCommentId;
         }
 
         /////////////////
         
         
+        
+        [commentsArray addObject:commentParameters];
     }
+    
+    blogPost.blogComments = commentsArray;
     
     return blogPost;
 }

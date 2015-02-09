@@ -16,5 +16,11 @@
 
 - (void) loadingHTMLFile:(NSString*)filePath withCompletion:(void(^)(NSError* error, NSString* htmlMarkup))completion;
 
+- (void) replyComment:(NSString*)comment blogId:(NSString*)blogId postId:(NSString*)postId commentId:(NSString*)commentId
+                 name:(NSString*)name email:(NSString*)email website:(NSString*)website
+               userId:(NSString*)userId notify:(BOOL)notify
+       withCompletion:(void(^)(NSError* error))completion;
+
+
 
 @end

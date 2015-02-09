@@ -24,9 +24,11 @@
     
     NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"postwithcomments" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
 
-    [CONVERTER convertBlogPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
-    }];
+//    [CONVERTER convertBlogPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
+//    }];
 
+    
+    
 //    [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
 //    }];
     

@@ -28,8 +28,7 @@
     
     [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
     
-    UIBarButtonItem* menuButton = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTapped:)];
-    
+    UIBarButtonItem* menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Hamburger"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTapped:)];
     self.navigationItem.leftBarButtonItem = menuButton;
     
     

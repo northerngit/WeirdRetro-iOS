@@ -45,7 +45,7 @@
             </objects>
             <point key="canvasLocation" x="488" y="393"/>
         </scene>
-        <!--Contact-->
+        <!--CONTACT-->
         <scene sceneID="sxE-Zt-B1R">
             <objects>
                 <tableViewController id="2os-Lf-fOv" customClass="ContactViewController" sceneMemberID="viewController">
@@ -62,7 +62,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HiK-le-BsP">
-                                                    <rect key="frame" x="8" y="7" width="304" height="30"/>
+                                                    <rect key="frame" x="20" y="9" width="292" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -75,7 +75,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZNn-mB-FSw">
-                                                    <rect key="frame" x="8" y="7" width="304" height="30"/>
+                                                    <rect key="frame" x="20" y="9" width="292" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -92,7 +92,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pN3-Td-vhv">
-                                                    <rect key="frame" x="8" y="7" width="304" height="30"/>
+                                                    <rect key="frame" x="20" y="9" width="292" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -105,7 +105,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-aG-gmQ">
-                                                    <rect key="frame" x="8" y="8" width="304" height="30"/>
+                                                    <rect key="frame" x="20" y="10" width="292" height="30"/>
                                                     <state key="normal" title="General Comments">
                                                         <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -124,7 +124,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cv1-YB-gi6">
-                                                    <rect key="frame" x="0.0" y="8" width="320" height="152"/>
+                                                    <rect key="frame" x="8" y="10" width="304" height="152"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -140,13 +140,20 @@
                             <outlet property="delegate" destination="2os-Lf-fOv" id="64M-Bl-bgv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Contact" id="kai-es-HFV">
-                        <barButtonItem key="rightBarButtonItem" title="Submit" id="vGv-PO-KFO"/>
+                    <navigationItem key="navigationItem" title="CONTACT" id="kai-es-HFV">
+                        <barButtonItem key="rightBarButtonItem" title="SUBMIT" id="vGv-PO-KFO"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="commentType" destination="xrk-aG-gmQ" id="xPM-28-D25"/>
+                        <outlet property="tfEmail" destination="pN3-Td-vhv" id="4cv-9G-bdw"/>
+                        <outlet property="tfFirstName" destination="HiK-le-BsP" id="2Am-My-ZUg"/>
+                        <outlet property="tfLastName" destination="ZNn-mB-FSw" id="u4R-dt-nVz"/>
+                        <outlet property="tvContent" destination="cv1-YB-gi6" id="qhM-fo-Snb"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RBi-ft-tWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="488" y="2564"/>
+            <point key="canvasLocation" x="488" y="2554"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BRo-0q-SUD">
