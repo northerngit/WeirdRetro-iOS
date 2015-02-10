@@ -20,16 +20,18 @@
     
     self.lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, 10, 100)];
     self.lblTitle.numberOfLines = 0;
-    //    self.lblTitle.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
     self.lblTitle.font = [UIFont fontWithName:@"Lato-Regular" size:14.f];
     
     self.lblDescription = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, 10, 100)];
     self.lblDescription.numberOfLines = 0;
-    //    self.lblDescription.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
     self.lblDescription.font = [UIFont fontWithName:@"Lato-Light" size:12.f];
-    //    self.lblDescription.backgroundColor = [UIColor redColor];
+
+    self.lblDate = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, 10, 20)];
+    self.lblDate.numberOfLines = 1;
+    self.lblDate.font = [UIFont fontWithName:@"Lato-Medium" size:9.f];
     
     [self.contentView addSubview:self.lblTitle];
+    [self.contentView addSubview:self.lblDate];
     [self.contentView addSubview:self.lblDescription];
     
     self.backgroundColor = [UIColor clearColor];
@@ -45,22 +47,26 @@
     [self.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:self.blogPost.thumbnailUrl]]];
     
     CGRect rectTitle = [self.lblTitle.text boundingRectWithSize:CGSizeMake(self.contentView.frame.size.width - 80, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.lblTitle.font} context:nil];
-    
+
     self.lblTitle.frame = CGRectMake(self.lblTitle.frame.origin.x, 10, rectTitle.size.width, rectTitle.size.height);
+
     
-    rectTitle = [self.lblDescription.text boundingRectWithSize:CGSizeMake(self.contentView.frame.size.width - 80, 200) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:self.lblDescription.font} context:nil];
+    self.lblDate.frame = CGRectMake(self.lblTitle.frame.origin.x,
+                                    self.lblTitle.frame.origin.y + self.lblTitle.frame.size.height + 5,
+                                    self.contentView.frame.size.width - 80,
+                                    10);
     
+    ///////////////////
+    
+    CGFloat descriptionOrigin = self.lblDate.frame.origin.y + self.lblDate.frame.size.height + 3;
+    CGFloat maxHeight = 100 - descriptionOrigin;
+    
+    rectTitle = [self.lblDescription.text boundingRectWithSize:CGSizeMake(self.contentView.frame.size.width - 80, maxHeight) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading) attributes:@{NSFontAttributeName:self.lblDescription.font} context:nil];
+
     self.lblDescription.frame = CGRectMake(self.lblDescription.frame.origin.x,
-                                           self.lblTitle.frame.origin.y + self.lblTitle.frame.size.height + 5,
+                                           descriptionOrigin,
                                            rectTitle.size.width,
                                            rectTitle.size.height);
-    
-    if ( (self.lblDescription.frame.origin.y + self.lblDescription.frame.size.height) > 100 )
-    {
-        CGRect r = self.lblDescription.frame;
-        r.size.height = (100 - self.lblDescription.frame.origin.y);
-        self.lblDescription.frame = r;
-    }
     
 }
 
@@ -70,6 +76,10 @@
     
     self.lblDescription.text = _blogPost.info;
     self.lblTitle.text = _blogPost.title;
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"dd/MM/yyyy";
+    self.lblDate.text = [NSString stringWithFormat:@"%@ Comments | %@", _blogPost.commentsCount, [formatter stringFromDate:_blogPost.dateBlogPost]];
 }
 
 @end

@@ -12,7 +12,8 @@
 @protocol CommonPost <NSObject>
 
 - (NSString*) title;
-- (NSString*) content;
+- (NSArray*) content;
+- (BOOL) isBlogPost;
 
 @end
 
@@ -21,6 +22,5 @@
 
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
 @property (strong, nonatomic) NSString* postURL;
-
 
 @end

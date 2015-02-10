@@ -25,4 +25,11 @@
 @dynamic url;
 @dynamic comments;
 
+
+- (BOOL) isBlogPost
+{
+    return YES;
+}
+
+
 @end

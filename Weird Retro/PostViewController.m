@@ -12,13 +12,11 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <DTCoreText/DTCoreText.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
-#import "YTPlayerView.h"
+#import "LeaveReplayViewController.h"
+
 
 #define HEIGHT_IMAGE_PLACEHOLDER 50
 #define ELEMENTS_SPACING 10
-
-
-
 
 
 @interface PostViewController ()
@@ -70,18 +68,24 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }];
     }
-//    
-//    UIBarButtonItem* menuButton = [[UIBarButtonItem alloc] initWithTitle:@"S" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
-//    self.navigationItem.rightBarButtonItem = menuButton;
-    
 
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = backButton;
     self.navigationItem.hidesBackButton = YES;
+
     
-//    UIBarButtonItem* menuButtonSharing = [[UIBarButtonItem alloc] initWithTitle:@"S" style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
-//    UIBarButtonItem* menuButtonComments = [[UIBarButtonItem alloc] initWithTitle:@"C" style:UIBarButtonItemStylePlain target:self action:@selector(commentsButtonTapped:)];
-//    self.navigationItem.rightBarButtonItems = @[menuButtonSharing, menuButtonComments];
+    NSMutableArray* buttonsArray = [NSMutableArray new];
+    if ( [self.post isBlogPost] )
+    {
+        UIBarButtonItem* replyButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reply"] style:UIBarButtonItemStylePlain target:self action:@selector(replyButtonTapped:)];
+        [buttonsArray addObject:replyButton];
+    }
+
+    UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
+    [buttonsArray addObject:shareButton];
+    shareButton.imageInsets = UIEdgeInsetsMake(0, 20, 0, -20);
+    
+    self.navigationItem.rightBarButtonItems = buttonsArray;
 
 }
 
@@ -102,10 +106,20 @@
 }
 
 
+- (IBAction)replyButtonTapped:(id)sender
+{
+    LeaveReplayViewController* replyViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LeaveReplayViewController"];
+    replyViewController.blogPost = (BlogPost*)self.post;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:replyViewController];
+    
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:navController animated:YES completion:^{
+    }];
+}
 
 - (void) reloadPost
 {
-    NSArray* postStructure = self.post.content;
+    NSArray* postStructure = [self.post content];
     if ( !postStructure )
         return;
     
@@ -146,21 +160,20 @@
 
 - (void) drawYoutube:(NSDictionary*)item
 {
-    DLog(@"%@", item);
+    UIWebView* view = [[UIWebView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 200)];
+    view.hidden = YES;
+    view.delegate = self;
+    [view loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:[@"http:" stringByAppendingString:item[@"src"]]]]];
     
-    YTPlayerView* youtubeView = [[YTPlayerView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 100)];
-    youtubeView.backgroundColor = [UIColor blackColor];
-//    [youtubeView loadVideoByURL:[@"http:" stringByAppendingString:item[@"src"]] startSeconds:0.f suggestedQuality:kYTPlaybackQualityMedium];
-    
-//    [youtubeView loadWithVideoId:@"zGN8w5AzSIU"];
-    
-    [self.scrollView addSubview:youtubeView];
-    height += youtubeView.frame.size.height + ELEMENTS_SPACING;
-
-//    DLog(@"%f", youtubeView.webView.frame.size.height);
-
+    [self.scrollView addSubview:view];
+    height += view.frame.size.height + ELEMENTS_SPACING;
 }
 
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    webView.hidden = NO;
+}
 
 
 - (void) drawSeparator
@@ -319,7 +332,6 @@
         [scrollView addSubview:imageView];
 
         f += 300 + 5;
-
     }
 
     scrollView.contentSize = CGSizeMake(f, scrollView.frame.size.height);

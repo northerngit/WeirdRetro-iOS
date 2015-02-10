@@ -247,6 +247,19 @@
     
     blogPost.blogComments = commentsArray;
     
+    for (NSDictionary* item in blogPost.items)
+    {
+        if ( [item[@"type"] integerValue] == 0 )
+        {
+            if ( [item[@"onlyText"] length] > 200 )
+                blogPost.info = [[item[@"onlyText"] substringToIndex:200] stringByAppendingString:@"..."];
+            else
+                blogPost.info = item[@"onlyText"];
+
+            break;
+        }
+    }
+    
     return blogPost;
 }
 
@@ -501,7 +514,7 @@
 
 - (void) parseTextDIV:(HTMLElement*)element
 {
-    [array addObject:@{@"type":@0, @"description":element.innerHTML}];
+    [array addObject:@{@"type":@0, @"description":element.innerHTML, @"onlyText":[element.textContent stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]]}];
 }
 
 

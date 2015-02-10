@@ -20,14 +20,11 @@
     
     self.lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, 10, 100)];
     self.lblTitle.numberOfLines = 0;
-//    self.lblTitle.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
     self.lblTitle.font = [UIFont fontWithName:@"Lato-Regular" size:14.f];
 
     self.lblDescription = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, 10, 100)];
     self.lblDescription.numberOfLines = 0;
-//    self.lblDescription.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
     self.lblDescription.font = [UIFont fontWithName:@"Lato-Light" size:12.f];
-//    self.lblDescription.backgroundColor = [UIColor redColor];
     
     [self.contentView addSubview:self.lblTitle];
     [self.contentView addSubview:self.lblDescription];
@@ -51,6 +48,7 @@
                                            self.lblTitle.frame.origin.y + self.lblTitle.frame.size.height + 5,
                                            rectTitle.size.width,
                                            rectTitle.size.height);
+    
     if ( (self.lblDescription.frame.origin.y + self.lblDescription.frame.size.height) > 100 )
     {
         CGRect r = self.lblDescription.frame;

@@ -25,6 +25,10 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSSet *comments;
+
+@property (nonatomic, readonly) BOOL isBlogPost;
+
+
 @end
 
 @interface BlogPost (CoreDataGeneratedAccessors)

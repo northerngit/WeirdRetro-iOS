@@ -647,6 +647,7 @@ static DataManager *sharedInstance = nil;
                     post.title = blogPost.title;
                     post.thumbnailUrl = blogPost.thumbnailUrl;
                     post.content = blogPost.items;
+                    post.info = blogPost.info;
                     post.blogPostIdentity = blogPost.blogPostId;
                     post.dateBlogPost = [formatter dateFromString:blogPost.blogPostDate];
                 }

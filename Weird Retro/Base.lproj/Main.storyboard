@@ -153,7 +153,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RBi-ft-tWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="488" y="2554"/>
+            <point key="canvasLocation" x="488" y="1785"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BRo-0q-SUD">
@@ -169,7 +169,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ws-6F-Mfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="21" y="2569"/>
+            <point key="canvasLocation" x="21" y="1785"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="T4F-gJ-0b1">
@@ -241,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAK-31-dZk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="488" y="1096"/>
+            <point key="canvasLocation" x="488" y="1097"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="j0w-ME-O51">
@@ -389,40 +389,107 @@
             </objects>
             <point key="canvasLocation" x="21" y="406"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="bsf-72-V5h">
+        <!--LEAVE A REPLY-->
+        <scene sceneID="ovF-Eh-0sI">
             <objects>
-                <navigationController storyboardIdentifier="SuppliesViewController" id="Pbp-6S-eXZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vUK-za-dNE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="96A-zf-3yU" kind="relationship" relationship="rootViewController" id="Pda-4c-ZRf"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6er-Rc-eSf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="21" y="1827"/>
-        </scene>
-        <!--Supplies-->
-        <scene sceneID="Pj2-Dn-7aU">
-            <objects>
-                <viewController id="96A-zf-3yU" customClass="SuppliesViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EOP-Mk-r2Q"/>
-                        <viewControllerLayoutGuide type="bottom" id="KQH-fZ-A8H"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CfK-l7-BD7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <tableViewController storyboardIdentifier="LeaveReplayViewController" id="IKu-vf-uzx" customClass="LeaveReplayViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="el7-1m-fVQ">
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Supplies" id="YU8-63-PDk"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DFh-i6-s4A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="86k-nH-gHy">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4Ut-Mf-7Wd">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Ut-Mf-7Wd" id="e9i-qz-Dif">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gpu-uE-Fix">
+                                                    <rect key="frame" x="20" y="9" width="292" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dxS-hC-rhB">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dxS-hC-rhB" id="HZ7-Pg-6zV">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BFz-nc-5dO">
+                                                    <rect key="frame" x="20" y="7" width="292" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dqi-wO-d5n">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dqi-wO-d5n" id="GE6-k9-dgw">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Website" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1sF-AC-ws8">
+                                                    <rect key="frame" x="20" y="7" width="292" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="WzL-gz-nZC">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="215" id="ATZ-iP-Bhr">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ATZ-iP-Bhr" id="z9V-me-4Fx">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BSW-WA-EAO">
+                                                    <rect key="frame" x="8" y="10" width="304" height="197"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="IKu-vf-uzx" id="sKz-77-Hj5"/>
+                            <outlet property="delegate" destination="IKu-vf-uzx" id="ncP-Pi-OqT"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="LEAVE A REPLY" id="tlh-iF-PeX">
+                        <barButtonItem key="leftBarButtonItem" title="CANCEL" id="qTH-Td-kkU">
+                            <connections>
+                                <action selector="clickCancel:" destination="IKu-vf-uzx" id="ySb-6L-vAJ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="DONE" id="Ovr-d8-Boj">
+                            <connections>
+                                <action selector="clickDone:" destination="IKu-vf-uzx" id="0qI-rc-lay"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tfEmail" destination="BFz-nc-5dO" id="AGi-fY-yRE"/>
+                        <outlet property="tfName" destination="Gpu-uE-Fix" id="Xj2-VB-9UJ"/>
+                        <outlet property="tfWebsite" destination="1sF-AC-ws8" id="sXM-HK-VNF"/>
+                        <outlet property="tvComment" destination="BSW-WA-EAO" id="mv8-YD-OPH"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MgK-rf-diV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="488" y="1827"/>
+            <point key="canvasLocation" x="958" y="1097"/>
         </scene>
     </scenes>
     <resources>

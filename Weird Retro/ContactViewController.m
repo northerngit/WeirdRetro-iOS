@@ -81,8 +81,6 @@
     
     self.tvContent.font = [UIFont fontWithName:@"Lato-Regular" size:13];
     [self.commentType.titleLabel setFont:[UIFont fontWithName:@"Lato-Regular" size:13]];
-    
-    
 }
 
 

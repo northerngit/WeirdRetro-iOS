@@ -96,15 +96,26 @@
     if ( commentId )
         parmaeters[@"parentId"] = commentId;
     
+    DLog(@"%@", parmaeters);
     
     [replyManager POST:@"weebly/publicBackend.php" parameters:parmaeters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSString* newStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        DLog(@"%@", newStr);
-        
+        NSString* returnString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if ( [returnString hasPrefix:@"%%SUCCESS%%"])
+        {
+            if ( completion )
+                completion(nil);
+        }
+        else if ( completion )
+        {
+            completion([NSError errorWithDomain:@"WeirdRetro" code:10000 userInfo:@{NSLocalizedDescriptionKey:returnString}]);
+        }
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         DLog(@"%@", error.localizedDescription);
+        if ( completion )
+            completion(error);
         
     }];
 }

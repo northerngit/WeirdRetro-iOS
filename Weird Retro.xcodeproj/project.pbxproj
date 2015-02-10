@@ -38,6 +38,9 @@
 		CE068A1C1A873A7C00D69CFC /* memory.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A171A873A7C00D69CFC /* memory.html */; };
 		CE068A1D1A873A7C00D69CFC /* superhero.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A181A873A7C00D69CFC /* superhero.html */; };
 		CE068A1F1A87495D00D69CFC /* postwithcomments.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A1E1A87495D00D69CFC /* postwithcomments.html */; };
+		CE0A61B21A89AE36007B4F27 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A61B11A89AE36007B4F27 /* share@2x.png */; };
+		CE0A61B41A89B75A007B4F27 /* reply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A61B31A89B75A007B4F27 /* reply@2x.png */; };
+		CE0A61C71A8A21CF007B4F27 /* LeaveReplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A61C61A8A21CF007B4F27 /* LeaveReplayViewController.m */; };
 		CE0BEFD51A847E5200207752 /* BlogPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BEFD41A847E5200207752 /* BlogPostTableViewCell.m */; };
 		CE0BEFD71A8482CA00207752 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BEFD61A8482CA00207752 /* CoreData.framework */; };
 		CE0BEFDE1A84850B00207752 /* WeirdRetro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE0BEFDC1A84850B00207752 /* WeirdRetro.xcdatamodeld */; };
@@ -53,7 +56,6 @@
 		CE21B8191A807084006B7F8D /* NetworkWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE21B8181A807084006B7F8D /* NetworkWorker.m */; };
 		CE22825C1A8222AB00B91271 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22825B1A8222AB00B91271 /* MenuViewController.m */; };
 		CE22825F1A82249B00B91271 /* MEZoomAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22825E1A82249B00B91271 /* MEZoomAnimationController.m */; };
-		CE345AE41A8546B2002B0747 /* SuppliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE345AE31A8546B2002B0747 /* SuppliesViewController.m */; };
 		CE345AE71A8546E9002B0747 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE345AE61A8546E9002B0747 /* ContactViewController.m */; };
 		CE345AEA1A8547E6002B0747 /* RootTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE345AE91A8547E6002B0747 /* RootTableTableViewController.m */; };
 		CE345AED1A85C54D002B0747 /* Section.m in Sources */ = {isa = PBXBuildFile; fileRef = CE345AEC1A85C54D002B0747 /* Section.m */; };
@@ -112,6 +114,10 @@
 		CE068A171A873A7C00D69CFC /* memory.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = memory.html; path = Examples/memory.html; sourceTree = "<group>"; };
 		CE068A181A873A7C00D69CFC /* superhero.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = superhero.html; path = Examples/superhero.html; sourceTree = "<group>"; };
 		CE068A1E1A87495D00D69CFC /* postwithcomments.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = postwithcomments.html; path = Examples/postwithcomments.html; sourceTree = "<group>"; };
+		CE0A61B11A89AE36007B4F27 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "share@2x.png"; path = "Images/share@2x.png"; sourceTree = "<group>"; };
+		CE0A61B31A89B75A007B4F27 /* reply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "reply@2x.png"; path = "Images/reply@2x.png"; sourceTree = "<group>"; };
+		CE0A61C51A8A21CF007B4F27 /* LeaveReplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveReplayViewController.h; sourceTree = "<group>"; };
+		CE0A61C61A8A21CF007B4F27 /* LeaveReplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveReplayViewController.m; sourceTree = "<group>"; };
 		CE0BEFD31A847E5200207752 /* BlogPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogPostTableViewCell.h; sourceTree = "<group>"; };
 		CE0BEFD41A847E5200207752 /* BlogPostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogPostTableViewCell.m; sourceTree = "<group>"; };
 		CE0BEFD61A8482CA00207752 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -139,8 +145,6 @@
 		CE22825B1A8222AB00B91271 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		CE22825D1A82249B00B91271 /* MEZoomAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEZoomAnimationController.h; sourceTree = "<group>"; };
 		CE22825E1A82249B00B91271 /* MEZoomAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEZoomAnimationController.m; sourceTree = "<group>"; };
-		CE345AE21A8546B2002B0747 /* SuppliesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuppliesViewController.h; sourceTree = "<group>"; };
-		CE345AE31A8546B2002B0747 /* SuppliesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuppliesViewController.m; sourceTree = "<group>"; };
 		CE345AE51A8546E9002B0747 /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
 		CE345AE61A8546E9002B0747 /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
 		CE345AE81A8547E6002B0747 /* RootTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTableTableViewController.h; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				CE0E63B41A892BD500AE7B63 /* Hamburger@2x.png */,
+				CE0A61B31A89B75A007B4F27 /* reply@2x.png */,
+				CE0A61B11A89AE36007B4F27 /* share@2x.png */,
 				CE0E63B61A892D2900AE7B63 /* back@2x.png */,
 				CE0E63B81A892D5E00AE7B63 /* back@3x.png */,
 				CE0689E31A873A3B00D69CFC /* bg.png */,
@@ -281,10 +287,10 @@
 				CE0BEFD41A847E5200207752 /* BlogPostTableViewCell.m */,
 				CE20EDB11A8137060029584F /* PostViewController.h */,
 				CE20EDB21A8137060029584F /* PostViewController.m */,
-				CE345AE21A8546B2002B0747 /* SuppliesViewController.h */,
-				CE345AE31A8546B2002B0747 /* SuppliesViewController.m */,
 				CE345AE51A8546E9002B0747 /* ContactViewController.h */,
 				CE345AE61A8546E9002B0747 /* ContactViewController.m */,
+				CE0A61C51A8A21CF007B4F27 /* LeaveReplayViewController.h */,
+				CE0A61C61A8A21CF007B4F27 /* LeaveReplayViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -530,6 +536,7 @@
 				CED3D44A1A7DC44F002F7FDC /* LaunchScreen.xib in Resources */,
 				CE0689E61A873A3B00D69CFC /* bg.png in Resources */,
 				CE0E63B91A892D5E00AE7B63 /* back@3x.png in Resources */,
+				CE0A61B41A89B75A007B4F27 /* reply@2x.png in Resources */,
 				CE068A101A873A5B00D69CFC /* Lato-Thin.ttf in Resources */,
 				CE068A051A873A5B00D69CFC /* Lato-HairlineItalic.ttf in Resources */,
 				CE068A0A1A873A5B00D69CFC /* Lato-LightItalic.ttf in Resources */,
@@ -537,6 +544,7 @@
 				CE068A191A873A7C00D69CFC /* blogpage.html in Resources */,
 				CE068A0D1A873A5B00D69CFC /* Lato-Regular.ttf in Resources */,
 				CE0E63B51A892BD500AE7B63 /* Hamburger@2x.png in Resources */,
+				CE0A61B21A89AE36007B4F27 /* share@2x.png in Resources */,
 				CED3D4471A7DC44F002F7FDC /* Images.xcassets in Resources */,
 				CE068A1C1A873A7C00D69CFC /* memory.html in Resources */,
 			);
@@ -611,7 +619,7 @@
 				CE0BEFD51A847E5200207752 /* BlogPostTableViewCell.m in Sources */,
 				CE22825F1A82249B00B91271 /* MEZoomAnimationController.m in Sources */,
 				CED3D43C1A7DC44F002F7FDC /* main.m in Sources */,
-				CE345AE41A8546B2002B0747 /* SuppliesViewController.m in Sources */,
+				CE0A61C71A8A21CF007B4F27 /* LeaveReplayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

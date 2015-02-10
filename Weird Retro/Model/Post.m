@@ -23,4 +23,10 @@
 @dynamic order;
 @dynamic section;
 
+
+- (BOOL) isBlogPost
+{
+    return NO;
+}
+
 @end

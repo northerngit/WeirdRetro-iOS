@@ -50,10 +50,10 @@
     if ( self.sections.count == 0 )
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [DATAMANAGER updatingStructureFromBackendWithCompletion:^(NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self reloadData];
-    }];
+   [DATAMANAGER updatingStructureFromBackendWithCompletion:^(NSError *error) {
+       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+       [self reloadData];
+   }];
     
 }
 
