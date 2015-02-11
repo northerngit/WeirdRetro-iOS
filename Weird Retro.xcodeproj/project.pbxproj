@@ -41,6 +41,8 @@
 		CE0A61B21A89AE36007B4F27 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A61B11A89AE36007B4F27 /* share@2x.png */; };
 		CE0A61B41A89B75A007B4F27 /* reply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A61B31A89B75A007B4F27 /* reply@2x.png */; };
 		CE0A61C71A8A21CF007B4F27 /* LeaveReplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A61C61A8A21CF007B4F27 /* LeaveReplayViewController.m */; };
+		CE0AFF671A8BEA1200775A7B /* Inconsolata.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE0AFF651A8BEA1200775A7B /* Inconsolata.otf */; };
+		CE0AFF681A8BEA1200775A7B /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE0AFF661A8BEA1200775A7B /* SIL Open Font License.txt */; };
 		CE0BEFD51A847E5200207752 /* BlogPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BEFD41A847E5200207752 /* BlogPostTableViewCell.m */; };
 		CE0BEFD71A8482CA00207752 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BEFD61A8482CA00207752 /* CoreData.framework */; };
 		CE0BEFDE1A84850B00207752 /* WeirdRetro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE0BEFDC1A84850B00207752 /* WeirdRetro.xcdatamodeld */; };
@@ -118,6 +120,8 @@
 		CE0A61B31A89B75A007B4F27 /* reply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "reply@2x.png"; path = "Images/reply@2x.png"; sourceTree = "<group>"; };
 		CE0A61C51A8A21CF007B4F27 /* LeaveReplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveReplayViewController.h; sourceTree = "<group>"; };
 		CE0A61C61A8A21CF007B4F27 /* LeaveReplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveReplayViewController.m; sourceTree = "<group>"; };
+		CE0AFF651A8BEA1200775A7B /* Inconsolata.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Inconsolata.otf; sourceTree = "<group>"; };
+		CE0AFF661A8BEA1200775A7B /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
 		CE0BEFD31A847E5200207752 /* BlogPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogPostTableViewCell.h; sourceTree = "<group>"; };
 		CE0BEFD41A847E5200207752 /* BlogPostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogPostTableViewCell.m; sourceTree = "<group>"; };
 		CE0BEFD61A8482CA00207752 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -235,6 +239,7 @@
 		CE0689E21A8739FF00D69CFC /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				CE0AFF641A8BEA1200775A7B /* Inconsolata */,
 				CE0689E91A873A5B00D69CFC /* Komika Axis.ttf */,
 				CE0689EA1A873A5B00D69CFC /* Lato2OFL */,
 			);
@@ -267,6 +272,16 @@
 			);
 			name = Lato2OFL;
 			path = Fonts/Lato2OFL;
+			sourceTree = "<group>";
+		};
+		CE0AFF641A8BEA1200775A7B /* Inconsolata */ = {
+			isa = PBXGroup;
+			children = (
+				CE0AFF651A8BEA1200775A7B /* Inconsolata.otf */,
+				CE0AFF661A8BEA1200775A7B /* SIL Open Font License.txt */,
+			);
+			name = Inconsolata;
+			path = Fonts/Inconsolata;
 			sourceTree = "<group>";
 		};
 		CE212EF61A832D36007EFD6E /* View Controllers */ = {
@@ -520,6 +535,8 @@
 				CE068A091A873A5B00D69CFC /* Lato-Light.ttf in Resources */,
 				CE068A111A873A5B00D69CFC /* Lato-ThinItalic.ttf in Resources */,
 				CE068A061A873A5B00D69CFC /* Lato-Heavy.ttf in Resources */,
+				CE0AFF681A8BEA1200775A7B /* SIL Open Font License.txt in Resources */,
+				CE0AFF671A8BEA1200775A7B /* Inconsolata.otf in Resources */,
 				CE068A021A873A5B00D69CFC /* Lato-Bold.ttf in Resources */,
 				CE068A1A1A873A7C00D69CFC /* fantomash.html in Resources */,
 				CE068A1F1A87495D00D69CFC /* postwithcomments.html in Resources */,

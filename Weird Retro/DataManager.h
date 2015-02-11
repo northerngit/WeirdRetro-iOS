@@ -8,6 +8,7 @@
 #import "Post.h"
 #import "Section.h"
 #import "BlogPost.h"
+#import "Comment.h"
 
 
 typedef void(^SuccessSaving)(BOOL hasChanges);

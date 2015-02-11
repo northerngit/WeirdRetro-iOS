@@ -17,4 +17,6 @@
 @property (strong, nonatomic) IBOutlet UITextView* tvContent;
 @property (strong, nonatomic) IBOutlet UIButton* commentType;
 
+- (IBAction)submitButtonTapped:(id)sender;
+
 @end

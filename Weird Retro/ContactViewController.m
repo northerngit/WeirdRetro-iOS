@@ -11,6 +11,7 @@
 #import "MEZoomAnimationController.h"
 #import "Managers.h"
 #import <DTCoreText/DTCoreText.h>
+#import "MBProgressHUD.h"
 
 
 @interface ContactViewController ()
@@ -55,7 +56,6 @@
                                         [UIColor whiteColor], NSForegroundColorAttributeName,
                                         nil] 
                               forState:UIControlStateNormal];
-    
 
     NSDictionary *options = kMainTextOptions;
     NSString* text = @"Have a weird question for us, a suggestion for the website, or just want to throw us a random \"Hiya!\"? Send us a message via our contact section, or email us directly at <a>weirdretro@rocketship.com</a> and we'll get back to you as soon as we land rocket ship Weird Retro.";
@@ -65,7 +65,6 @@
     self.headerLabel.attributedString = headerAttrString;
     self.headerLabel.backgroundColor = [UIColor clearColor];
     [self.headerLabel sizeToFit];
-    
     
     text = @"Note: Any questions or queries in relation to orders, please remember to quote your order number, so we can get back to you quickly.";
     data = [text dataUsingEncoding:NSUTF8StringEncoding];
@@ -142,14 +141,29 @@
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)submitButtonTapped:(id)sender {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.view endEditing:YES];
+    
+    [NETWORK submitContactFormWithFirstName:self.tfFirstName.text lastName:self.tfLastName.text email:self.tfEmail.text type:[self.commentType titleForState:UIControlStateNormal] comment:self.tvContent.text withCompletion:^(NSError *error) {
+
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        self.tvContent.text = @"";
+
+        UIAlertController * alert =   [UIAlertController alertControllerWithTitle:@"Success" message:@"Thank you. Your information has been submitted." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* dismissAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                        {
+                                            [alert dismissViewControllerAnimated:YES completion:nil];
+                                        }];
+        [alert addAction:dismissAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+
+        
+    }];
 }
-*/
 
 @end

@@ -16,16 +16,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Weird Retro/Classes/NetworkWorker.m"
-            timestampString = "445340756.50687"
+            filePath = "Weird Retro/Classes/HTMLConvertOperation.m"
+            timestampString = "445373545.528827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "-loadingHTMLFile:withCompletion:"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "-parseBlogPost:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -75,7 +75,7 @@
         }
         else if ( self.type == PageTypeBlogPost )
         {
-            self.pageObject = [self parseBlogPost:elementContent];
+            self.pageObject = [self parseBlogPost:[elementContent firstNodeMatchingSelector:@"div[class='blog-post']"]];
         }
     }
     else if ( self.type == PageTypeBlogPage )
@@ -116,8 +116,6 @@
     {
         WRPage* blogPost = [self parseBlogPost:blogNode];
         [blogPostsParsed addObject:blogPost];
-        
-        DLog(@"D %d", blogPost.blogPostCountComments);
     }
     
     array = blogPostsParsed;
@@ -135,8 +133,11 @@
     
     blogPost.title = blogTitle.textContent;
     blogPost.url = blogTitle.attributes[@"href"];
+    
     blogPost.blogPostId = [blogNode.attributes[@"id"] substringFromIndex:[@"blog-post-" length]];
     blogPost.blogPostDate = blogDate.textContent;
+    
+    DLog(@"%@, %@", blogPost.blogPostId, blogNode);
     
     NSString* numberString = @"";
     NSScanner *scanner = [NSScanner scannerWithString:blogComments.textContent];

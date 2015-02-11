@@ -24,6 +24,8 @@
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) Section *section;
 
+@property (nonatomic, readonly) NSSet* comments;
+
 @property (nonatomic, readonly) BOOL isBlogPost;
 
 

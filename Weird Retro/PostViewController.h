@@ -13,8 +13,11 @@
 
 - (NSString*) title;
 - (NSArray*) content;
-- (NSArray*) comments;
+- (NSSet*) comments;
 - (BOOL) isBlogPost;
+
+- (NSDate*) dateLastView;
+- (void) setDateLastView:(NSDate*)dateLastView;
 
 @end
 

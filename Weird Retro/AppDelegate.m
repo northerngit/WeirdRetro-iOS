@@ -20,17 +20,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self importFonts];
-//    [self printAvailableFonts];
+    [self printAvailableFonts];
     
-    NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"postwithcomments" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-
+//    NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"postwithcomments" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
 //    [CONVERTER convertBlogPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
 //    }];
 
-    
-    
 //    [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
 //    }];
+    
+    [NETWORK submitContactFormWithFirstName:@"Alex" lastName:@"True" email:@"troohin@gmail.com" type:@"General Comment" comment:@"Comment" withCompletion:^(NSError *error) {
+        
+    }];
     
     return YES;
 }

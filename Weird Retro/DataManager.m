@@ -3,10 +3,6 @@
 //
 
 #import "Managers.h"
-#import "BlogPost.h"
-#import "Post.h"
-#import "Comment.h"
-
 
 @interface DataManager ()
 
@@ -645,6 +641,8 @@ static DataManager *sharedInstance = nil;
                         post.url = blogPost.url;
                     }
                     
+                    DLog(@"%@", blogPost.blogPostId);
+
                     post.title = blogPost.title;
                     post.thumbnailUrl = blogPost.thumbnailUrl;
                     post.content = blogPost.items;
@@ -839,7 +837,9 @@ static DataManager *sharedInstance = nil;
                         comment.date = [formatterComment dateFromString:commentParameters[@"date"]];
                         comment.indent = @([commentParameters[@"level"] integerValue]);
                         comment.name = [commentParameters[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
+                        comment.comment = [commentParameters[@"comment"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                        
+                        
                         if ( commentParameters[@"link"] )
                             comment.link = [commentParameters[@"link"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                         

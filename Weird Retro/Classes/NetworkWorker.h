@@ -21,5 +21,11 @@
                notify:(BOOL)notify
        withCompletion:(void(^)(NSError* error))completion;
 
+- (void) submitContactFormWithFirstName:(NSString*)firstName
+                               lastName:(NSString*)lastName
+                                  email:(NSString*)email
+                                   type:(NSString*)type
+                                comment:(NSString*)comment
+                         withCompletion:(void(^)(NSError* error))completion;
 
 @end

@@ -74,10 +74,26 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [NETWORK replyComment:self.tvComment.text postId:self.blogPost.blogPostIdentity commentId:nil name:self.tfName.text email:self.tfEmail.text website:self.tfWebsite.text notify:NO withCompletion:^(NSError *error) {
         
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         if ( !error )
         {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            Comment* comment = [DATAMANAGER object:@"Comment"];
+            comment.date = [NSDate date];
+            comment.indent = 0;
+            comment.name = [self.tfName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            comment.comment = [self.tvComment.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            
+            if ( self.tfWebsite.text )
+                comment.link = [self.tfWebsite.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            
+            [self.blogPost addCommentsObject:comment];
+            [DATAMANAGER saveWithSuccess:^(BOOL hasChanges) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } failure:^(NSError *error) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+            
         }
         else
         {
@@ -89,6 +105,7 @@
              }];
             [alert addAction:dismissAction];
             
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self presentViewController:alert animated:YES completion:nil];
         }
 

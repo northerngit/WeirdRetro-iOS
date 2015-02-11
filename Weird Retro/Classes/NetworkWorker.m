@@ -129,4 +129,45 @@
 
 
 
+
+- (void) submitContactFormWithFirstName:(NSString*)firstName lastName:(NSString*)lastName email:(NSString*)email
+                 type:(NSString*)type comment:(NSString*)comment withCompletion:(void(^)(NSError* error))completion
+{
+    AFHTTPRequestOperationManager* submitManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.weebly.com/"]];
+    
+    submitManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSMutableURLRequest * request = [submitManager.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:@"http://www.weebly.com/weebly/apps/formSubmit.php" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFormData:[firstName dataUsingEncoding:NSUTF8StringEncoding] name:@"_u450006438604769013[first]"];
+        [formData appendPartWithFormData:[lastName dataUsingEncoding:NSUTF8StringEncoding] name:@"_u450006438604769013[last]"];
+        [formData appendPartWithFormData:[email dataUsingEncoding:NSUTF8StringEncoding] name:@"_u397512320750547466"];  // Email
+        [formData appendPartWithFormData:[type dataUsingEncoding:NSUTF8StringEncoding] name:@"_u197117304839875198"];  // Type
+        [formData appendPartWithFormData:[comment dataUsingEncoding:NSUTF8StringEncoding] name:@"_u142040583413706299"];  // Comment
+
+        [formData appendPartWithFormData:[@"586754650902150079" dataUsingEncoding:NSUTF8StringEncoding] name:@"ucfid"];
+        [formData appendPartWithFormData:[@"weebly" dataUsingEncoding:NSUTF8StringEncoding] name:@"wsite_approved"];
+        [formData appendPartWithFormData:[@"2" dataUsingEncoding:NSUTF8StringEncoding] name:@"form_version"];
+        
+    } error:nil];
+    
+    
+    AFHTTPRequestOperation * operation = [submitManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+//        NSString* returnString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        
+        if ( completion )
+            completion(nil);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if ( completion )
+            completion(error);
+        
+    }];
+    
+    [operation start];
+}
+
+
 @end

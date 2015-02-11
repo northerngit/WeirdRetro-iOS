@@ -29,4 +29,11 @@
     return NO;
 }
 
+
+- (NSSet*) comments
+{
+    return [NSSet new];
+}
+
+
 @end

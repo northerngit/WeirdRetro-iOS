@@ -23,9 +23,12 @@
 {
     CGFloat height;
     NSOperationQueue* queue;
+    BOOL firstOpen;
+    BOOL updatingComments;
 }
 
 @property (strong, nonatomic) NSManagedObject<CommonPost>* post;
+@property (strong, nonatomic) UIView* commentsPlaceholder;
 
 @end
 
@@ -36,23 +39,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
-
-    height = 20;
+    
     queue = [[NSOperationQueue alloc] init];
     queue.maxConcurrentOperationCount = 1;
     
     self.post = [DATAMANAGER object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", self.postURL]];
+    firstOpen = NO;
+    
+    if ( ![self.post dateLastView] )
+        firstOpen = YES;
+    
+    [self.post setDateLastView:[NSDate date]];
+    [DATAMANAGER saveWithSuccess:nil failure:nil];
     
     if ( !self.post )
+    {
         self.post = [DATAMANAGER object:@"BlogPost" predicate:[NSPredicate predicateWithFormat:@"url = %@", self.postURL]];
+    }
     
     self.title = [self.post title];
     
@@ -60,9 +65,10 @@
     {
         if ( [self.post isBlogPost] )
         {
-            DLog(@"%@", self.postURL);
+            updatingComments = YES;
             [DATAMANAGER updatingBlogPostFromBackendFile:self.postURL completion:^(NSError *error) {
-                [self reloadPost];
+                updatingComments = NO;
+                [self refreshComments];
             }];
         }
         
@@ -76,7 +82,7 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }];
     }
-
+    
     
     
     // Navigation items
@@ -90,12 +96,21 @@
         UIBarButtonItem* replyButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"reply"] style:UIBarButtonItemStylePlain target:self action:@selector(replyButtonTapped:)];
         [buttonsArray addObject:replyButton];
     }
-
+    
     UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
     [buttonsArray addObject:shareButton];
     shareButton.imageInsets = UIEdgeInsetsMake(0, 20, 0, -20);
     
     self.navigationItem.rightBarButtonItems = buttonsArray;
+
+}
+
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self reloadPost];
 }
 
 
@@ -128,9 +143,15 @@
 
 - (void) reloadPost
 {
+    height = 20;
+    for (UIView* itemViews in self.scrollView.subviews)
+        [itemViews removeFromSuperview];
+
+    
     NSArray* postStructure = [self.post content];
     if ( !postStructure )
         return;
+    
     
     [self drawTitle];
     
@@ -171,33 +192,6 @@
         [self drawComments];
     }
     
-//    for (UIView* itemViews in subviews)
-//    {
-//        height = 20;
-//        [itemViews removeFromSuperview];
-//    }
-
-    
-}
-
-
-
-
-- (void) drawComments
-{
-    UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(30, height, self.view.frame.size.width-60, 300)];
-    [self.scrollView addSubview:lblTitle];
-    
-    lblTitle.font = [UIFont fontWithName:@"KomikaAxis" size:20.0];
-    lblTitle.numberOfLines = 0;
-    lblTitle.text = @"Comments";
-    lblTitle.textAlignment = NSTextAlignmentCenter;
-    
-    CGRect rect = [self.post.title boundingRectWithSize:lblTitle.frame.size options:NSStringDrawingUsesLineFragmentOrigin
-                                             attributes:@{NSFontAttributeName:lblTitle.font} context:nil];
-    
-    lblTitle.frame = CGRectMake(lblTitle.frame.origin.x, lblTitle.frame.origin.y, lblTitle.frame.size.width, rect.size.height);
-    height += ELEMENTS_SPACING*2 + lblTitle.frame.size.height;
 }
 
 
@@ -336,12 +330,6 @@
                 if ( widthNeeded < 200 )
                     heightNeeded = 200 * (image.size.height / image.size.width);
                 
-                    
-                DLog(@"%@, %f", request, image.size.height);
-
-
-//                heightNeeded = heightNeeded/1.5;
-
                 _imageView.frame = CGRectMake(0, _imageView.frame.origin.y, self.view.frame.size.width, heightNeeded);
                 _imageView.image = image;
 
@@ -395,6 +383,97 @@
     height += ELEMENTS_SPACING*2 + scrollView.frame.size.height + 20;
 }
 
+
+
+- (void) drawComments
+{
+    UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(30, height, self.view.frame.size.width-60, 300)];
+    [self.scrollView addSubview:lblTitle];
+    
+    lblTitle.font = [UIFont fontWithName:@"KomikaAxis" size:20.0];
+    lblTitle.numberOfLines = 0;
+    lblTitle.text = @"Comments";
+    lblTitle.textAlignment = NSTextAlignmentCenter;
+    
+    CGRect rect = [lblTitle.text boundingRectWithSize:lblTitle.frame.size options:NSStringDrawingUsesLineFragmentOrigin
+                                             attributes:@{NSFontAttributeName:lblTitle.font} context:nil];
+    
+    lblTitle.frame = CGRectMake(lblTitle.frame.origin.x, lblTitle.frame.origin.y, lblTitle.frame.size.width, rect.size.height);
+    height += lblTitle.frame.size.height;
+
+    if ( !self.commentsPlaceholder )
+        self.commentsPlaceholder = [[UIView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 30)];
+    
+    if ( !self.commentsPlaceholder.superview )
+        [self.scrollView addSubview:self.commentsPlaceholder];
+    
+    [self refreshComments];
+}
+
+
+
+- (void) refreshComments
+{
+    if ( [self.post comments] )
+    {
+        for (UIView* subview in self.commentsPlaceholder.subviews)
+            [subview removeFromSuperview];
+
+        NSSortDescriptor* descriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+        NSArray* commentsSorted = [[self.post comments] sortedArrayUsingDescriptors:@[descriptor]];
+        
+        CGFloat heightComments = 5;
+        
+        NSDateFormatter* formatterComment = [[NSDateFormatter alloc] init];
+        formatterComment.dateFormat = @"dd/MM/yyyy HH:mm";
+
+        for (Comment* comment in commentsSorted)
+        {
+//            [DTCoreTextFontDescriptor setOverrideFontName:@"Lato-Bold" forFontFamily:@"Lato-Regular" bold:YES italic:NO];
+            
+//            CTFontRef font = CTFontCreateWithName(CFSTR("Lato-Thin"), 20, NULL);
+//            NSLog(@"%@", font);
+            
+//            DTCoreTextFontDescriptor *newDesc = [[DTCoreTextFontDescriptor alloc] initWithCTFont:font];
+//            NSLog(@"%@", [newDesc cssStyleRepresentation]);
+            
+            NSString* text = [NSString stringWithFormat:@"<span style='font-family: \"Lato\"; font-weight: bold; font-style: normal;'>%@</span> <span style='font-size:10.0; color:#aaa;'>(%@)</span><br/>%@", comment.name, [formatterComment stringFromDate:comment.date], comment.comment];
+            NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
+            
+            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:kMainTextOptions documentAttributes:NULL];
+            [attrString removeAttribute:@"CTForegroundColorFromContext" range:NSMakeRange(0, attrString.length)];
+            [attrString removeAttribute:@"NSLink" range:NSMakeRange(0, attrString.length)];
+            
+            DTAttributedLabel* label = [[DTAttributedLabel alloc] initWithFrame:CGRectMake(20 + 15 * [comment.indent integerValue], heightComments, self.view.frame.size.width-20 - (20 + 15 * [comment.indent integerValue]), 10000)];
+            label.attributedString = attrString;
+            label.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.2];
+            [label sizeToFit];
+            
+            [self.commentsPlaceholder addSubview:label];
+            
+            heightComments += label.frame.size.height + 20;
+        }
+        
+        CGRect rect = self.commentsPlaceholder.frame;
+        rect.size.height = heightComments;
+        self.commentsPlaceholder.frame = rect;
+    }
+    else if ( updatingComments )
+    {
+        UIActivityIndicatorView* activityComments = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityComments.center = CGPointMake(self.commentsPlaceholder.frame.size.width/2, self.commentsPlaceholder.frame.size.height/2);
+        [self.commentsPlaceholder addSubview:activityComments];
+        [activityComments startAnimating];
+    }
+    else
+    {
+        for (UIView* subview in self.commentsPlaceholder.subviews)
+            [subview removeFromSuperview];
+    }
+    
+    height = self.commentsPlaceholder.frame.origin.y + self.commentsPlaceholder.frame.size.height;
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+}
 
 
 @end

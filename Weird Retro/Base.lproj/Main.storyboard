@@ -141,7 +141,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="CONTACT" id="kai-es-HFV">
-                        <barButtonItem key="rightBarButtonItem" title="SUBMIT" id="vGv-PO-KFO"/>
+                        <barButtonItem key="rightBarButtonItem" title="SUBMIT" id="vGv-PO-KFO">
+                            <connections>
+                                <action selector="submitButtonTapped:" destination="2os-Lf-fOv" id="Auk-Sl-1Vb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="commentType" destination="xrk-aG-gmQ" id="xPM-28-D25"/>

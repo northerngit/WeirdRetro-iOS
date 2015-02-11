@@ -90,6 +90,22 @@
     return self.sections.allKeys[section];
 }
 
+- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+    lblTitle.font = [UIFont fontWithName:@"Inconsolata" size:16.0f];
+    lblTitle.textColor = [UIColor blackColor];
+    lblTitle.backgroundColor = [UIColor colorWithRed:243.0/255.0 green:200.0/255.0 blue:0 alpha:0.8];
+    lblTitle.text = [@"  " stringByAppendingString:[self tableView:tableView titleForHeaderInSection:section]];
+    
+    return lblTitle;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.sections.allKeys.count;
 }
