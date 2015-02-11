@@ -43,6 +43,7 @@
 		CE0A61C71A8A21CF007B4F27 /* LeaveReplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A61C61A8A21CF007B4F27 /* LeaveReplayViewController.m */; };
 		CE0AFF671A8BEA1200775A7B /* Inconsolata.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE0AFF651A8BEA1200775A7B /* Inconsolata.otf */; };
 		CE0AFF681A8BEA1200775A7B /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE0AFF661A8BEA1200775A7B /* SIL Open Font License.txt */; };
+		CE0AFF6A1A8BEFF700775A7B /* logo2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0AFF691A8BEFF700775A7B /* logo2.png */; };
 		CE0BEFD51A847E5200207752 /* BlogPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BEFD41A847E5200207752 /* BlogPostTableViewCell.m */; };
 		CE0BEFD71A8482CA00207752 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BEFD61A8482CA00207752 /* CoreData.framework */; };
 		CE0BEFDE1A84850B00207752 /* WeirdRetro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE0BEFDC1A84850B00207752 /* WeirdRetro.xcdatamodeld */; };
@@ -122,6 +123,7 @@
 		CE0A61C61A8A21CF007B4F27 /* LeaveReplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveReplayViewController.m; sourceTree = "<group>"; };
 		CE0AFF651A8BEA1200775A7B /* Inconsolata.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Inconsolata.otf; sourceTree = "<group>"; };
 		CE0AFF661A8BEA1200775A7B /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
+		CE0AFF691A8BEFF700775A7B /* logo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo2.png; path = Images/logo2.png; sourceTree = "<group>"; };
 		CE0BEFD31A847E5200207752 /* BlogPostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogPostTableViewCell.h; sourceTree = "<group>"; };
 		CE0BEFD41A847E5200207752 /* BlogPostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogPostTableViewCell.m; sourceTree = "<group>"; };
 		CE0BEFD61A8482CA00207752 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -230,6 +232,7 @@
 				CE0E63B61A892D2900AE7B63 /* back@2x.png */,
 				CE0E63B81A892D5E00AE7B63 /* back@3x.png */,
 				CE0689E31A873A3B00D69CFC /* bg.png */,
+				CE0AFF691A8BEFF700775A7B /* logo2.png */,
 				CE0689E41A873A3B00D69CFC /* logo.png */,
 				CE0689E51A873A3B00D69CFC /* vintage-tan-paper-texture.jpg */,
 			);
@@ -532,6 +535,7 @@
 				CE068A0C1A873A5B00D69CFC /* Lato-MediumItalic.ttf in Resources */,
 				CE068A131A873A5B00D69CFC /* README.txt in Resources */,
 				CE068A1B1A873A7C00D69CFC /* japanese.html in Resources */,
+				CE0AFF6A1A8BEFF700775A7B /* logo2.png in Resources */,
 				CE068A091A873A5B00D69CFC /* Lato-Light.ttf in Resources */,
 				CE068A111A873A5B00D69CFC /* Lato-ThinItalic.ttf in Resources */,
 				CE068A061A873A5B00D69CFC /* Lato-Heavy.ttf in Resources */,

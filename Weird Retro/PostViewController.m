@@ -99,7 +99,11 @@
     
     UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTapped:)];
     [buttonsArray addObject:shareButton];
-    shareButton.imageInsets = UIEdgeInsetsMake(0, 20, 0, -20);
+    
+    if ( [self.post isBlogPost] )
+    {
+        shareButton.imageInsets = UIEdgeInsetsMake(0, 20, 0, -20);
+    }
     
     self.navigationItem.rightBarButtonItems = buttonsArray;
 
