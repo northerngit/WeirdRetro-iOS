@@ -116,6 +116,8 @@
     {
         WRPage* blogPost = [self parseBlogPost:blogNode];
         [blogPostsParsed addObject:blogPost];
+        
+        DLog(@"D %d", blogPost.blogPostCountComments);
     }
     
     array = blogPostsParsed;
@@ -141,6 +143,7 @@
     NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
     [scanner scanUpToCharactersFromSet:numbers intoString:NULL];
     [scanner scanCharactersFromSet:numbers intoString:&numberString];
+    
     blogPost.blogPostCountComments = [numberString integerValue];
     
     for (HTMLNode* childrenNode in blogContent.children)
@@ -170,7 +173,6 @@
     {
         if (![commentNode isKindOfClass:[HTMLElement class]])
             continue;
-        
         
         
         NSMutableDictionary* commentParameters = [NSMutableDictionary new];

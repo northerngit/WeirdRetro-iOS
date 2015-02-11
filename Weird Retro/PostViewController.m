@@ -58,6 +58,14 @@
     
     if ( self.post && [self.post content] )
     {
+        if ( [self.post isBlogPost] )
+        {
+            DLog(@"%@", self.postURL);
+            [DATAMANAGER updatingBlogPostFromBackendFile:self.postURL completion:^(NSError *error) {
+                [self reloadPost];
+            }];
+        }
+        
         [self reloadPost];
     }
     else
@@ -69,10 +77,12 @@
         }];
     }
 
+    
+    
+    // Navigation items
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonTapped:)];
     self.navigationItem.leftBarButtonItem = backButton;
     self.navigationItem.hidesBackButton = YES;
-
     
     NSMutableArray* buttonsArray = [NSMutableArray new];
     if ( [self.post isBlogPost] )
@@ -86,7 +96,6 @@
     shareButton.imageInsets = UIEdgeInsetsMake(0, 20, 0, -20);
     
     self.navigationItem.rightBarButtonItems = buttonsArray;
-
 }
 
 
@@ -155,7 +164,42 @@
     
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+    
+    
+    if ( [self.post isBlogPost] )
+    {
+        [self drawComments];
+    }
+    
+//    for (UIView* itemViews in subviews)
+//    {
+//        height = 20;
+//        [itemViews removeFromSuperview];
+//    }
+
+    
 }
+
+
+
+
+- (void) drawComments
+{
+    UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(30, height, self.view.frame.size.width-60, 300)];
+    [self.scrollView addSubview:lblTitle];
+    
+    lblTitle.font = [UIFont fontWithName:@"KomikaAxis" size:20.0];
+    lblTitle.numberOfLines = 0;
+    lblTitle.text = @"Comments";
+    lblTitle.textAlignment = NSTextAlignmentCenter;
+    
+    CGRect rect = [self.post.title boundingRectWithSize:lblTitle.frame.size options:NSStringDrawingUsesLineFragmentOrigin
+                                             attributes:@{NSFontAttributeName:lblTitle.font} context:nil];
+    
+    lblTitle.frame = CGRectMake(lblTitle.frame.origin.x, lblTitle.frame.origin.y, lblTitle.frame.size.width, rect.size.height);
+    height += ELEMENTS_SPACING*2 + lblTitle.frame.size.height;
+}
+
 
 
 - (void) drawYoutube:(NSDictionary*)item
@@ -285,7 +329,18 @@
             dispatch_async(mainQueue, ^{
                 
                 CGFloat heightNeeded = self.view.frame.size.width * (image.size.height / image.size.width);
-                heightNeeded = heightNeeded/1.5;
+                if ( heightNeeded > image.size.height)
+                    heightNeeded = image.size.height;
+                
+                CGFloat widthNeeded = heightNeeded * (image.size.width / image.size.height);
+                if ( widthNeeded < 200 )
+                    heightNeeded = 200 * (image.size.height / image.size.width);
+                
+                    
+                DLog(@"%@, %f", request, image.size.height);
+
+
+//                heightNeeded = heightNeeded/1.5;
 
                 _imageView.frame = CGRectMake(0, _imageView.frame.origin.y, self.view.frame.size.width, heightNeeded);
                 _imageView.image = image;

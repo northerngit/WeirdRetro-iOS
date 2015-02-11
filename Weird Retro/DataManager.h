@@ -70,6 +70,7 @@ typedef void(^FailureSaving)(NSError *error);
 
 - (void) updatingStructureFromBackendWithCompletion:(void(^)(NSError* error))completion;
 - (void) updatingPostFromBackendFile:(NSString*)filePath completion:(void(^)(NSError* error))completion;
+- (void) updatingBlogPostFromBackendFile:(NSString*)filePath completion:(void(^)(NSError* error))completion;
 
 - (void) loadBlogPostsFromBackendWithCompletion:(void(^)(NSError* error))completion;
 

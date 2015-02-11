@@ -50,7 +50,14 @@
 - (void) loadingHTMLFile:(NSString*)filePath withCompletion:(void(^)(NSError* error, NSString* htmlMarkup))completion
 {
 //    NSURL *URL = [NSURL URLWithString:@"http://www.weirdretro.org.uk/cult-cinema.html"];
-    NSURL *URL = [NSURL URLWithString:[self.baseURL stringByAppendingPathComponent:filePath]];
+    
+    NSURL *URL = nil;
+    
+    if ( [filePath hasPrefix:@"http"] )
+        URL = [NSURL URLWithString:filePath];
+    else
+        URL = [NSURL URLWithString:[self.baseURL stringByAppendingPathComponent:filePath]];
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     AFHTTPRequestOperation *downloadRequest = [[AFHTTPRequestOperation alloc] initWithRequest:request];

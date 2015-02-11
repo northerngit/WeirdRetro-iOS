@@ -19,5 +19,6 @@
 @dynamic date;
 @dynamic indent;
 @dynamic blogPost;
+@dynamic order;
 
 @end

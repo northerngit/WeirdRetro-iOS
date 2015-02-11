@@ -21,6 +21,7 @@
         <attribute name="indent" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="blogPost" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BlogPost" inverseName="comments" inverseEntity="BlogPost" syncable="YES"/>
     </entity>
     <entity name="Post" representedClassName="Post" syncable="YES">
@@ -43,8 +44,8 @@
     </entity>
     <elements>
         <element name="BlogPost" positionX="-54" positionY="45" width="128" height="223"/>
+        <element name="Comment" positionX="-63" positionY="99" width="128" height="165"/>
         <element name="Post" positionX="-63" positionY="-18" width="128" height="193"/>
         <element name="Section" positionX="-54" positionY="99" width="128" height="103"/>
-        <element name="Comment" positionX="-63" positionY="99" width="128" height="148"/>
     </elements>
 </model>

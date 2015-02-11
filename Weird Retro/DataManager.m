@@ -5,6 +5,7 @@
 #import "Managers.h"
 #import "BlogPost.h"
 #import "Post.h"
+#import "Comment.h"
 
 
 @interface DataManager ()
@@ -648,6 +649,7 @@ static DataManager *sharedInstance = nil;
                     post.thumbnailUrl = blogPost.thumbnailUrl;
                     post.content = blogPost.items;
                     post.info = blogPost.info;
+                    post.commentsCount = @(blogPost.blogPostCountComments);
                     post.blogPostIdentity = blogPost.blogPostId;
                     post.dateBlogPost = [formatter dateFromString:blogPost.blogPostDate];
                 }
@@ -741,6 +743,10 @@ static DataManager *sharedInstance = nil;
                     
                     [DATAMANAGER saveWithSuccess:nil failure:nil];
 
+                    for (Post* post in sectionExistItems)
+                        [self deleteObject:post];
+                    [DATAMANAGER saveWithSuccess:nil failure:nil];
+                    
                     index++;
                     if ( index == sections.count && completion )
                         completion(nil);
@@ -778,6 +784,87 @@ static DataManager *sharedInstance = nil;
             return completion(error);
     }];
 }
+
+
+- (void) updatingBlogPostFromBackendFile:(NSString*)filePath completion:(void(^)(NSError* error))completion
+{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"dd/MM/yyyy";
+    NSDateFormatter* formatterComment = [[NSDateFormatter alloc] init];
+    formatterComment.dateFormat = @"dd/MM/yyyy HH:mm";
+
+    [NETWORK loadingHTMLFile:filePath withCompletion:^(NSError *error, NSString *htmlMarkup) {
+        
+        if ( !error )
+        {
+            [CONVERTER convertBlogPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
+                
+                BlogPost* blogPost = [self object:@"BlogPost" predicate:[NSPredicate predicateWithFormat:@"url = %@", filePath]];
+                if ( !blogPost )
+                {
+                    blogPost = [self object:@"BlogPost"];
+                    blogPost.url = filePath;
+                }
+                
+                blogPost.title = pageObject.title;
+                blogPost.thumbnailUrl = pageObject.thumbnailUrl;
+                blogPost.content = pageObject.items;
+                blogPost.info = pageObject.info;
+                blogPost.commentsCount = @(pageObject.blogPostCountComments);
+                blogPost.blogPostIdentity = pageObject.blogPostId;
+                blogPost.dateBlogPost = [formatter dateFromString:pageObject.blogPostDate];
+
+                [self saveWithSuccess:nil failure:nil];
+
+                if ( pageObject.blogComments.count )
+                {
+                    NSMutableArray* commentsForDeleting = [NSMutableArray arrayWithArray:[blogPost.comments allObjects]];
+                    int order = 0;
+                    for (NSDictionary* commentParameters in pageObject.blogComments)
+                    {
+                        NSArray* commentsTmp = [commentsForDeleting filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"commentId = %@", commentParameters[@"commentId"]]];
+                        
+                        Comment* comment = nil;
+                        if ( commentsTmp.count > 0 )
+                        {
+                            comment = commentsTmp[0];
+                            [commentsForDeleting removeObject:comment];
+                            continue;
+                        }
+                        else
+                        {
+                            comment = [self object:@"Comment"];
+                        }
+                        
+                        comment.date = [formatterComment dateFromString:commentParameters[@"date"]];
+                        comment.indent = @([commentParameters[@"level"] integerValue]);
+                        comment.name = [commentParameters[@"name"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+                        if ( commentParameters[@"link"] )
+                            comment.link = [commentParameters[@"link"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                        
+                        [blogPost addCommentsObject:comment];
+                        
+                        order++;
+                    }
+                    
+                    for (Comment* comment in commentsForDeleting)
+                        [self deleteObject:comment];
+                    
+                    [self saveWithSuccess:nil failure:nil];
+
+                }
+                
+                if ( completion )
+                    completion(nil);
+            }];
+        }
+        
+        if ( completion )
+            return completion(error);
+    }];
+}
+
 
 
 

@@ -13,6 +13,7 @@
 
 - (NSString*) title;
 - (NSArray*) content;
+- (NSArray*) comments;
 - (BOOL) isBlogPost;
 
 @end

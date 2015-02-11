@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * link;
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSNumber * indent;
+@property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) BlogPost *blogPost;
 
 @end
