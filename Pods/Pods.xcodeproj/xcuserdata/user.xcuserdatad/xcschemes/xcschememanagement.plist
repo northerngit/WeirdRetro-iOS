@@ -74,11 +74,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Weird Retro-youtube-ios-player-helper.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Weird Retro.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -119,17 +114,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Weird RetroTests-youtube-ios-player-helper.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Weird RetroTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-youtube-ios-player-helper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -142,137 +127,122 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>021E523EB91BF1FAD28F13D9</key>
+		<key>131759BF0DC509D65636A8F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>10D6591249BABE4545518094</key>
+		<key>210CB582EC95FE2EDCD64ACE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>19A319ECAAB7BBD0E2BEAAC3</key>
+		<key>266701416191025193C341A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3AEA1E01F92E40A506AD7703</key>
+		<key>2836BF3F692C2DA652D41846</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3BDE92358DB0854906FE1F1E</key>
+		<key>2C501791268AD2A8C56FC8BC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>413A001703FE94261D720291</key>
+		<key>3A240FE6E88EEFC1A8ED7646</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4B4A6549753AC20918F85A91</key>
+		<key>3B5C46D8867A6AE98D028B1E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>55658679247F86F37AFAFE7B</key>
+		<key>4D603A19B0D69C6B2E017330</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>787198EC1DC60953F0A076C6</key>
+		<key>61170157DD365A83B0446680</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7BE2ABD8AC05FC17A2D2E459</key>
+		<key>71E69DC9F03196FA1B6AD079</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>83FD8EE02D0C4325F6ACBBEC</key>
+		<key>77140BB16C9D982CD92348D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>93732AE81BCDA89B541445B0</key>
+		<key>7C7DCFE71DE9EEDED9F4E810</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>99D1A560273BA38654487426</key>
+		<key>89D9D9E501EA26714DB34CB1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A2F46553B6FE7E7BCD944A19</key>
+		<key>921A4619BE602E8203B0AFD2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A6CCAADB40378986729ADC7C</key>
+		<key>9DE3D19C078D207BDA793835</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A91463709CC7A250E70B003F</key>
+		<key>9E4137DBAF568D9652BA7C96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AC51DD5B668D5AA4A8627E12</key>
+		<key>AED80494FAB117E97B7DDF18</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AF75587372F5EAE8CE6F2256</key>
+		<key>B072E0250B2DA0310BF23352</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B1D0C497F395047A9D6EA035</key>
+		<key>DB66AEAE00B7D04E78D5406B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B69A9E2DCE87A6D09D7DCE94</key>
+		<key>DD8471118AF513C747633C0F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C41A154CB11E8F78153CED45</key>
+		<key>DE11CE2ACBC07BB8A29D9924</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D4A44869F05C6006BD2CAF51</key>
+		<key>E40F2DF6BCD42ADFFCC6FBFB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DB256E56B62E2D70B4A7B481</key>
+		<key>EA19FBB95FE8AF43EFCCDF76</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DFCB5D5742DF789AA7C2A939</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F0263740A84D253C1AE3FAEF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FD7DB04D7FDD0B80F81F3777</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FE83E74E8798073CE69A2E71</key>
+		<key>F7E3FCEC5F5B9109D1531291</key>
 		<dict>
 			<key>primary</key>
 			<true/>

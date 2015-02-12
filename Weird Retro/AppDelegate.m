@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "Managers.h"
 #import <dlfcn.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "CustomURLCache.h"
+
 
 @interface AppDelegate ()
 
@@ -20,19 +23,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self importFonts];
-    [self printAvailableFonts];
     
-//    NSString* htmlMarkup = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"postwithcomments" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil];
-//    [CONVERTER convertBlogPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
-//    }];
-
-//    [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
-//    }];
+    CustomURLCache *URLCache = [[CustomURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+                                                         diskCapacity:200 * 1024 * 1024
+                                                             diskPath:nil];
     
-    [NETWORK submitContactFormWithFirstName:@"Alex" lastName:@"True" email:@"troohin@gmail.com" type:@"General Comment" comment:@"Comment" withCompletion:^(NSError *error) {
-        
-    }];
+    [NSURLCache setSharedURLCache:URLCache];
     
+//    NSURLCache* cache = [NSURLCache sharedURLCache];
+    
+//    DLog(@"%d", cache.diskCapacity);
+    
+//    [self printAvailableFonts];
     return YES;
 }
 

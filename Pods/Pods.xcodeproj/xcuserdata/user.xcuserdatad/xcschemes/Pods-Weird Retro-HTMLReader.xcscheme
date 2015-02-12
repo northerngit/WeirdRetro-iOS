@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AC51DD5B668D5AA4A8627E12"
+               BlueprintIdentifier = "F7E3FCEC5F5B9109D1531291"
                BuildableName = "libPods-Weird Retro-HTMLReader.a"
                BlueprintName = "Pods-Weird Retro-HTMLReader"
                ReferencedContainer = "container:Pods.xcodeproj">

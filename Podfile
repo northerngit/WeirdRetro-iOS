@@ -8,7 +8,7 @@ pod 'MBProgressHUD', '~> 0.8'
 pod 'DTCoreText'
 pod 'ECSlidingViewController'
 pod 'OrderedDictionary'
-pod 'youtube-ios-player-helper', '~> 0.1.1'
+# pod 'SDWebImage', '~>3.6'
 
 target 'Weird Retro' do
 end

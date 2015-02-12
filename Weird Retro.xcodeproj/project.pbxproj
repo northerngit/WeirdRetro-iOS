@@ -50,6 +50,7 @@
 		CE0E63B51A892BD500AE7B63 /* Hamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E63B41A892BD500AE7B63 /* Hamburger@2x.png */; };
 		CE0E63B71A892D2900AE7B63 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E63B61A892D2900AE7B63 /* back@2x.png */; };
 		CE0E63B91A892D5E00AE7B63 /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E63B81A892D5E00AE7B63 /* back@3x.png */; };
+		CE10654A1A8C76E400AFA858 /* CustomURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1065491A8C76E400AFA858 /* CustomURLCache.m */; };
 		CE20389A1A885BC100DA6701 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2038991A885BC100DA6701 /* Comment.m */; };
 		CE20389D1A885C2800DA6701 /* BlogPost.m in Sources */ = {isa = PBXBuildFile; fileRef = CE20389C1A885C2800DA6701 /* BlogPost.m */; };
 		CE20EDB31A8137060029584F /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE20EDB21A8137060029584F /* PostViewController.m */; };
@@ -132,6 +133,8 @@
 		CE0E63B41A892BD500AE7B63 /* Hamburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Hamburger@2x.png"; path = "Images/Hamburger@2x.png"; sourceTree = "<group>"; };
 		CE0E63B61A892D2900AE7B63 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@2x.png"; path = "Images/back@2x.png"; sourceTree = "<group>"; };
 		CE0E63B81A892D5E00AE7B63 /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@3x.png"; path = "Images/back@3x.png"; sourceTree = "<group>"; };
+		CE1065481A8C76E400AFA858 /* CustomURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomURLCache.h; sourceTree = "<group>"; };
+		CE1065491A8C76E400AFA858 /* CustomURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomURLCache.m; sourceTree = "<group>"; };
 		CE2038981A885BC100DA6701 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = Model/Comment.h; sourceTree = "<group>"; };
 		CE2038991A885BC100DA6701 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = Model/Comment.m; sourceTree = "<group>"; };
 		CE20389B1A885C2800DA6701 /* BlogPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlogPost.h; path = Model/BlogPost.h; sourceTree = "<group>"; };
@@ -414,6 +417,8 @@
 				CE8E11D11A7F4BBF00B8566C /* Resources */,
 				CED3D43D1A7DC44F002F7FDC /* AppDelegate.h */,
 				CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */,
+				CE1065481A8C76E400AFA858 /* CustomURLCache.h */,
+				CE1065491A8C76E400AFA858 /* CustomURLCache.m */,
 				CED3D4391A7DC44F002F7FDC /* Supporting Files */,
 			);
 			path = "Weird Retro";
@@ -631,6 +636,7 @@
 				CE0BEFDE1A84850B00207752 /* WeirdRetro.xcdatamodeld in Sources */,
 				CE4D68401A807D6600CD948A /* HTMLConverter.m in Sources */,
 				CE20389D1A885C2800DA6701 /* BlogPost.m in Sources */,
+				CE10654A1A8C76E400AFA858 /* CustomURLCache.m in Sources */,
 				CE212F071A835756007EFD6E /* WRPage.m in Sources */,
 				CED3D43F1A7DC44F002F7FDC /* AppDelegate.m in Sources */,
 				CE345AF01A85C577002B0747 /* Post.m in Sources */,
