@@ -497,7 +497,7 @@
         [label sizeToFit];
         
         [self.commentsPlaceholder addSubview:label];
-        CGFloat heightComments += label.frame.size.height + 20;
+        CGFloat heightComments = label.frame.size.height + 20;
         CGRect rect = self.commentsPlaceholder.frame;
         rect.size.height = heightComments;
         self.commentsPlaceholder.frame = rect;
