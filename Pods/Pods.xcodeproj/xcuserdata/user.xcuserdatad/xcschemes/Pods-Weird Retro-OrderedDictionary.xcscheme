@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "921A4619BE602E8203B0AFD2"
+               BlueprintIdentifier = "8BCDF138C865037216B86D94"
                BuildableName = "libPods-Weird Retro-OrderedDictionary.a"
                BlueprintName = "Pods-Weird Retro-OrderedDictionary"
                ReferencedContainer = "container:Pods.xcodeproj">

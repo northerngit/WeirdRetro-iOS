@@ -8,6 +8,8 @@ pod 'MBProgressHUD', '~> 0.8'
 pod 'DTCoreText'
 pod 'ECSlidingViewController'
 pod 'OrderedDictionary'
+pod 'SwipeView'
+
 # pod 'SDWebImage', '~>3.6'
 
 target 'Weird Retro' do

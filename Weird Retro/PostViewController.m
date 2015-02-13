@@ -29,6 +29,8 @@
 
 @property (strong, nonatomic) NSManagedObject<CommonPost>* post;
 @property (strong, nonatomic) UIView* commentsPlaceholder;
+@property (strong, nonatomic) NSMutableArray* slidesItems;
+
 
 @end
 
@@ -44,7 +46,9 @@
     
     queue = [[NSOperationQueue alloc] init];
     queue.maxConcurrentOperationCount = 1;
-    
+
+    self.slidesItems = [NSMutableArray new];
+
     self.post = [DATAMANAGER object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", self.postURL]];
     firstOpen = NO;
     
@@ -116,6 +120,10 @@
     [self reloadPost];
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
 
 
 - (IBAction)backButtonTapped:(id)sender
@@ -147,6 +155,9 @@
 - (void) reloadPost
 {
     height = 20;
+
+    [self.slidesItems removeAllObjects];
+
     for (UIView* itemViews in self.scrollView.subviews)
     {
         if ([itemViews isKindOfClass:[UIWebView class]])
@@ -191,9 +202,7 @@
         }
     }
     
-    
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
-    
     
     if ( [self.post isBlogPost] )
         [self drawComments];
@@ -323,9 +332,29 @@
         indicator.center = CGPointMake(imageView.frame.size.width/2, imageView.frame.size.height/2);
         [indicator startAnimating];
     }
+    else
+    {
+        imageView.image = [[UIImageView sharedImageCache] cachedImageForRequest:request];
+        
+        CGFloat heightNeeded = self.view.frame.size.width * (imageView.image.size.height / imageView.image.size.width);
+        if ( heightNeeded > imageView.image.size.height)
+            heightNeeded = imageView.image.size.height;
+        
+        CGFloat widthNeeded = heightNeeded * (imageView.image.size.width / imageView.image.size.height);
+        if ( widthNeeded < 200 )
+            heightNeeded = 200 * (imageView.image.size.height / imageView.image.size.width);
+        
+        imageView.frame = CGRectMake(0, _imageView.frame.origin.y, self.view.frame.size.width, heightNeeded);
+        
+        height += heightNeeded + 20 - HEIGHT_IMAGE_PLACEHOLDER;
+        [self.scrollView addSubview:imageView];
+        return;
+        
+    }
 
     [self.scrollView addSubview:imageView];
 
+    
     
     [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
 
@@ -356,6 +385,7 @@
                 }
                 
                 height += heightNeeded + 20 - HEIGHT_IMAGE_PLACEHOLDER;
+                
                 self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
             });
             
@@ -370,30 +400,68 @@
 
 - (void) drawSlides:(NSDictionary*)item
 {
-    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 500)];
-    scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 100);
-    scrollView.clipsToBounds = NO;
-    scrollView.pagingEnabled = YES;
-    scrollView.delegate = self;
     
-    CGFloat f = 0;
-    for (NSDictionary* imagePagameters in item[@"images"])
-    {
-        UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(f, 0, 300, scrollView.frame.size.height)];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        
-//        DLog(@"%@", [NETWORK.baseURL stringByAppendingPathComponent:imagePagameters[@"url"]]);
-        [imageView setImageWithURL:[NSURL URLWithString:[@"http://www.weirdretro.org.uk/uploads" stringByAppendingPathComponent:imagePagameters[@"url"]]]];
-        [scrollView addSubview:imageView];
-
-        f += 300 + 5;
-    }
-
-    scrollView.contentSize = CGSizeMake(f, scrollView.frame.size.height);
-    [self.scrollView addSubview:scrollView];
+    CGFloat avgHeight = 0;
+    for (NSDictionary* imageParameters in item[@"images"])
+        if ( imageParameters[@"fullHeight"] )
+        {
+            CGFloat fullHeight = [imageParameters[@"fullHeight"] floatValue];
+            avgHeight += fullHeight;
+            avgHeight /= 2;
+        }
     
-    height += ELEMENTS_SPACING*2 + scrollView.frame.size.height + 20;
+    
+    CGFloat minWidth = LONG_MAX;
+    for (NSDictionary* imageParameters in item[@"images"])
+        if ( imageParameters[@"fullWidth"] && [imageParameters[@"fullWidth"] integerValue] < minWidth )
+            minWidth = [imageParameters[@"fullWidth"] floatValue];
+    
+    
+    CGFloat resolution = minWidth / (self.view.frame.size.width * 0.8);
+    CGFloat neededHeight = avgHeight / resolution;
+
+    
+    [self.slidesItems addObject:item];
+    
+    
+    SwipeView *swipeView = [[SwipeView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, neededHeight)];
+    swipeView.delegate = self;
+    swipeView.dataSource = self;
+    swipeView.tag = self.slidesItems.count-1;
+    [self.scrollView addSubview:swipeView];
+
+    height += ELEMENTS_SPACING*2 + swipeView.frame.size.height + 20;
 }
+
+
+
+
+
+- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
+{
+    return [self.slidesItems[swipeView.tag][@"images"] count];
+}
+
+- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+{
+
+    UIImageView* imageView = [[UIImageView alloc] initWithFrame:swipeView.bounds];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+    NSDictionary* params = self.slidesItems[swipeView.tag][@"images"][index];
+
+    [imageView setImageWithURL:[NSURL URLWithString:[@"http://www.weirdretro.org.uk/uploads" stringByAppendingPathComponent:params[@"url"]]]];
+    
+    return imageView;
+}
+
+- (CGSize)swipeViewItemSize:(SwipeView *)swipeView
+{
+    return CGSizeMake(swipeView.bounds.size.width*0.8, swipeView.bounds.size.height);
+}
+
+
 
 
 
@@ -415,6 +483,8 @@
 
     if ( !self.commentsPlaceholder )
         self.commentsPlaceholder = [[UIView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 30)];
+    else
+        self.commentsPlaceholder.frame = CGRectMake(0, height, self.view.frame.size.width, self.commentsPlaceholder.frame.size.height);
     
     if ( !self.commentsPlaceholder.superview )
         [self.scrollView addSubview:self.commentsPlaceholder];

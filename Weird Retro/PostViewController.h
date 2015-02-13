@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SwipeView.h"
 
 
 @protocol CommonPost <NSObject>
@@ -22,7 +23,7 @@
 @end
 
 
-@interface PostViewController : UIViewController
+@interface PostViewController : UIViewController <SwipeViewDelegate, SwipeViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
 @property (strong, nonatomic) NSString* postURL;
