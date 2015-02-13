@@ -163,93 +163,100 @@
     [arraySkip removeAllObjects];
     
     
+
+    HTMLElement* blogParent = blogNode.parentElement;
+    
     ///////// Comments ////////
-    HTMLElement* blogCommentsArea = [blogNode firstNodeMatchingSelector:@"div[id='commentArea']"];
+    HTMLElement* blogCommentsArea = [blogParent firstNodeMatchingSelector:@"div[id='commentArea']"];
     
-    // Comments list
-    NSArray* commentsNodes = [blogCommentsArea nodesMatchingSelector:@"div[class~='blogCommentWrap']"];
-    NSMutableArray* commentsArray = [NSMutableArray new];
-    
-    for (HTMLNode *commentNode in commentsNodes)
+    if ( blogCommentsArea )
     {
-        if (![commentNode isKindOfClass:[HTMLElement class]])
-            continue;
+        // Comments list
+        NSArray* commentsNodes = [blogCommentsArea nodesMatchingSelector:@"div[class~='blogCommentWrap']"];
+        NSMutableArray* commentsArray = [NSMutableArray new];
         
-        
-        NSMutableDictionary* commentParameters = [NSMutableDictionary new];
-        
-        HTMLElement* commentElement = (HTMLElement*)commentNode;
-        NSInteger commentLevel = 0;
-        NSArray* commentElementClasses = [commentElement.attributes[@"class"] componentsSeparatedByString:@" "];
-        for (NSString* commentElementClass in commentElementClasses)
+        for (HTMLNode *commentNode in commentsNodes)
         {
-            if ( [commentElementClass hasPrefix:@"blogCommentLevel"])
+            if (![commentNode isKindOfClass:[HTMLElement class]])
+                continue;
+            
+            
+            NSMutableDictionary* commentParameters = [NSMutableDictionary new];
+            
+            HTMLElement* commentElement = (HTMLElement*)commentNode;
+            NSInteger commentLevel = 0;
+            NSArray* commentElementClasses = [commentElement.attributes[@"class"] componentsSeparatedByString:@" "];
+            for (NSString* commentElementClass in commentElementClasses)
             {
-                NSString* commentElementLevelString = [commentElementClass substringFromIndex:[@"blogCommentLevel" length]];
-                commentLevel = [commentElementLevelString integerValue];
-                break;
+                if ( [commentElementClass hasPrefix:@"blogCommentLevel"])
+                {
+                    NSString* commentElementLevelString = [commentElementClass substringFromIndex:[@"blogCommentLevel" length]];
+                    commentLevel = [commentElementLevelString integerValue];
+                    break;
+                }
             }
-        }
-        commentParameters[@"level"] = @(commentLevel);
+            commentParameters[@"level"] = @(commentLevel);
 
-        
-        
-        HTMLElement* commentAuthorElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentHeadingInner']>div[class='blogCommentAuthor']"];
-        HTMLElement* commentAuthorAnchorElement = [commentAuthorElement firstNodeMatchingSelector:@"a[class='name']"];
-        if ( commentAuthorAnchorElement )
-        {
-            commentParameters[@"link"] = commentAuthorAnchorElement.attributes[@"href"];
-            commentParameters[@"name"] = commentAuthorAnchorElement.textContent;
-        }
-        else
-        {
-            commentParameters[@"name"] = commentAuthorElement.textContent;
-        }
-        
-        
-        
-        HTMLElement* commentDateElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentHeadingInner']>div[class='blogCommentDate']"];
-        commentParameters[@"date"] = commentDateElement.textContent;
-        
-        HTMLElement* commentTextElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentText']"];
-        commentParameters[@"comment"] = commentTextElement.textContent;
+            
+            
+            HTMLElement* commentAuthorElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentHeadingInner']>div[class='blogCommentAuthor']"];
+            HTMLElement* commentAuthorAnchorElement = [commentAuthorElement firstNodeMatchingSelector:@"a[class='name']"];
+            if ( commentAuthorAnchorElement )
+            {
+                commentParameters[@"link"] = commentAuthorAnchorElement.attributes[@"href"];
+                commentParameters[@"name"] = commentAuthorAnchorElement.textContent;
+            }
+            else
+            {
+                commentParameters[@"name"] = commentAuthorElement.textContent;
+            }
+            
+            
+            
+            HTMLElement* commentDateElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentHeadingInner']>div[class='blogCommentDate']"];
+            commentParameters[@"date"] = commentDateElement.textContent;
+            
+            HTMLElement* commentTextElement = [commentElement firstNodeMatchingSelector:@"div[class='blogCommentText']"];
+            commentParameters[@"comment"] = commentTextElement.textContent;
 
-        HTMLElement* commentReplyButtonElement = [commentElement firstNodeMatchingSelector:@"span[class~='blog-button'][class~='reply-comment']"];
-        
-        NSString* s = commentReplyButtonElement[@"onclick"];
-        
-        
-        
-        /////////////////
-        
-        NSError *error = NULL;
-        NSRegularExpressionOptions regexOptions = NSRegularExpressionCaseInsensitive;
-        
-        NSString *pattern = @".+comment_id=(\\d+).+";
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
-        if (error)
-        {
-            NSLog(@"Couldn't create regex with given string and options");
-        }
-        
-        NSRange textRange = NSMakeRange(0, s.length);
-        NSTextCheckingResult* matches = [regex firstMatchInString:s options:NSMatchingReportProgress range:textRange];
-        
-        if ( matches.numberOfRanges == 2 )
-        {
-            NSString* commentCommentId = [s substringWithRange:[matches rangeAtIndex:1]];
-            commentParameters[@"commentId"] = commentCommentId;
-        }
+            HTMLElement* commentReplyButtonElement = [commentElement firstNodeMatchingSelector:@"span[class~='blog-button'][class~='reply-comment']"];
+            
+            NSString* s = commentReplyButtonElement[@"onclick"];
+            
+            
+            
+            /////////////////
+            
+            NSError *error = NULL;
+            NSRegularExpressionOptions regexOptions = NSRegularExpressionCaseInsensitive;
+            
+            NSString *pattern = @".+comment_id=(\\d+).+";
+            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
+            if (error)
+            {
+                NSLog(@"Couldn't create regex with given string and options");
+            }
+            
+            NSRange textRange = NSMakeRange(0, s.length);
+            NSTextCheckingResult* matches = [regex firstMatchInString:s options:NSMatchingReportProgress range:textRange];
+            
+            if ( matches.numberOfRanges == 2 )
+            {
+                NSString* commentCommentId = [s substringWithRange:[matches rangeAtIndex:1]];
+                commentParameters[@"commentId"] = commentCommentId;
+            }
 
-        /////////////////
+            /////////////////
+            
+            
+            
+            [commentsArray addObject:commentParameters];
+        }
         
-        
-        
-        [commentsArray addObject:commentParameters];
+        blogPost.blogComments = commentsArray;
     }
     
-    blogPost.blogComments = commentsArray;
-    
+    // Create blog post description
     for (NSDictionary* item in blogPost.items)
     {
         if ( [item[@"type"] integerValue] == 0 )
@@ -265,7 +272,6 @@
     
     return blogPost;
 }
-
 
 
 

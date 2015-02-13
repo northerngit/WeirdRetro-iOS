@@ -138,8 +138,6 @@
         self.af_imageRequestOperation = nil;
     } else {
         
-        NSLog(@"%@", urlRequest);
-        
         if (placeholderImage) {
             self.image = placeholderImage;
         }

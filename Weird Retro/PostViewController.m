@@ -113,7 +113,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [self reloadPost];
 }
 
@@ -149,7 +148,12 @@
 {
     height = 20;
     for (UIView* itemViews in self.scrollView.subviews)
+    {
+        if ([itemViews isKindOfClass:[UIWebView class]])
+            [(UIWebView*)itemViews stopLoading];
+        
         [itemViews removeFromSuperview];
+    }
 
     
     NSArray* postStructure = [self.post content];
@@ -205,6 +209,7 @@
     UIWebView* view = [[UIWebView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 200)];
     view.hidden = YES;
     view.delegate = self;
+    
     [view loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:[@"http:" stringByAppendingString:item[@"src"]]]]];
     
     [self.scrollView addSubview:view];
@@ -215,6 +220,11 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     webView.hidden = NO;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    DLog(@"%@", error);
 }
 
 
