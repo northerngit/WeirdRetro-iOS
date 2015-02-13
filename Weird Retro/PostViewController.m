@@ -140,7 +140,7 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:replyViewController];
     
     navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:navController animated:YES completion:^{
+        [self presentViewController:navController animated:YES completion:^{
     }];
 }
 
@@ -196,10 +196,8 @@
     
     
     if ( [self.post isBlogPost] )
-    {
         [self drawComments];
-    }
-    
+
 }
 
 
@@ -428,7 +426,10 @@
 
 - (void) refreshComments
 {
-    if ( [self.post comments] )
+    if ( !self.post.isBlogPost )
+        return;
+    
+    if ( [self.post comments] && [[self.post comments] count] )
     {
         for (UIView* subview in self.commentsPlaceholder.subviews)
             [subview removeFromSuperview];
@@ -483,6 +484,23 @@
     {
         for (UIView* subview in self.commentsPlaceholder.subviews)
             [subview removeFromSuperview];
+
+        NSData *data = [@"No comments yet..." dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:kMainTextOptions documentAttributes:NULL];
+        [attrString removeAttribute:@"CTForegroundColorFromContext" range:NSMakeRange(0, attrString.length)];
+        [attrString removeAttribute:@"NSLink" range:NSMakeRange(0, attrString.length)];
+        
+        DTAttributedLabel* label = [[DTAttributedLabel alloc] initWithFrame:CGRectMake(20, 5, self.view.frame.size.width-20 - 20, 10000)];
+        label.attributedString = attrString;
+        label.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.2];
+        [label sizeToFit];
+        
+        [self.commentsPlaceholder addSubview:label];
+        CGFloat heightComments += label.frame.size.height + 20;
+        CGRect rect = self.commentsPlaceholder.frame;
+        rect.size.height = heightComments;
+        self.commentsPlaceholder.frame = rect;
     }
     
     height = self.commentsPlaceholder.frame.origin.y + self.commentsPlaceholder.frame.size.height;
