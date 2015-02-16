@@ -63,7 +63,7 @@
     NSArray* sections = [DATAMANAGER objects:@"Section" predicate:nil sortKey:@"order" ascending:YES];
     
     MutableOrderedDictionary* dict = [MutableOrderedDictionary dictionary];
-    NSSortDescriptor* descriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+    NSSortDescriptor* descriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
     
     for (Section* section in sections)
     {
