@@ -35,7 +35,7 @@ static NSTimeInterval const CustomURLCacheExpirationInterval = 600;
 
     if (cachedResponse)
     {
-        if ([cachedResponse.userInfo[CustomURLCacheExpirationKey] compare:[[NSDate date] dateByAddingTimeInterval:CustomURLCacheExpirationInterval]] == NSOrderedDescending)
+        if ([(NSDate*)cachedResponse.userInfo[CustomURLCacheExpirationKey] compare:[[NSDate date] dateByAddingTimeInterval:CustomURLCacheExpirationInterval]] == NSOrderedDescending)
         {
             [self removeCachedResponseForRequest:request];
             return nil;

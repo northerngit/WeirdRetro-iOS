@@ -78,7 +78,7 @@
         {
             Comment* comment = [DATAMANAGER object:@"Comment"];
             comment.date = [NSDate date];
-            comment.indent = 0;
+            comment.indent = @0;
             comment.name = [self.tfName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             comment.comment = [self.tvComment.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             

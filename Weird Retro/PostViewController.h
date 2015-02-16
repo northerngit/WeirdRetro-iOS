@@ -23,7 +23,7 @@
 @end
 
 
-@interface PostViewController : UIViewController <SwipeViewDelegate, SwipeViewDataSource>
+@interface PostViewController : UIViewController <SwipeViewDelegate, SwipeViewDataSource, UIWebViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
 @property (strong, nonatomic) NSString* postURL;
