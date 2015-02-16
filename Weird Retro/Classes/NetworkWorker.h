@@ -10,7 +10,7 @@
 
 @interface NetworkWorker : NSObject
 
-@property (nonatomic, strong) NSString* baseURL;
+@property (nonatomic, copy) NSString* baseURL;
 
 + (instancetype) sharedInstance;
 

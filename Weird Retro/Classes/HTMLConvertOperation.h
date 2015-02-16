@@ -15,7 +15,7 @@ typedef void(^CustomOperationCompletionBlock)(WRPage* pageObject);
 @interface HTMLConvertOperation : NSOperation
 
 @property (nonatomic, assign) CustomOperationCompletionBlock successFailureBlock;
-@property (nonatomic, strong) NSString* htmlMarkup;
+@property (nonatomic, copy) NSString* htmlMarkup;
 @property (nonatomic, assign) PageType type;
 
 //- (id)initWithURL:(NSURL *)url successFailureBlock:(CustomOperationCompletionBlock)successFailureBlock;

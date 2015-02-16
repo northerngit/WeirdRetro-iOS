@@ -234,7 +234,7 @@
             NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
             if (error)
             {
-                NSLog(@"Couldn't create regex with given string and options");
+                DLog(@"Couldn't create regex with given string and options");
             }
             
             NSRange textRange = NSMakeRange(0, s.length);
@@ -474,7 +474,7 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:regexOptions error:&error];
     if (error)
     {
-        NSLog(@"Couldn't create regex with given string and options");
+        DLog(@"Couldn't create regex with given string and options");
         return;
     }
     

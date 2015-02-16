@@ -32,17 +32,13 @@
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
     
     
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                    [UIFont fontWithName:@"Courier" size:16.0], NSFontAttributeName,
-                                                                    [UIColor whiteColor], NSForegroundColorAttributeName,
-                                                                    nil]
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Courier" size:16.0],
+                                                                    NSForegroundColorAttributeName: [UIColor whiteColor]}
                                                           forState:UIControlStateNormal];
     
     
-    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                    [UIFont fontWithName:@"Courier" size:16.0], NSFontAttributeName,
-                                                                    [UIColor whiteColor], NSForegroundColorAttributeName,
-                                                                    nil]
+    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Courier" size:16.0],
+                                                                    NSForegroundColorAttributeName: [UIColor whiteColor]}
                                                           forState:UIControlStateNormal];
 
     
@@ -89,7 +85,7 @@
             [DATAMANAGER saveWithSuccess:^(BOOL hasChanges) {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 [self dismissViewControllerAnimated:YES completion:nil];
-            } failure:^(NSError *error) {
+            } failure:^(NSError *errorFailure) {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];

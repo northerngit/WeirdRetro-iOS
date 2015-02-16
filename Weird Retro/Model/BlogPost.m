@@ -8,7 +8,7 @@
 
 #import "BlogPost.h"
 #import "Comment.h"
-
+#import "assert.h"
 
 @implementation BlogPost
 

@@ -71,7 +71,7 @@
         {
             updatingComments = YES;
             [DATAMANAGER updatingBlogPostFromBackendFile:self.postURL completion:^(NSError *error) {
-                updatingComments = NO;
+                self->updatingComments = NO;
                 [self refreshComments];
             }];
         }
@@ -356,9 +356,9 @@
 
     
     
-    [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+    [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *requestImageView, NSHTTPURLResponse *response, UIImage *image) {
 
-        [queue addOperationWithBlock:^{
+        [self->queue addOperationWithBlock:^{
             
             dispatch_queue_t mainQueue = dispatch_get_main_queue();
             dispatch_async(mainQueue, ^{
@@ -379,19 +379,19 @@
                 
                 for (NSUInteger i = [self.scrollView.subviews indexOfObject:_imageView]+1; i < self.scrollView.subviews.count; i++)
                 {
-                    CGRect r = [[self.scrollView.subviews objectAtIndex:i] frame];
+                    CGRect r = [(self.scrollView.subviews)[i] frame];
                     r.origin.y += heightNeeded + 20 - HEIGHT_IMAGE_PLACEHOLDER;
-                    [[self.scrollView.subviews objectAtIndex:i] setFrame:r];
+                    [(self.scrollView.subviews)[i] setFrame:r];
                 }
                 
-                height += heightNeeded + 20 - HEIGHT_IMAGE_PLACEHOLDER;
+                self->height += heightNeeded + 20 - HEIGHT_IMAGE_PLACEHOLDER;
                 
-                self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
+                self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self->height);
             });
             
         }];
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+    } failure:^(NSURLRequest *requestImageView, NSHTTPURLResponse *response, NSError *error) {
         
     }];
     
@@ -427,7 +427,7 @@
     SwipeView *swipeView = [[SwipeView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, neededHeight)];
     swipeView.delegate = self;
     swipeView.dataSource = self;
-    swipeView.tag = self.slidesItems.count-1;
+    swipeView.tag = (NSInteger)self.slidesItems.count - 1;
     [self.scrollView addSubview:swipeView];
 
     height += ELEMENTS_SPACING*2 + swipeView.frame.size.height + 20;
@@ -439,7 +439,7 @@
 
 - (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView
 {
-    return [self.slidesItems[swipeView.tag][@"images"] count];
+    return (NSInteger)[self.slidesItems[(NSUInteger)swipeView.tag][@"images"] count];
 }
 
 - (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
@@ -449,7 +449,7 @@
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
-    NSDictionary* params = self.slidesItems[swipeView.tag][@"images"][index];
+    NSDictionary* params = self.slidesItems[(NSUInteger)swipeView.tag][@"images"][(NSUInteger)index];
 
     [imageView setImageWithURL:[NSURL URLWithString:[@"http://www.weirdretro.org.uk/uploads" stringByAppendingPathComponent:params[@"url"]]]];
     

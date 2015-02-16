@@ -40,7 +40,7 @@
     for (NSString *family in familyNames) {
         NSArray *fonts = [UIFont fontNamesForFamilyName:family];
         if (fonts) {
-            [dict setObject:fonts forKey:family];
+            dict[family] = fonts;
         }
     }
     

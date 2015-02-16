@@ -34,7 +34,7 @@
 }
 
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     
@@ -152,14 +152,14 @@
     } error:nil];
     
     
-    AFHTTPRequestOperation * operation = [submitManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHTTPRequestOperation * operation = [submitManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operationInside, id responseObject) {
         
 //        NSString* returnString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
         if ( completion )
             completion(nil);
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operationInside, NSError *error) {
         
         if ( completion )
             completion(error);

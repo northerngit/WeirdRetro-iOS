@@ -51,10 +51,8 @@
     
 //    UIBarButtonItem submitButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(sel:)];
 
-    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                        [UIFont fontWithName:@"Courier" size:16.0], NSFontAttributeName,
-                                        [UIColor whiteColor], NSForegroundColorAttributeName,
-                                        nil] 
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Courier" size:16.0],
+                                        NSForegroundColorAttributeName: [UIColor whiteColor]} 
                               forState:UIControlStateNormal];
 
     NSDictionary *options = kMainTextOptions;

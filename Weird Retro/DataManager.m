@@ -44,7 +44,7 @@ static DataManager *sharedInstance = nil;
     return nil;
 }
 
-- (id) init {
+- (instancetype) init {
     self =[super init];
     if (self) {
         self.datamodelName = @"WeirdRetro";
@@ -281,7 +281,7 @@ static DataManager *sharedInstance = nil;
         DLog(@"(!!!) Exception \"%@\", reason: \"%@\"", [exception name], [exception reason]);
     }
     
-    return ([result count] == 0 ? nil : [result objectAtIndex:0]);
+    return ([result count] == 0 ? nil : result[0]);
 }
 
 
@@ -297,17 +297,22 @@ static DataManager *sharedInstance = nil;
     {
         NSError *error = nil;
         result = [contextNew executeFetchRequest:request error:&error];
+        
+        if (error)
+        {
+            DLog(@"%@", error.description);
+        }
     }
     @catch(NSException *exception)
     {
         DLog(@"(!!!) Exception \"%@\", reason: \"%@\"", [exception name], [exception reason]);
     }
     
-    return ([result count] == 0 ? nil : [result objectAtIndex:0]);
+    return ([result count] == 0 ? nil : result[0]);
 }
 
 
-- (id)object:(NSString *)entityName predicate:(NSPredicate *)predicate sortKey:(NSString*)sortKey ascending:(BOOL) ascending
+- (id)object:(NSString *)entityName predicate:(NSPredicate *)predicate sortKey:(NSString*)sortKey ascending:(BOOL)ascending
 {
     NSArray *result = nil;
     
@@ -332,7 +337,7 @@ static DataManager *sharedInstance = nil;
         DLog(@"(!!!) Exception \"%@\", reason: \"%@\"", [exception name], [exception reason]);
     }
     
-    return ([result count] == 0 ? nil : [result objectAtIndex:0]);
+    return ([result count] == 0 ? nil : result[0]);
 }
 
 
@@ -381,7 +386,7 @@ static DataManager *sharedInstance = nil;
     [req setEntity:entity];
     [req setPredicate:predicate];
     
-    NSUInteger count = -1;
+    NSUInteger count = -1ul;
     
     @try
     {
@@ -450,7 +455,7 @@ static DataManager *sharedInstance = nil;
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:entity];
     [req setPredicate:predicate];
-    [req setSortDescriptors:[NSArray arrayWithObjects:[[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending],nil]];
+    [req setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending]]];
     
     @try
     {
@@ -501,7 +506,7 @@ static DataManager *sharedInstance = nil;
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:entity];
     [req setPredicate:predicate];
-    [req setSortDescriptors:[NSArray arrayWithObjects:[[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending],nil]];
+    [req setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending]]];
     
     @try
     {
@@ -562,13 +567,13 @@ static DataManager *sharedInstance = nil;
         }
         else
         {
-            [_privateWriterContext performBlockAndWait:^{
-                NSError *error = nil;
-                [_privateWriterContext save:&error];
+            [self->_privateWriterContext performBlockAndWait:^{
+                NSError *errorP = nil;
+                [self->_privateWriterContext save:&errorP];
                 
-                if (error)
+                if (errorP)
                 {
-                    DLog(@"%@", error.description);
+                    DLog(@"%@", errorP.description);
                 }
                 else
                 {
@@ -591,6 +596,7 @@ static DataManager *sharedInstance = nil;
 - (void) loadBlogPostsFromBackendWithCompletion:(void(^)(NSError* error))completion
 {
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     formatter.dateFormat = @"dd/MM/yyyy";
     
     [NETWORK loadingHTMLFile:@"captains-blog" withCompletion:^(NSError *error, NSString *htmlMarkup) {
@@ -664,7 +670,7 @@ static DataManager *sharedInstance = nil;
     }
     
 
-    __block NSInteger index = 0;
+    __block NSUInteger index = 0;
     
     for (Section* section in sections)
     {
@@ -754,8 +760,10 @@ static DataManager *sharedInstance = nil;
 {
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"dd/MM/yyyy";
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     NSDateFormatter* formatterComment = [[NSDateFormatter alloc] init];
     formatterComment.dateFormat = @"dd/MM/yyyy HH:mm";
+    formatterComment.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
 
     [NETWORK loadingHTMLFile:filePath withCompletion:^(NSError *error, NSString *htmlMarkup) {
         

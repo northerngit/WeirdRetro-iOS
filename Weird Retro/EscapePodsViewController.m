@@ -87,7 +87,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return self.sections.allKeys[section];
+    return self.sections.allKeys[(NSUInteger)section];
 }
 
 - (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -107,18 +107,18 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sections.allKeys.count;
+    return (NSInteger)self.sections.allKeys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.sections[self.sections.allKeys[section]] count];
+    return (NSInteger)[self.sections[self.sections.allKeys[(NSUInteger)section]] count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EscapePodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EscapePodsTableViewCell" forIndexPath:indexPath];
     
-    Post* post = self.sections[self.sections.allKeys[indexPath.section]][indexPath.row];
+    Post* post = self.sections[self.sections.allKeys[(NSUInteger)indexPath.section]][(NSUInteger)indexPath.row];
     cell.post = post;
     
     cell.backgroundColor = [UIColor clearColor];
@@ -144,7 +144,7 @@
         NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
         
         PostViewController* controller = segue.destinationViewController;
-        Post* post = self.sections[self.sections.allKeys[indexPath.section]][indexPath.row];
+        Post* post = self.sections[self.sections.allKeys[(NSUInteger)indexPath.section]][(NSUInteger)indexPath.row];
         controller.postURL = post.url;
     }
 }

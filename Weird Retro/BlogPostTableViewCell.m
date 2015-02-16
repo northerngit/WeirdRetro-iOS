@@ -79,6 +79,7 @@
     
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"dd/MM/yyyy";
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     self.lblDate.text = [NSString stringWithFormat:@"%@ Comments | %@", _blogPost.commentsCount, [formatter stringFromDate:_blogPost.dateBlogPost]];
 }
 

@@ -70,7 +70,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.blogPosts.count;
+    return (NSInteger)self.blogPosts.count;
 }
 
 
@@ -82,7 +82,7 @@
         cell = [[BlogPostTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BlogPostTableViewCell"];
     }
     
-    BlogPost* blogPost = self.blogPosts[indexPath.row];
+    BlogPost* blogPost = self.blogPosts[(NSUInteger)indexPath.row];
     cell.blogPost = blogPost;
     
     return cell;
@@ -107,7 +107,7 @@
         NSIndexPath* path = [self.tableView indexPathForCell:cell];
         
         PostViewController* controller = segue.destinationViewController;
-        controller.postURL = [(BlogPost*)self.blogPosts[path.row] url];
+        controller.postURL = [(BlogPost*)self.blogPosts[(NSUInteger)path.row] url];
     }
 }
 

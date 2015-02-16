@@ -23,12 +23,12 @@ typedef void(^FailureSaving)(NSError *error);
 @property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, strong) NSString *datamodelName;
-@property (nonatomic, strong) NSString *storageName;
+@property (nonatomic, copy) NSString *datamodelName;
+@property (nonatomic, copy) NSString *storageName;
 
 + (DataManager *) sharedInstance;
-- (NSURL *) applicationDocumentsDirectory;
-- (BOOL) contextHasChanges;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSURL *applicationDocumentsDirectory;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL contextHasChanges;
 - (void) saveContext;
 - (void) discardChanges;
 - (void) startThreadContext;

@@ -20,24 +20,22 @@ typedef NS_ENUM(NSUInteger, PageType) {
 
 @interface WRPage : NSObject
 
-@property (strong, nonatomic) NSString* title;
-@property (strong, nonatomic) NSString* url;
-@property (strong, nonatomic) NSString* info;
-@property (strong, nonatomic) NSString* keywords;
-@property (strong, nonatomic) NSString* thumbnailUrl;
+@property (copy, nonatomic) NSString* title;
+@property (copy, nonatomic) NSString* url;
+@property (copy, nonatomic) NSString* info;
+@property (copy, nonatomic) NSString* keywords;
+@property (copy, nonatomic) NSString* thumbnailUrl;
 
 @property (strong, nonatomic) NSArray* items;
 
-@property (strong, nonatomic) NSString* blogPostDate;
+@property (copy, nonatomic) NSString* blogPostDate;
 
 @property (assign, nonatomic) NSInteger blogPostCountComments;
-@property (strong, nonatomic) NSString* blogPostId;
-@property (strong, nonatomic) NSString* blogUserId;
-@property (strong, nonatomic) NSString* blogBlogId;
+@property (copy, nonatomic) NSString* blogPostId;
+@property (copy, nonatomic) NSString* blogUserId;
+@property (copy, nonatomic) NSString* blogBlogId;
 @property (strong, nonatomic) NSArray* blogComments;
 
 @property (assign, nonatomic) PageType type;
-
-//- (id) initWithHTML:(NSString*)htmlMarkup;
 
 @end
