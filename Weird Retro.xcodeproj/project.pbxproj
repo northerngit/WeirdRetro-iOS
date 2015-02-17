@@ -38,6 +38,7 @@
 		CE068A1C1A873A7C00D69CFC /* memory.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A171A873A7C00D69CFC /* memory.html */; };
 		CE068A1D1A873A7C00D69CFC /* superhero.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A181A873A7C00D69CFC /* superhero.html */; };
 		CE068A1F1A87495D00D69CFC /* postwithcomments.html in Resources */ = {isa = PBXBuildFile; fileRef = CE068A1E1A87495D00D69CFC /* postwithcomments.html */; };
+		CE0992F61A93B4AC003F34FA /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0992F51A93B4AC003F34FA /* SlidingViewController.m */; };
 		CE0A61B21A89AE36007B4F27 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A61B11A89AE36007B4F27 /* share@2x.png */; };
 		CE0A61B41A89B75A007B4F27 /* reply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A61B31A89B75A007B4F27 /* reply@2x.png */; };
 		CE0A61C71A8A21CF007B4F27 /* LeaveReplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A61C61A8A21CF007B4F27 /* LeaveReplayViewController.m */; };
@@ -74,18 +75,7 @@
 		CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4431A7DC44F002F7FDC /* Main.storyboard */; };
 		CED3D4471A7DC44F002F7FDC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4461A7DC44F002F7FDC /* Images.xcassets */; };
 		CED3D44A1A7DC44F002F7FDC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4481A7DC44F002F7FDC /* LaunchScreen.xib */; };
-		CED3D4561A7DC44F002F7FDC /* Weird_RetroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D4551A7DC44F002F7FDC /* Weird_RetroTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		CED3D4501A7DC44F002F7FDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CED3D42E1A7DC44F002F7FDC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CED3D4351A7DC44F002F7FDC;
-			remoteInfo = "Weird Retro";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CE0689E31A873A3B00D69CFC /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = Images/bg.png; sourceTree = "<group>"; };
@@ -118,6 +108,8 @@
 		CE068A171A873A7C00D69CFC /* memory.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = memory.html; path = Examples/memory.html; sourceTree = "<group>"; };
 		CE068A181A873A7C00D69CFC /* superhero.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = superhero.html; path = Examples/superhero.html; sourceTree = "<group>"; };
 		CE068A1E1A87495D00D69CFC /* postwithcomments.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = postwithcomments.html; path = Examples/postwithcomments.html; sourceTree = "<group>"; };
+		CE0992F41A93B4AC003F34FA /* SlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingViewController.h; sourceTree = "<group>"; };
+		CE0992F51A93B4AC003F34FA /* SlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingViewController.m; sourceTree = "<group>"; };
 		CE0A61B11A89AE36007B4F27 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "share@2x.png"; path = "Images/share@2x.png"; sourceTree = "<group>"; };
 		CE0A61B31A89B75A007B4F27 /* reply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "reply@2x.png"; path = "Images/reply@2x.png"; sourceTree = "<group>"; };
 		CE0A61C51A8A21CF007B4F27 /* LeaveReplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveReplayViewController.h; sourceTree = "<group>"; };
@@ -180,7 +172,6 @@
 		CED3D4441A7DC44F002F7FDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CED3D4461A7DC44F002F7FDC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CED3D4491A7DC44F002F7FDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		CED3D44F1A7DC44F002F7FDC /* Weird RetroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Weird RetroTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED3D4541A7DC44F002F7FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED3D4551A7DC44F002F7FDC /* Weird_RetroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Weird_RetroTests.m; sourceTree = "<group>"; };
 		DD0F2BF7B1EF754C407EF799 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,13 +186,6 @@
 			files = (
 				CE0BEFD71A8482CA00207752 /* CoreData.framework in Frameworks */,
 				AC478D6FC8E66A49116B8FBE /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CED3D44C1A7DC44F002F7FDC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +280,8 @@
 				CE212EF71A832D47007EFD6E /* Menu View Controller */,
 				CE212EFA1A833C9A007EFD6E /* RootViewController.h */,
 				CE212EFB1A833C9A007EFD6E /* RootViewController.m */,
+				CE0992F41A93B4AC003F34FA /* SlidingViewController.h */,
+				CE0992F51A93B4AC003F34FA /* SlidingViewController.m */,
 				CE345AE81A8547E6002B0747 /* RootTableTableViewController.h */,
 				CE345AE91A8547E6002B0747 /* RootTableTableViewController.m */,
 				CE4D684B1A80F2B600CD948A /* EscapePodsViewController.h */,
@@ -403,7 +389,6 @@
 			isa = PBXGroup;
 			children = (
 				CED3D4361A7DC44F002F7FDC /* Weird Retro.app */,
-				CED3D44F1A7DC44F002F7FDC /* Weird RetroTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -472,24 +457,6 @@
 			productReference = CED3D4361A7DC44F002F7FDC /* Weird Retro.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CED3D44E1A7DC44F002F7FDC /* Weird RetroTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CED3D45C1A7DC44F002F7FDC /* Build configuration list for PBXNativeTarget "Weird RetroTests" */;
-			buildPhases = (
-				CED3D44B1A7DC44F002F7FDC /* Sources */,
-				CED3D44C1A7DC44F002F7FDC /* Frameworks */,
-				CED3D44D1A7DC44F002F7FDC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CED3D4511A7DC44F002F7FDC /* PBXTargetDependency */,
-			);
-			name = "Weird RetroTests";
-			productName = "Weird RetroTests";
-			productReference = CED3D44F1A7DC44F002F7FDC /* Weird RetroTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -501,10 +468,6 @@
 				TargetAttributes = {
 					CED3D4351A7DC44F002F7FDC = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					CED3D44E1A7DC44F002F7FDC = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = CED3D4351A7DC44F002F7FDC;
 					};
 				};
 			};
@@ -522,7 +485,6 @@
 			projectRoot = "";
 			targets = (
 				CED3D4351A7DC44F002F7FDC /* Weird Retro */,
-				CED3D44E1A7DC44F002F7FDC /* Weird RetroTests */,
 			);
 		};
 /* End PBXProject section */
@@ -573,13 +535,6 @@
 				CE0A61B21A89AE36007B4F27 /* share@2x.png in Resources */,
 				CED3D4471A7DC44F002F7FDC /* Images.xcassets in Resources */,
 				CE068A1C1A873A7C00D69CFC /* memory.html in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CED3D44D1A7DC44F002F7FDC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,26 +602,11 @@
 				CE22825F1A82249B00B91271 /* MEZoomAnimationController.m in Sources */,
 				CED3D43C1A7DC44F002F7FDC /* main.m in Sources */,
 				CE0A61C71A8A21CF007B4F27 /* LeaveReplayViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CED3D44B1A7DC44F002F7FDC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CED3D4561A7DC44F002F7FDC /* Weird_RetroTests.m in Sources */,
+				CE0992F61A93B4AC003F34FA /* SlidingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		CED3D4511A7DC44F002F7FDC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CED3D4351A7DC44F002F7FDC /* Weird Retro */;
-			targetProxy = CED3D4501A7DC44F002F7FDC /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CED3D4431A7DC44F002F7FDC /* Main.storyboard */ = {
@@ -864,40 +804,6 @@
 			};
 			name = Release;
 		};
-		CED3D45D1A7DC44F002F7FDC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Weird RetroTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weird Retro.app/Weird Retro";
-			};
-			name = Debug;
-		};
-		CED3D45E1A7DC44F002F7FDC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Weird RetroTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weird Retro.app/Weird Retro";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -915,15 +821,6 @@
 			buildConfigurations = (
 				CED3D45A1A7DC44F002F7FDC /* Debug */,
 				CED3D45B1A7DC44F002F7FDC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CED3D45C1A7DC44F002F7FDC /* Build configuration list for PBXNativeTarget "Weird RetroTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CED3D45D1A7DC44F002F7FDC /* Debug */,
-				CED3D45E1A7DC44F002F7FDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

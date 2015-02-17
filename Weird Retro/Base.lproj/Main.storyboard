@@ -358,7 +358,7 @@
         <!--Sliding View Controller-->
         <scene sceneID="wE7-iZ-qIu">
             <objects>
-                <viewController id="PIw-BA-OrV" customClass="ECSlidingViewController" sceneMemberID="viewController">
+                <viewController id="PIw-BA-OrV" customClass="SlidingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jur-SF-ka1"/>
                         <viewControllerLayoutGuide type="bottom" id="KH8-EK-s2g"/>
@@ -366,16 +366,65 @@
                     <view key="view" contentMode="scaleToFill" id="A6F-Ok-bqB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zbn-AX-42x">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vintage-tan-paper-texture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="vZy-tA-YWl">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="268" translatesAutoresizingMaskIntoConstraints="NO" id="zxm-Hi-cit">
+                                        <rect key="frame" x="26" y="514" width="268" height="47"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="47" id="3ig-vZ-xXe"/>
+                                            <constraint firstAttribute="width" constant="268" id="e9C-5k-fRd"/>
+                                        </constraints>
+                                        <string key="text">Copyright (c) 2015 Weird Retro.
+All rights reserved.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.20343200862407684" green="0.13998821377754211" blue="0.054147571325302124" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="G93-Ir-iQc">
+                                        <rect key="frame" x="40" y="102" width="240" height="241"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="241" id="2Cz-ii-70Q"/>
+                                            <constraint firstAttribute="width" constant="240" id="6Dr-l9-BM4"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="G93-Ir-iQc" firstAttribute="top" secondItem="Zbn-AX-42x" secondAttribute="top" constant="102" id="5Mh-Sj-P1R"/>
+                                    <constraint firstAttribute="centerX" secondItem="G93-Ir-iQc" secondAttribute="centerX" id="EkJ-vN-6IZ"/>
+                                    <constraint firstAttribute="centerX" secondItem="zxm-Hi-cit" secondAttribute="centerX" id="Xmc-Ms-h6e"/>
+                                    <constraint firstAttribute="bottom" secondItem="vZy-tA-YWl" secondAttribute="bottom" id="ZAw-HO-DUT"/>
+                                    <constraint firstItem="vZy-tA-YWl" firstAttribute="leading" secondItem="Zbn-AX-42x" secondAttribute="leading" id="cz2-Ju-JVb"/>
+                                    <constraint firstItem="vZy-tA-YWl" firstAttribute="top" secondItem="Zbn-AX-42x" secondAttribute="top" id="kxy-z2-imk"/>
+                                    <constraint firstAttribute="trailing" secondItem="vZy-tA-YWl" secondAttribute="trailing" id="mO6-XU-9Qw"/>
+                                    <constraint firstAttribute="bottom" secondItem="zxm-Hi-cit" secondAttribute="bottom" constant="7" id="szt-gV-7wP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Zbn-AX-42x" secondAttribute="trailing" id="M0x-x7-Ca4"/>
+                            <constraint firstItem="KH8-EK-s2g" firstAttribute="top" secondItem="Zbn-AX-42x" secondAttribute="bottom" id="U1N-mQ-U3S"/>
+                            <constraint firstItem="Zbn-AX-42x" firstAttribute="leading" secondItem="A6F-Ok-bqB" secondAttribute="leading" id="i16-Nr-Ue4"/>
+                            <constraint firstItem="Zbn-AX-42x" firstAttribute="top" secondItem="A6F-Ok-bqB" secondAttribute="top" id="rTv-ke-WBt"/>
+                        </constraints>
                     </view>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="topViewControllerStoryboardId" value="EscapePodsViewController"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="underLeftViewControllerStoryboardId" value="MenuViewController"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="splashView" destination="Zbn-AX-42x" id="pyu-Ko-hLs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GN2-iI-mUQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="21" y="-289"/>
+            <point key="canvasLocation" x="8" y="-289"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eza-Fd-foI">
@@ -497,6 +546,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="logo.png" width="465" height="465"/>
         <image name="logo2.png" width="465" height="465"/>
         <image name="vintage-tan-paper-texture.jpg" width="1080" height="1920"/>
     </resources>

@@ -14,37 +14,20 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vintage-tan-paper-texture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6WZ-2J-bH9">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Yrh-6l-hMH">
-                    <rect key="frame" x="120" y="61" width="240" height="241"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="240" id="qfn-PR-Qnt"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="  Copyright (c) 2015 Weird Retro. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                    <color key="textColor" red="0.24668482730263158" green="0.149290903478321" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="6WZ-2J-bH9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3zz-9r-bQN"/>
                 <constraint firstAttribute="bottom" secondItem="6WZ-2J-bH9" secondAttribute="bottom" id="ArY-yl-Jws"/>
                 <constraint firstItem="6WZ-2J-bH9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HqI-kO-2Ot"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
                 <constraint firstAttribute="trailing" secondItem="6WZ-2J-bH9" secondAttribute="trailing" id="kMT-dP-Iuf"/>
-                <constraint firstItem="6WZ-2J-bH9" firstAttribute="centerX" secondItem="Yrh-6l-hMH" secondAttribute="centerX" id="xaf-B6-lrZ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="334" y="385"/>
+            <point key="canvasLocation" x="491" y="442"/>
         </view>
     </objects>
     <resources>
-        <image name="logo.png" width="465" height="465"/>
         <image name="vintage-tan-paper-texture.jpg" width="1080" height="1920"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
