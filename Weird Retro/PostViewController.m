@@ -417,7 +417,7 @@
             minWidth = [imageParameters[@"fullWidth"] floatValue];
     
     
-    CGFloat resolution = minWidth / (self.view.frame.size.width * 0.8);
+    CGFloat resolution = minWidth / (self.view.frame.size.width * 0.8f);
     CGFloat neededHeight = avgHeight / resolution;
 
     
@@ -458,7 +458,7 @@
 
 - (CGSize)swipeViewItemSize:(SwipeView *)swipeView
 {
-    return CGSizeMake(swipeView.bounds.size.width*0.8, swipeView.bounds.size.height);
+    return CGSizeMake(swipeView.bounds.size.width*0.8f, swipeView.bounds.size.height);
 }
 
 
@@ -531,7 +531,7 @@
             
             DTAttributedLabel* label = [[DTAttributedLabel alloc] initWithFrame:CGRectMake(20 + 15 * [comment.indent integerValue], heightComments, self.view.frame.size.width-20 - (20 + 15 * [comment.indent integerValue]), 10000)];
             label.attributedString = attrString;
-            label.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.2];
+            label.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.2f];
             [label sizeToFit];
             
             [self.commentsPlaceholder addSubview:label];
@@ -563,7 +563,7 @@
         
         DTAttributedLabel* label = [[DTAttributedLabel alloc] initWithFrame:CGRectMake(20, 5, self.view.frame.size.width-20 - 20, 10000)];
         label.attributedString = attrString;
-        label.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.2];
+        label.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.2f];
         [label sizeToFit];
         
         [self.commentsPlaceholder addSubview:label];

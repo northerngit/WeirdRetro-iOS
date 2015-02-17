@@ -95,7 +95,7 @@
     UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
     lblTitle.font = [UIFont fontWithName:@"Inconsolata" size:16.0f];
     lblTitle.textColor = [UIColor blackColor];
-    lblTitle.backgroundColor = [UIColor colorWithRed:243.0/255.0 green:200.0/255.0 blue:0 alpha:0.8];
+    lblTitle.backgroundColor = [UIColor colorWithRed:243.0f/255.0f green:200.0f/255.0f blue:0 alpha:0.8f];
     lblTitle.text = [@"  " stringByAppendingString:[self tableView:tableView titleForHeaderInSection:section]];
     
     return lblTitle;

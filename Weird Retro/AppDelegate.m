@@ -49,7 +49,7 @@
 
 - (void) importFonts {
     BOOL GSFontAddFromFile(const char * path);
-    NSUInteger newFontCount = 0;
+    NSInteger newFontCount = 0;
     NSBundle *frameworkBundle = [NSBundle bundleWithIdentifier:@"com.apple.GraphicsServices"];
     const char *frameworkPath = [[frameworkBundle executablePath] UTF8String];
     if (frameworkPath) {
@@ -58,10 +58,10 @@
             BOOL (*GSFontAddFromFile)(const char *) = dlsym(graphicsServices, "GSFontAddFromFile");
             if (GSFontAddFromFile) {
                 for (NSString *fontFile in [[NSBundle mainBundle] pathsForResourcesOfType:@"ttf" inDirectory:nil])
-                    newFontCount += GSFontAddFromFile([fontFile UTF8String]);
+                    newFontCount += (NSInteger)GSFontAddFromFile([fontFile UTF8String]);
                 
                 for (NSString *fontFile in [[NSBundle mainBundle] pathsForResourcesOfType:@"otf" inDirectory:nil])
-                    newFontCount += GSFontAddFromFile([fontFile UTF8String]);
+                    newFontCount += (NSInteger)GSFontAddFromFile([fontFile UTF8String]);
             }
         }
     }
