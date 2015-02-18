@@ -506,7 +506,8 @@
     HTMLElement* imgElement = [element firstNodeMatchingSelector:@"img"];
     HTMLElement* descriptionDivElement = [element firstNodeMatchingSelector:@"div"];
     
-    if ( imgElement )
+    if ( imgElement &&
+        !(imgElement.attributes && imgElement.attributes[@"alt"] && [imgElement.attributes[@"alt"] rangeOfString:@"nomobile" options:NSCaseInsensitiveSearch].location != NSNotFound) )
     {
         NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @1, @"src":imgElement.attributes[@"src"]}];
         
