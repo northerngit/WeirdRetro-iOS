@@ -27,12 +27,11 @@
 }
 
 
-
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     if ( self.splashView.alpha > 0.0f )
-        [self performSelector:@selector(hidingSplash) withObject:nil afterDelay:1.3f];
+        [self performSelector:@selector(hidingSplash) withObject:nil afterDelay:1.6f];
 }
 
 
