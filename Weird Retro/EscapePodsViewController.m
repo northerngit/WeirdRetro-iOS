@@ -83,7 +83,7 @@
     CGFloat margin = 1;
     
     self.filterPlaceholderView = [[UIView alloc] initWithFrame: CGRectMake(0, 59, 302, 26)];
-    self.filterPlaceholderView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.1];
+    self.filterPlaceholderView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
     self.filterPlaceholderView.layer.cornerRadius = self.filterPlaceholderView.frame.size.height/2.f;
     self.filterPlaceholderView.center = CGPointMake(self.view.frame.size.width/2, self.filterPlaceholderView.center.y);
     self.filterPlaceholderView.alpha = 0.0f;
