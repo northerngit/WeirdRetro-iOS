@@ -1,7 +1,7 @@
 // Debug.h
 
 
-//#define DEBUG1
+#define DEBUG1
 
 #ifdef DEBUG1
 #   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);

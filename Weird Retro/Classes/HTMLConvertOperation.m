@@ -38,15 +38,12 @@
     arraySkip = [NSMutableArray new];
     
     self.htmlDocument = [HTMLDocument documentWithString:self.htmlMarkup];
-
     self.pageObject = [[WRPage alloc] init];
     
     HTMLElement* elementContent = [self.htmlDocument firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
 
-    if ( self.type == 0 )
-    {
+    if ( self.type == PageTypeMemories )
         [self startParsingTheMemory:elementContent];
-    }
     else if ( self.type == PageTypePost || self.type == PageTypeBlogPost )
     {
         NSArray* metaTags = [self.htmlDocument nodesMatchingSelector:@"meta"];
@@ -80,6 +77,10 @@
     }
     else if ( self.type == PageTypeBlogPage )
         [self startParsingTheBlogPage:elementContent];
+    else if (self.type == PageTypeMainPage)
+    {
+        [self startParsingMainPage];
+    }
 
     
     ////////////
@@ -103,6 +104,25 @@
 }
 
 
+
+- (void) startParsingMainPage
+{
+    HTMLElement* menusContent = [self.htmlDocument firstNodeMatchingSelector:@"ul[class=\"wsite-menu-default\"] ul[class=\"wsite-menu\"]"];
+    NSArray* menus = [menusContent childElementNodes];
+    
+    NSMutableArray* menuElements = [NSMutableArray new];
+    
+    for (HTMLElement* menuItem in menus)
+    {
+        HTMLElement* aElement = [menuItem firstNodeMatchingSelector:@"a"];
+        HTMLElement* spanElement = [aElement firstNodeMatchingSelector:@"span[class='wsite-menu-title']"];
+        
+        [menuElements addObject:@{@"title":[spanElement textContent], @"url":aElement.attributes[@"href"]}];
+    }
+    
+    [menuElements removeLastObject];
+    array = menuElements;
+}
 
 
 
@@ -137,7 +157,7 @@
     blogPost.blogPostId = [blogNode.attributes[@"id"] substringFromIndex:[@"blog-post-" length]];
     blogPost.blogPostDate = blogDate.textContent;
     
-    DLog(@"%@, %@", blogPost.blogPostId, blogNode);
+//    DLog(@"%@, %@", blogPost.blogPostId, blogNode);
     
     NSString* numberString = @"";
     NSScanner *scanner = [NSScanner scannerWithString:blogComments.textContent];

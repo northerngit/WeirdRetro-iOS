@@ -14,7 +14,8 @@ typedef NS_ENUM(NSUInteger, PageType) {
     PageTypeMemories,
     PageTypePost,
     PageTypeBlogPage,
-    PageTypeBlogPost
+    PageTypeBlogPost,
+    PageTypeMainPage,
 };
 
 

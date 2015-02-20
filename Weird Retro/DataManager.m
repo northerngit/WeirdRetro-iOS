@@ -640,93 +640,129 @@ static DataManager *sharedInstance = nil;
 
 - (void) updatingStructureFromBackendWithCompletion:(void(^)(NSError* error))completion
 {
-    NSArray* sections = [self objects:@"Section"];
-    if ( !sections )
-    {
-        NSArray* sectionsParameters = @[@{@"title":@"Comics corner", @"url":@"comics-corner.html"},
-                              @{@"title":@"Cracked Culture", @"url":@"cracked-culture.html"},
-                              @{@"title":@"Cult Cinema", @"url":@"cult-cinema.html"},
-                              @{@"title":@"Editorial Sarcasm", @"url":@"editorial-sarcasm.html"},
-                              @{@"title":@"Far-Out Fiction", @"url":@"far-out-fiction.html"},
-                              @{@"title":@"Retro Gaming", @"url":@"retro-gaming.html"},
-                              @{@"title":@"Wacky World", @"url":@"wacky-world.html"},
-                              @{@"title":@"Weird Music", @"url":@"weird-music.html"}];
+    [NETWORK loadingHTMLFile:@"http://www.weirdretro.org.uk/" withCompletion:^(NSError *error, NSString *htmlMarkup) {
         
-        NSInteger index = 0;
-        
-        for (NSDictionary* sectionParameters in sectionsParameters)
+        if ( error )
         {
-            Section* section = [self object:@"Section"];
-            section.order = @(index);
-            section.title = sectionParameters[@"title"];
-            section.url = sectionParameters[@"url"];
-            
-            index++;
+            if ( completion ) completion(error);
+            return;
         }
-        
-        [self saveWithSuccess:nil failure:nil];
-        
-        sections = [self objects:@"Section"];
-    }
-    
 
-    __block NSUInteger index = 0;
-    
-    for (Section* section in sections)
-    {
-        [NETWORK loadingHTMLFile:section.url withCompletion:^(NSError *error, NSString *htmlMarkup) {
-            if ( !error )
+        [CONVERTER convertMainPage:htmlMarkup withCompletion:^(WRPage* pageObject) {
+            DLog(@"%@", pageObject.items);
+            
+            NSArray* sectionsParameters = pageObject.items;
+            
+            if ( sectionsParameters.count == 0 )
             {
-                [CONVERTER convertPostToStructure:htmlMarkup withCompletion:^(WRPage* pageObject) {
-                    
-                    NSArray* items = pageObject.items;
-                    NSMutableArray* sectionExistItems = [NSMutableArray arrayWithArray:[section.posts allObjects]];
-                    
-                    NSInteger postIndex = 0;
-                    for (NSDictionary* postParams in items)
+                if ( completion ) completion(nil);
+                return;
+            }
+            
+            NSMutableArray* sectionsForDeletion = [NSMutableArray arrayWithArray:[self objects:@"Section"]];
+            
+            __block NSUInteger index = 0;
+            for (NSDictionary* sectionParameters in sectionsParameters)
+            {
+                NSArray* tmpArray = [sectionsForDeletion filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"url = %@", sectionParameters[@"url"]]];
+                
+                Section* section = nil;
+                if ( tmpArray.count > 0 )
+                {
+                    section = tmpArray[0];
+                    [sectionsForDeletion removeObject:section];
+                }
+                
+                if ( !section )
+                    section = [self object:@"Section"];
+                
+                section.order = @(index);
+                section.title = sectionParameters[@"title"];
+                section.url = sectionParameters[@"url"];
+
+                index++;
+            }
+            
+            [self saveWithSuccess:nil failure:nil];
+
+            for (Section* section in sectionsForDeletion)
+                [self deleteObject:section];
+            
+            [self saveWithSuccess:nil failure:nil];
+
+            
+            
+            
+            NSArray* sections = [self objects:@"Section"];
+            index = 0;
+            
+            for (Section* section in sections)
+            {
+                [NETWORK loadingHTMLFile:section.url withCompletion:^(NSError *errorInLoading, NSString *htmlMarkupPage) {
+                    if ( !errorInLoading )
                     {
-                        NSArray* postsTmp = [sectionExistItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"url = %@", postParams[@"link"]]];
-                        
-                        Post* post = nil;
-                        if ( postsTmp.count > 0 )
-                        {
-                            post = postsTmp[0];
-                            [sectionExistItems removeObject:post];
-                        }
-
-                        if ( !post )
-                        {
-                            post = [self object:@"Post"];
-                            post.url = postParams[@"link"];
-                        }
-
-                        post.title = postParams[@"title"];
-                        post.info = postParams[@"info"];
-                        post.thumbnailUrl = postParams[@"src"];
-                        post.section = section;
-                        post.order = @(postIndex);
-                        
-                        postIndex++;
-                        
-                        ///////////////
+                        [CONVERTER convertPostToStructure:htmlMarkupPage withCompletion:^(WRPage* pageObjectPage) {
+                            
+                            NSArray* items = pageObjectPage.items;
+                            NSMutableArray* sectionExistItems = [NSMutableArray arrayWithArray:[section.posts allObjects]];
+                            
+                            NSInteger postIndex = 0;
+                            for (NSDictionary* postParams in items)
+                            {
+                                NSArray* postsTmp = [sectionExistItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"url = %@", postParams[@"link"]]];
+                                
+                                Post* post = nil;
+                                if ( postsTmp.count > 0 )
+                                {
+                                    post = postsTmp[0];
+                                    [sectionExistItems removeObject:post];
+                                }
+                                
+                                if ( !post )
+                                {
+                                    post = [self object:@"Post"];
+                                    post.url = postParams[@"link"];
+                                }
+                                
+                                post.title = postParams[@"title"];
+                                post.info = postParams[@"info"];
+                                post.thumbnailUrl = postParams[@"src"];
+                                post.section = section;
+                                post.order = @(postIndex);
+                                
+                                postIndex++;
+                                
+                                ///////////////
+                            }
+                            
+                            [DATAMANAGER saveWithSuccess:nil failure:nil];
+                            
+                            for (Post* post in sectionExistItems)
+                                [self deleteObject:post];
+                            
+                            [DATAMANAGER saveWithSuccess:nil failure:nil];
+                            
+                            index++;
+                            if ( index == sections.count && completion )
+                                completion(nil);
+                            
+                        }];
                     }
-                    
-                    [DATAMANAGER saveWithSuccess:nil failure:nil];
-
-                    for (Post* post in sectionExistItems)
-                        [self deleteObject:post];
-                    [DATAMANAGER saveWithSuccess:nil failure:nil];
-                    
-                    index++;
-                    if ( index == sections.count && completion )
-                        completion(nil);
-
+                    else
+                    {
+                        DLog(@"%@", errorInLoading.localizedDescription);
+                        if ( completion )
+                        {
+                            completion(errorInLoading);
+                            return;
+                        }
+                    }
                 }];
             }
-            else
-                DLog(@"%@", error.localizedDescription);
         }];
-    }
+    }];
+    
+
     
 }
 

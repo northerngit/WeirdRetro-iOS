@@ -106,6 +106,28 @@
 }
 
 
+- (void) convertMainPage:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void)
+    {
+       HTMLConvertOperation* operation = [[HTMLConvertOperation alloc] init];
+       operation.type = PageTypeMainPage;
+       operation.htmlMarkup = htmlText;
+       
+       operation.successFailureBlock = ^(WRPage* pageObject) {
+           
+           dispatch_queue_t mainQueue = dispatch_get_main_queue();
+           dispatch_async(mainQueue, ^{
+               completion(pageObject);
+           });
+           
+       };
+       
+       [operation start];
+   });
+    
+}
+
 
 - (void) convertBlogPostToStructure:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion
 {

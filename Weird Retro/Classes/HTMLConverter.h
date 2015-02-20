@@ -19,6 +19,7 @@
 - (void) convertPostToStructure:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion;
 - (void) convertBlogPostToStructure:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion;
 - (void) convertBlogPostPage:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion;
+- (void) convertMainPage:(NSString*)htmlText withCompletion:(void(^)(WRPage* pageObject))completion;
 
 @property (nonatomic, strong) NSOperationQueue* operations;
 

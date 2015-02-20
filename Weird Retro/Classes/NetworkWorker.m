@@ -49,8 +49,6 @@
 
 - (void) loadingHTMLFile:(NSString*)filePath withCompletion:(void(^)(NSError* error, NSString* htmlMarkup))completion
 {
-//    NSURL *URL = [NSURL URLWithString:@"http://www.weirdretro.org.uk/cult-cinema.html"];
-    
     NSURL *URL = nil;
     
     if ( [filePath hasPrefix:@"http"] )
@@ -103,7 +101,7 @@
     if ( commentId )
         parmaeters[@"parentId"] = commentId;
     
-    DLog(@"%@", parmaeters);
+//    DLog(@"%@", parmaeters);
     
     [replyManager POST:@"weebly/publicBackend.php" parameters:parmaeters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -126,7 +124,6 @@
         
     }];
 }
-
 
 
 
