@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "UIViewController+ECSlidingViewController.h"
 #import "MEZoomAnimationController.h"
+#import "UINavigationBar+CustomHeight.h"
 
 
 @interface RootViewController ()

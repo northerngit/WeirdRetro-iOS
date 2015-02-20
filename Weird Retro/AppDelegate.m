@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "Managers.h"
 #import <dlfcn.h>
-#import <AFNetworking/UIImageView+AFNetworking.h>
+//#import <AFNetworking/UIImageView+AFNetworking.h>
 #import "CustomURLCache.h"
 
 
@@ -23,11 +23,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self importFonts];
+//    [self printAvailableFonts];
     
     CustomURLCache *URLCache = [[CustomURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
                                                          diskCapacity:200 * 1024 * 1024
                                                              diskPath:nil];
-    
     [NSURLCache setSharedURLCache:URLCache];
     
     return YES;

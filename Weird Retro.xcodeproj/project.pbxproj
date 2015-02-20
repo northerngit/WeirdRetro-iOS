@@ -70,6 +70,9 @@
 		CE4D684A1A80E9AA00CD948A /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D68491A80E9AA00CD948A /* DataManager.m */; };
 		CE4D684D1A80F2B600CD948A /* EscapePodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D684C1A80F2B600CD948A /* EscapePodsViewController.m */; };
 		CE4D68501A80F39E00CD948A /* EscapePodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4D684F1A80F39E00CD948A /* EscapePodsTableViewCell.m */; };
+		CEC0D2171A96F5FD00D0FBA1 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0D2161A96F5FD00D0FBA1 /* UINavigationBar+CustomHeight.m */; };
+		CEC0D2191A97121800D0FBA1 /* EscapePodsFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0D2181A97121800D0FBA1 /* EscapePodsFilterView.xib */; };
+		CEC0D21C1A97136E00D0FBA1 /* EscapePodsFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0D21B1A97136E00D0FBA1 /* EscapePodsFilterView.m */; };
 		CED3D43C1A7DC44F002F7FDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43B1A7DC44F002F7FDC /* main.m */; };
 		CED3D43F1A7DC44F002F7FDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */; };
 		CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4431A7DC44F002F7FDC /* Main.storyboard */; };
@@ -164,6 +167,11 @@
 		CE4D684C1A80F2B600CD948A /* EscapePodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscapePodsViewController.m; sourceTree = "<group>"; };
 		CE4D684E1A80F39E00CD948A /* EscapePodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EscapePodsTableViewCell.h; sourceTree = "<group>"; };
 		CE4D684F1A80F39E00CD948A /* EscapePodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscapePodsTableViewCell.m; sourceTree = "<group>"; };
+		CEC0D2151A96F5FD00D0FBA1 /* UINavigationBar+CustomHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CustomHeight.h"; sourceTree = "<group>"; };
+		CEC0D2161A96F5FD00D0FBA1 /* UINavigationBar+CustomHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CustomHeight.m"; sourceTree = "<group>"; };
+		CEC0D2181A97121800D0FBA1 /* EscapePodsFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EscapePodsFilterView.xib; sourceTree = "<group>"; };
+		CEC0D21A1A97136E00D0FBA1 /* EscapePodsFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EscapePodsFilterView.h; sourceTree = "<group>"; };
+		CEC0D21B1A97136E00D0FBA1 /* EscapePodsFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscapePodsFilterView.m; sourceTree = "<group>"; };
 		CED3D4361A7DC44F002F7FDC /* Weird Retro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weird Retro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED3D43A1A7DC44F002F7FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED3D43B1A7DC44F002F7FDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -280,6 +288,8 @@
 				CE212EF71A832D47007EFD6E /* Menu View Controller */,
 				CE212EFA1A833C9A007EFD6E /* RootViewController.h */,
 				CE212EFB1A833C9A007EFD6E /* RootViewController.m */,
+				CEC0D2151A96F5FD00D0FBA1 /* UINavigationBar+CustomHeight.h */,
+				CEC0D2161A96F5FD00D0FBA1 /* UINavigationBar+CustomHeight.m */,
 				CE0992F41A93B4AC003F34FA /* SlidingViewController.h */,
 				CE0992F51A93B4AC003F34FA /* SlidingViewController.m */,
 				CE345AE81A8547E6002B0747 /* RootTableTableViewController.h */,
@@ -298,6 +308,8 @@
 				CE345AE61A8546E9002B0747 /* ContactViewController.m */,
 				CE0A61C51A8A21CF007B4F27 /* LeaveReplayViewController.h */,
 				CE0A61C61A8A21CF007B4F27 /* LeaveReplayViewController.m */,
+				CEC0D21A1A97136E00D0FBA1 /* EscapePodsFilterView.h */,
+				CEC0D21B1A97136E00D0FBA1 /* EscapePodsFilterView.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -370,6 +382,7 @@
 				CED3D4461A7DC44F002F7FDC /* Images.xcassets */,
 				CED3D4431A7DC44F002F7FDC /* Main.storyboard */,
 				CED3D4481A7DC44F002F7FDC /* LaunchScreen.xib */,
+				CEC0D2181A97121800D0FBA1 /* EscapePodsFilterView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -531,6 +544,7 @@
 				CE068A001A873A5B00D69CFC /* Lato-Black.ttf in Resources */,
 				CE068A191A873A7C00D69CFC /* blogpage.html in Resources */,
 				CE068A0D1A873A5B00D69CFC /* Lato-Regular.ttf in Resources */,
+				CEC0D2191A97121800D0FBA1 /* EscapePodsFilterView.xib in Resources */,
 				CE0E63B51A892BD500AE7B63 /* Hamburger@2x.png in Resources */,
 				CE0A61B21A89AE36007B4F27 /* share@2x.png in Resources */,
 				CED3D4471A7DC44F002F7FDC /* Images.xcassets in Resources */,
@@ -581,6 +595,7 @@
 				CE4D68431A80858F00CD948A /* HTMLConvertOperation.m in Sources */,
 				CE212EFF1A833F5E007EFD6E /* CaptainsBlogViewController.m in Sources */,
 				CE345AEA1A8547E6002B0747 /* RootTableTableViewController.m in Sources */,
+				CEC0D2171A96F5FD00D0FBA1 /* UINavigationBar+CustomHeight.m in Sources */,
 				CE345AED1A85C54D002B0747 /* Section.m in Sources */,
 				CE4D684A1A80E9AA00CD948A /* DataManager.m in Sources */,
 				CE20389A1A885BC100DA6701 /* Comment.m in Sources */,
@@ -590,6 +605,7 @@
 				CE345AE71A8546E9002B0747 /* ContactViewController.m in Sources */,
 				CE0BEFDE1A84850B00207752 /* WeirdRetro.xcdatamodeld in Sources */,
 				CE4D68401A807D6600CD948A /* HTMLConverter.m in Sources */,
+				CEC0D21C1A97136E00D0FBA1 /* EscapePodsFilterView.m in Sources */,
 				CE20389D1A885C2800DA6701 /* BlogPost.m in Sources */,
 				CE10654A1A8C76E400AFA858 /* CustomURLCache.m in Sources */,
 				CE212F071A835756007EFD6E /* WRPage.m in Sources */,

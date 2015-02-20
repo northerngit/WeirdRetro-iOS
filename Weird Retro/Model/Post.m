@@ -22,6 +22,7 @@
 @dynamic thumbnailUrl;
 @dynamic order;
 @dynamic section;
+@dynamic orderInLast;
 
 
 - (BOOL) isBlogPost

@@ -15,15 +15,21 @@
 #import <DTCoreText/DTCoreText.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <AFNetworking/UIKit+AFNetworking.h>
+#import <HMSegmentedControl/HMSegmentedControl.h>
 #import "OrderedDictionary.h"
 
 #import "RootViewController.h"
 #import "Post.h"
 
+#import "EscapePodsFilterView.h"
+
 
 @interface EscapePodsViewController ()
 
 @property (nonatomic, strong) MutableOrderedDictionary *sections;
+@property (nonatomic, strong) NSArray *lastPods;
+@property (nonatomic, strong) UIView *filterPlaceholderView;
+@property (nonatomic, assign) NSInteger selectedFilterIndex;
 
 @end
 
@@ -34,13 +40,19 @@
 {
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
+    self.tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
+    
+    self.selectedFilterIndex = 0;
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self reloadData];
+
+    [self configureFilter];
 }
+
 
 
 - (void) viewDidAppear:(BOOL)animated
@@ -50,13 +62,62 @@
     if ( self.sections.count == 0 )
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-   [DATAMANAGER updatingStructureFromBackendWithCompletion:^(NSError *error) {
-       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-       [self reloadData];
-   }];
+    [DATAMANAGER updatingStructureFromBackendWithCompletion:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self reloadData];
+    }];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.filterPlaceholderView removeFromSuperview];
+    self.filterPlaceholderView = nil;
+}
+
+- (void) configureFilter
+{
+    if ( self.filterPlaceholderView )
+        return;
+    
+    CGFloat margin = 1;
+    
+    self.filterPlaceholderView = [[UIView alloc] initWithFrame: CGRectMake(0, 59, 302, 26)];
+    self.filterPlaceholderView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.1];
+    self.filterPlaceholderView.layer.cornerRadius = self.filterPlaceholderView.frame.size.height/2.f;
+    self.filterPlaceholderView.center = CGPointMake(self.view.frame.size.width/2, self.filterPlaceholderView.center.y);
+    self.filterPlaceholderView.alpha = 0.0f;
+    
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"latest pods", @"memory banks"]];
+    segmentedControl.frame = CGRectMake(margin, margin, self.filterPlaceholderView.frame.size.width-margin*2, self.filterPlaceholderView.frame.size.height-margin*2);
+    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    
+    segmentedControl.backgroundColor = [UIColor clearColor];
+    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox;
+    segmentedControl.textColor = [UIColor whiteColor];
+    segmentedControl.selectedTextColor = [UIColor blackColor];
+    segmentedControl.font = [UIFont fontWithName:@"CourierNewPS-BoldMT" size:13.0f];
+    segmentedControl.selectionIndicatorColor = [UIColor colorWithRed:243.0f/255.0f green:200.0f/255.0f blue:0 alpha:1.0f];
+    segmentedControl.selectionIndicatorBoxOpacity = 1.0f;
+    
+    segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationNone;
+    segmentedControl.shouldAnimateUserSelection = NO;
+    
+    [self.filterPlaceholderView addSubview:segmentedControl];
+    [self.navigationController.navigationBar.superview addSubview:self.filterPlaceholderView];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.filterPlaceholderView.alpha = 1.f;
+    }];
     
 }
 
+
+- (void) segmentedControlChangedValue:(HMSegmentedControl*)sender
+{
+    self.selectedFilterIndex = sender.selectedSegmentIndex;
+    [self.tableView reloadData];
+}
 
 - (void) reloadData
 {
@@ -73,8 +134,13 @@
     
     self.sections = dict;
     
+    ////////////
+    
+    NSArray* lastPosts = [DATAMANAGER objects:@"Post" predicate:[NSPredicate predicateWithFormat:@"orderInLast > 0"] sortKey:@"orderInLast" ascending:YES];
+    self.lastPods = lastPosts;
     [self.tableView reloadData];
 }
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -103,22 +169,36 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    if ( self.selectedFilterIndex == 0 )
+        return 0;
+    else
+        return 30;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return (NSInteger)self.sections.allKeys.count;
+    if ( self.selectedFilterIndex == 0 )
+        return 1;
+    else
+        return (NSInteger)self.sections.allKeys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (NSInteger)[self.sections[self.sections.allKeys[(NSUInteger)section]] count];
+    if ( self.selectedFilterIndex == 0 )
+        return (NSInteger)self.lastPods.count;
+    else
+        return (NSInteger)[self.sections[self.sections.allKeys[(NSUInteger)section]] count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EscapePodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EscapePodsTableViewCell" forIndexPath:indexPath];
     
-    Post* post = self.sections[self.sections.allKeys[(NSUInteger)indexPath.section]][(NSUInteger)indexPath.row];
+    Post* post = nil;
+    if ( self.selectedFilterIndex == 0 )
+        post = self.lastPods[(NSUInteger)indexPath.row];
+    else
+        post = self.sections[self.sections.allKeys[(NSUInteger)indexPath.section]][(NSUInteger)indexPath.row];
+    
     cell.post = post;
     
     cell.backgroundColor = [UIColor clearColor];
@@ -144,7 +224,13 @@
         NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
         
         PostViewController* controller = segue.destinationViewController;
-        Post* post = self.sections[self.sections.allKeys[(NSUInteger)indexPath.section]][(NSUInteger)indexPath.row];
+        
+        Post* post = nil;
+        if ( self.selectedFilterIndex == 0 )
+            post = self.lastPods[(NSUInteger)indexPath.row];
+        else
+            post = self.sections[self.sections.allKeys[(NSUInteger)indexPath.section]][(NSUInteger)indexPath.row];
+        
         controller.postURL = post.url;
     }
 }

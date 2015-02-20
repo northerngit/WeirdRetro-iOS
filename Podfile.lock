@@ -32,6 +32,7 @@ PODS:
   - DTFoundation/UIKit (1.7.4):
     - DTFoundation/Core
   - ECSlidingViewController (2.0.3)
+  - HMSegmentedControl (1.4.0)
   - HTMLReader (0.5.9)
   - MBProgressHUD (0.9)
   - OrderedDictionary (1.2)
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - DTCoreText
   - ECSlidingViewController
+  - HMSegmentedControl
   - HTMLReader
   - MBProgressHUD (~> 0.8)
   - OrderedDictionary
@@ -51,9 +53,10 @@ SPEC CHECKSUMS:
   DTCoreText: 1fc0aadfa238d14c6cc56035af4e2b76b958e3b1
   DTFoundation: 721a63964fb9acd64cb8c9d3d1642ee60bac3d6a
   ECSlidingViewController: e79fe856bfb1a99a39c995377a1943e50f7647eb
+  HMSegmentedControl: c0517a8d4b80c978b8386f863f1c44729cfd7d6f
   HTMLReader: 0833fa2af5fd2019bc2d7a6e8066a07fd0fe87f1
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   OrderedDictionary: f7dffc6f0b866461964952a66ed8497d15cf2028
   SwipeView: 0093c212acf3d715b09334c50d568a4418404150
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.0.beta.2

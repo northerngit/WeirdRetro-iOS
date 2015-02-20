@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSString * thumbnailUrl;
 @property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSNumber * orderInLast;
 @property (nonatomic, retain) Section *section;
 
 @property (nonatomic, readonly) NSSet* comments;

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DE2DF46BAB191D6A477A4593"
+               BlueprintIdentifier = "7E8EA8F52B893FC722C8319C"
                BuildableName = "libPods-OrderedDictionary.a"
                BlueprintName = "Pods-OrderedDictionary"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -649,9 +649,8 @@ static DataManager *sharedInstance = nil;
         }
 
         [CONVERTER convertMainPage:htmlMarkup withCompletion:^(WRPage* pageObject) {
-            DLog(@"%@", pageObject.items);
             
-            NSArray* sectionsParameters = pageObject.items;
+            NSArray* sectionsParameters = pageObject.items2;
             
             if ( sectionsParameters.count == 0 )
             {
@@ -687,9 +686,36 @@ static DataManager *sharedInstance = nil;
 
             for (Section* section in sectionsForDeletion)
                 [self deleteObject:section];
-            
             [self saveWithSuccess:nil failure:nil];
-
+            
+            
+            //////
+            NSArray* currentLastPosts = [self objects:@"Post" predicate:[NSPredicate predicateWithFormat:@"orderInLast > 0"]];
+            for (Post* latestPost in currentLastPosts)
+                latestPost.orderInLast = @0;
+            [self saveWithSuccess:nil failure:nil];
+            
+            //////
+            NSInteger latestPostIndex = 1;
+            for (NSDictionary* latestPostParameters in pageObject.items)
+            {
+                Post* post = nil;
+                post = [self object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", latestPostParameters[@"link"]]];
+                
+                if ( !post )
+                {
+                    post = [self object:@"Post"];
+                    post.url = latestPostParameters[@"link"];
+                
+                    post.title = latestPostParameters[@"title"];
+                    post.info = latestPostParameters[@"info"];
+                    post.thumbnailUrl = latestPostParameters[@"src"];
+                }
+                
+                post.orderInLast = @(latestPostIndex);
+                latestPostIndex++;
+            }
+            [self saveWithSuccess:nil failure:nil];
             
             
             

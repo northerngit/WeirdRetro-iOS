@@ -121,7 +121,20 @@
     }
     
     [menuElements removeLastObject];
-    array = menuElements;
+    self.pageObject.items2 = menuElements;
+    
+    
+    HTMLElement* latestPodsElement = [self.htmlDocument firstNodeMatchingSelector:@"img[src=\"/uploads/3/8/2/1/38217449/123867_orig.jpg\"]"];
+    while (![latestPodsElement.tagName isEqualToString:@"td"]) {
+        latestPodsElement = latestPodsElement.parentElement;
+    }
+    
+    for (HTMLNode* childrenNode in latestPodsElement.childElementNodes)
+    {
+        [self parseNode:childrenNode level:0];
+    }
+    
+    [array removeObjectAtIndex:0];
 }
 
 

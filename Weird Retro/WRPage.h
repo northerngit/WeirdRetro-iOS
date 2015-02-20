@@ -28,6 +28,7 @@ typedef NS_ENUM(NSUInteger, PageType) {
 @property (copy, nonatomic) NSString* thumbnailUrl;
 
 @property (strong, nonatomic) NSArray* items;
+@property (strong, nonatomic) NSArray* items2;
 
 @property (copy, nonatomic) NSString* blogPostDate;
 

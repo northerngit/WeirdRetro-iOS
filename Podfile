@@ -9,12 +9,10 @@ pod 'DTCoreText'
 pod 'ECSlidingViewController'
 pod 'OrderedDictionary'
 pod 'SwipeView'
+pod 'HMSegmentedControl'
 
 # pod 'SDWebImage', '~>3.6'
 
 target 'Weird Retro' do
-end
-
-target 'Weird RetroTests' do
 end
 

@@ -430,7 +430,7 @@ All rights reserved.</string>
         <scene sceneID="eza-Fd-foI">
             <objects>
                 <navigationController storyboardIdentifier="EscapePodsViewController" id="ae9-8y-Xng" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lVf-7a-hPb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lVf-7a-hPb" customClass="VFSNavigationBar">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
