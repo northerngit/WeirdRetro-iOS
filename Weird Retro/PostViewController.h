@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SwipeView.h"
+#import <DTCoreText/DTCoreText.h>
 
 
 @protocol CommonPost <NSObject>
@@ -23,7 +24,7 @@
 @end
 
 
-@interface PostViewController : UIViewController <SwipeViewDelegate, SwipeViewDataSource, UIWebViewDelegate>
+@interface PostViewController : UIViewController <SwipeViewDelegate, SwipeViewDataSource, UIWebViewDelegate, DTAttributedTextContentViewDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
 @property (strong, nonatomic) NSString* postURL;

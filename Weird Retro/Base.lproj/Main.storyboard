@@ -250,7 +250,7 @@
         <!--Post View Controller-->
         <scene sceneID="j0w-ME-O51">
             <objects>
-                <viewController id="YfQ-o9-P2B" customClass="PostViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostViewer" id="YfQ-o9-P2B" customClass="PostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pSl-li-1bb"/>
                         <viewControllerLayoutGuide type="bottom" id="MeO-HU-LkN"/>

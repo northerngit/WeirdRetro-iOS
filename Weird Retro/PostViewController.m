@@ -10,10 +10,10 @@
 
 #import "PostViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
-#import <DTCoreText/DTCoreText.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "LeaveReplayViewController.h"
-
+#import "ButtonURL.h"
+#import <CJAMacros/CJAMacros.h>
 
 #define HEIGHT_IMAGE_PLACEHOLDER 50
 #define ELEMENTS_SPACING 10
@@ -25,6 +25,7 @@
     NSOperationQueue* queue;
     BOOL firstOpen;
     BOOL updatingComments;
+    NSString* tmpUrlString;
 }
 
 @property (strong, nonatomic) NSManagedObject<CommonPost>* post;
@@ -76,7 +77,7 @@
             }];
         }
         
-        [self reloadPost];
+//        [self reloadPost];
     }
     else
     {
@@ -86,7 +87,6 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         }];
     }
-    
     
     
     // Navigation items
@@ -118,11 +118,6 @@
 {
     [super viewWillAppear:animated];
     [self reloadPost];
-}
-
-- (void) viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
 }
 
 
@@ -269,17 +264,90 @@
     NSData *data = [item[@"description"] dataUsingEncoding:NSUTF8StringEncoding];
 
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];
-    [attrString removeAttribute:@"CTForegroundColorFromContext" range:NSMakeRange(0, attrString.length)];
-    [attrString removeAttribute:@"NSLink" range:NSMakeRange(0, attrString.length)];
     
     DTAttributedLabel* label = [[DTAttributedLabel alloc] initWithFrame:CGRectMake(15, height, self.view.frame.size.width-30, 10000)];
     label.attributedString = attrString;
+    label.delegate = self;
     label.backgroundColor = [UIColor clearColor];
     [label sizeToFit];
     
     [self.scrollView addSubview:label];
     
     height += label.frame.size.height + 20;
+}
+
+
+- (UIView *) attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame
+{
+    ButtonURL* buttonURL = [ButtonURL buttonWithType:UIButtonTypeCustom];
+    buttonURL.frame = frame;
+    buttonURL.backgroundColor = [UIColor clearColor];
+    buttonURL.stringURL = url.path;
+    [buttonURL addTarget:self action:@selector(clickURLButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return buttonURL;
+}
+
+
+- (void) clickURLButton:(ButtonURL*)button
+{
+    if (!button.stringURL || button.stringURL.length == 0)
+        return;
+
+    NSString* urlString = button.stringURL;
+    
+    if ( [urlString hasPrefix:@"/captains-blog/"] )
+    {
+        urlString = [[NETWORK baseURL] stringByAppendingString:urlString];
+    }
+    
+    Post* post = [DATAMANAGER object:@"Post" predicate:[NSPredicate predicateWithFormat:@"url = %@", urlString]];
+    
+    if ( post )
+    {
+        PostViewController* postController = [self.storyboard instantiateViewControllerWithIdentifier:@"PostViewer"];
+        postController.postURL = urlString;
+        [self.navigationController pushViewController:postController animated:YES];
+    }
+    else if ( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(_iOS_8_0) )
+    {
+        UIAlertController *openView = [UIAlertController alertControllerWithTitle:@"Open an External Link" message:@"This link will be opened in the Safari" preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Open" style:UIAlertActionStyleDefault  handler:^(UIAlertAction * action)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+            [openView dismissViewControllerAnimated:YES completion:nil];
+        }];
+        
+        UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action)
+        {
+            [openView dismissViewControllerAnimated:YES completion:nil];
+        }];
+        
+        [openView addAction:ok];
+        [openView addAction:cancel];
+        
+        [self presentViewController:openView animated:YES completion:nil];
+    }
+    else
+    {
+        tmpUrlString = urlString;
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"This link will be opened in the Safari" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open", nil];
+        [actionSheet showInView:self.view];
+    }
+}
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex == 0 )
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tmpUrlString]];
+    }
+    else if ( tmpUrlString )
+    {
+        tmpUrlString = nil;
+    }
 }
 
 
@@ -311,6 +379,13 @@
     
     [self.scrollView addSubview:label];
     [self.scrollView addSubview:imageView];
+    
+
+    ButtonURL* button = [ButtonURL buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectUnion(label.frame, imageView.frame);
+    [button addTarget:self action:@selector(clickURLButton:) forControlEvents:UIControlEventTouchUpInside];
+    button.stringURL = item[@"link"];
+    [self.scrollView addSubview:button];
 }
 
 

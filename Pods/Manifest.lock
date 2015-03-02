@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.5.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - CJAMacros (2.1.1)
   - DTCoreText (1.6.14):
     - DTFoundation/Core (~> 1.7.1)
     - DTFoundation/DTAnimatedGIF (~> 1.7.1)
@@ -40,6 +41,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - CJAMacros
   - DTCoreText
   - ECSlidingViewController
   - HMSegmentedControl
@@ -50,6 +52,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
+  CJAMacros: e3f6c0823e3cbcba6a3788363117d35371a63ef7
   DTCoreText: 1fc0aadfa238d14c6cc56035af4e2b76b958e3b1
   DTFoundation: 721a63964fb9acd64cb8c9d3d1642ee60bac3d6a
   ECSlidingViewController: e79fe856bfb1a99a39c995377a1943e50f7647eb
@@ -59,4 +62,4 @@ SPEC CHECKSUMS:
   OrderedDictionary: f7dffc6f0b866461964952a66ed8497d15cf2028
   SwipeView: 0093c212acf3d715b09334c50d568a4418404150
 
-COCOAPODS: 0.36.0.beta.2
+COCOAPODS: 0.36.0.rc.1

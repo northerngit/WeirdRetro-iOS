@@ -10,8 +10,7 @@ pod 'ECSlidingViewController'
 pod 'OrderedDictionary'
 pod 'SwipeView'
 pod 'HMSegmentedControl'
-
-# pod 'SDWebImage', '~>3.6'
+pod 'CJAMacros'
 
 target 'Weird Retro' do
 end

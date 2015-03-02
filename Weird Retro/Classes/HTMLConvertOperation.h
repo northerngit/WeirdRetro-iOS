@@ -18,6 +18,4 @@ typedef void(^CustomOperationCompletionBlock)(WRPage* pageObject);
 @property (nonatomic, assign) PageType type;
 @property (nonatomic, copy) NSString* htmlMarkup;
 
-//- (id)initWithURL:(NSURL *)url successFailureBlock:(CustomOperationCompletionBlock)successFailureBlock;
-
 @end
