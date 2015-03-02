@@ -49,6 +49,7 @@
 		CE0BEFD71A8482CA00207752 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BEFD61A8482CA00207752 /* CoreData.framework */; };
 		CE0BEFDE1A84850B00207752 /* WeirdRetro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE0BEFDC1A84850B00207752 /* WeirdRetro.xcdatamodeld */; };
 		CE0D81631AA3EAFD00974899 /* ButtonURL.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0D81621AA3EAFD00974899 /* ButtonURL.m */; };
+		CE0D81651AA4062C00974899 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0D81641AA4062C00974899 /* Settings.bundle */; };
 		CE0E63B51A892BD500AE7B63 /* Hamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E63B41A892BD500AE7B63 /* Hamburger@2x.png */; };
 		CE0E63B71A892D2900AE7B63 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E63B61A892D2900AE7B63 /* back@2x.png */; };
 		CE0E63B91A892D5E00AE7B63 /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E63B81A892D5E00AE7B63 /* back@3x.png */; };
@@ -128,6 +129,7 @@
 		CE0BEFDD1A84850B00207752 /* WeirdRetro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeirdRetro.xcdatamodel; sourceTree = "<group>"; };
 		CE0D81611AA3EAFD00974899 /* ButtonURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonURL.h; sourceTree = "<group>"; };
 		CE0D81621AA3EAFD00974899 /* ButtonURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonURL.m; sourceTree = "<group>"; };
+		CE0D81641AA4062C00974899 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		CE0E63B41A892BD500AE7B63 /* Hamburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Hamburger@2x.png"; path = "Images/Hamburger@2x.png"; sourceTree = "<group>"; };
 		CE0E63B61A892D2900AE7B63 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@2x.png"; path = "Images/back@2x.png"; sourceTree = "<group>"; };
 		CE0E63B81A892D5E00AE7B63 /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back@3x.png"; path = "Images/back@3x.png"; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				CED3D4431A7DC44F002F7FDC /* Main.storyboard */,
 				CED3D4481A7DC44F002F7FDC /* LaunchScreen.xib */,
 				CEC0D2181A97121800D0FBA1 /* EscapePodsFilterView.xib */,
+				CE0D81641AA4062C00974899 /* Settings.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				CE068A0F1A873A5B00D69CFC /* Lato-SemiboldItalic.ttf in Resources */,
 				CE068A121A873A5B00D69CFC /* OFL.txt in Resources */,
 				CE0689E81A873A3B00D69CFC /* vintage-tan-paper-texture.jpg in Resources */,
+				CE0D81651AA4062C00974899 /* Settings.bundle in Resources */,
 				CE0689E71A873A3B00D69CFC /* logo.png in Resources */,
 				CED3D44A1A7DC44F002F7FDC /* LaunchScreen.xib in Resources */,
 				CE0689E61A873A3B00D69CFC /* bg.png in Resources */,

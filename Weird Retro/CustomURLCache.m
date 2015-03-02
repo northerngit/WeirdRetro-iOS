@@ -9,7 +9,7 @@
 #import "CustomURLCache.h"
 
 static NSString * const CustomURLCacheExpirationKey = @"CustomURLCacheExpiration";
-static NSTimeInterval const CustomURLCacheExpirationInterval = 600;
+static NSTimeInterval const CustomURLCacheExpirationInterval = 6000;
 
 @implementation CustomURLCache
 
@@ -18,7 +18,7 @@ static NSTimeInterval const CustomURLCacheExpirationInterval = 600;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _standardURLCache = [[CustomURLCache alloc]
-                             initWithMemoryCapacity:(2 * 1024 * 1024)
+                             initWithMemoryCapacity:(5 * 1024 * 1024)
                              diskCapacity:(100 * 1024 * 1024)
                              diskPath:nil];
     });

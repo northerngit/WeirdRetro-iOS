@@ -342,11 +342,11 @@
 {
     if ( buttonIndex == 0 )
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tmpUrlString]];
+        tmpUrlString = nil;
     }
     else if ( tmpUrlString )
     {
-        tmpUrlString = nil;
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tmpUrlString]];
     }
 }
 

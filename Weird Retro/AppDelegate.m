@@ -23,13 +23,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self importFonts];
-//    [self printAvailableFonts];
-    
-    CustomURLCache *URLCache = [[CustomURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
-                                                         diskCapacity:200 * 1024 * 1024
-                                                             diskPath:nil];
+
+    CustomURLCache *URLCache = [[CustomURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024 diskCapacity:200 * 1024 * 1024 diskPath:@"customcache"];
     [NSURLCache setSharedURLCache:URLCache];
-    
+
     return YES;
 }
 
@@ -79,6 +76,13 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    if ( [[NSUserDefaults standardUserDefaults] boolForKey:@"settingsClearCache"] )
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"settingsClearCache"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
