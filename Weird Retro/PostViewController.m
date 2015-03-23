@@ -195,6 +195,10 @@
         {
             [self drawSlides:item];
         }
+        else if ( [item[@"type"] integerValue] == 6 )
+        {
+            [self drawMap:item];
+        }
     }
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
@@ -209,6 +213,19 @@
 - (void) drawYoutube:(NSDictionary*)item
 {
     UIWebView* view = [[UIWebView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 200)];
+    view.hidden = YES;
+    view.delegate = self;
+    
+    [view loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:[@"http:" stringByAppendingString:item[@"src"]]]]];
+    
+    [self.scrollView addSubview:view];
+    height += view.frame.size.height + ELEMENTS_SPACING;
+}
+
+
+- (void) drawMap:(NSDictionary*)item
+{
+    UIWebView* view = [[UIWebView alloc] initWithFrame:CGRectMake(0, height, self.view.frame.size.width, 250)];
     view.hidden = YES;
     view.delegate = self;
     

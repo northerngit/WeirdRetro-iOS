@@ -378,6 +378,11 @@
                 {
                     [self parseYoutube:element];
                 }
+                // Map
+                else if ( [class isEqualToString:@"wsite-map"] )
+                {
+                    [self parseMap:element];
+                }
             }
             else
             {
@@ -491,6 +496,19 @@
     if ( iframeElement )
     {
         NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @4, @"src": iframeElement.attributes[@"src"]}];
+        
+        [array addObject:dictionary];
+    }
+}
+
+
+- (void) parseMap:(HTMLElement*)element
+{
+    HTMLElement* iframeElement = [element firstNodeMatchingSelector:@"iframe"];
+
+    if ( iframeElement )
+    {
+        NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @6, @"src": iframeElement.attributes[@"src"]}];
         
         [array addObject:dictionary];
     }
