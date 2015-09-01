@@ -407,7 +407,7 @@
         }
         else if ( [element.tagName isEqualToString:@"h2"] && element.attributes[@"class"] && [element.attributes[@"class"] isEqualToString:@"wsite-content-title"] )
         {
-            // OK
+            [self parseTitle:element];
         }
         else
         {
@@ -512,6 +512,13 @@
         
         [array addObject:dictionary];
     }
+}
+
+
+- (void) parseTitle:(HTMLElement*)element
+{
+    NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @7, @"html": element.innerHTML}];
+    [array addObject:dictionary];
 }
 
 

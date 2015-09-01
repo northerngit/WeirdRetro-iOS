@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7BCBC82C484552F167772132"
+               BlueprintIdentifier = "A26FBF7D095A1453CBD1F3F6"
                BuildableName = "libPods-Weird Retro-HMSegmentedControl.a"
                BlueprintName = "Pods-Weird Retro-HMSegmentedControl"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -22,6 +22,11 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return [self initWithString:@""];
+}
+
 - (BOOL)consumeString:(NSString *)string matchingCase:(BOOL)caseSensitive
 {
     NSScanner *scanner = [self unprocessedScanner];
@@ -126,15 +131,11 @@
             if (self.errorBlock) {
                 self.errorBlock(@"Isolated lead surrogate");
             }
-            // SPEC The spec does not say to emit a replacement character here. We'll do so anyway because of html5lib-tests.
-            c = 0xFFFD;
         }
     } else if (CFStringIsSurrogateLowCharacter(c)) {
         if (self.errorBlock) {
             self.errorBlock(@"Isloated trail surrogate");
         }
-        // SPEC The spec does not say to emit a replacement character here. We'll do so anyway because of html5lib-tests.
-        c = 0xFFFD;
     } else if (c == '\r') {
         c = '\n';
         if (CFStringGetCharacterFromInlineBuffer(&_buffer, _scanLocation + advance) == '\n') {

@@ -10,6 +10,8 @@
 #import "HTMLString.h"
 #import "HTMLTextNode.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation HTMLNode (Serialization)
 
 - (NSString *)recursiveDescription
@@ -109,9 +111,9 @@ static void RecursiveDescriptionHelper(HTMLNode *self, NSMutableString *string, 
     NSMutableString *description = [NSMutableString new];
     [description appendFormat:@"<%@: %p <", self.class, self];
     
-    if (self.namespace == HTMLNamespaceMathML) {
+    if (self.htmlNamespace == HTMLNamespaceMathML) {
         [description appendString:@"math "];
-    } else if (self.namespace == HTMLNamespaceSVG) {
+    } else if (self.htmlNamespace == HTMLNamespaceSVG) {
         [description appendString:@"svg "];
     }
     
@@ -201,3 +203,5 @@ static void RecursiveDescriptionHelper(HTMLNode *self, NSMutableString *string, 
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

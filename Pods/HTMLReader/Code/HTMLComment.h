@@ -4,18 +4,21 @@
 
 #import "HTMLNode.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
- * An HTMLCommentNode represents a comment.
- *
- * For more information, see http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#comments
+    An HTMLComment represents a comment.
+ 
+    For more information, see http://www.whatwg.org/specs/web-apps/current-work/multipage/syntax.html#comments
  */
 @interface HTMLComment : HTMLNode
 
+/// Initializes a comment with some text.
 - (instancetype)initWithData:(NSString *)data NS_DESIGNATED_INITIALIZER;
 
-/**
- * The comment itself.
- */
+/// The comment text.
 @property (copy, nonatomic) NSString *data;
 
 @end
+
+NS_ASSUME_NONNULL_END

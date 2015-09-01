@@ -586,8 +586,6 @@
     
     self.currentOperation = operation;
     
-    NSLog(@"%@", self.delegate);
-    
     if ([(NSObject *)self.delegate respondsToSelector:@selector(slidingViewController:animationControllerForOperation:topViewController:)]) {
         self.currentAnimationController = [self.delegate slidingViewController:self
                                                animationControllerForOperation:operation

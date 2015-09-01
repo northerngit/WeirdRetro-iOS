@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "162DDD4F00C41B4E22BA98D9"
+               BlueprintIdentifier = "1FE934B1A4249AF89FC525C1"
                BuildableName = "libPods-Weird Retro-SwipeView.a"
                BlueprintName = "Pods-Weird Retro-SwipeView"
                ReferencedContainer = "container:Pods.xcodeproj">

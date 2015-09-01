@@ -80,23 +80,24 @@
     if ( self.filterPlaceholderView )
         return;
     
-    CGFloat margin = 1;
-    
     self.filterPlaceholderView = [[UIView alloc] initWithFrame: CGRectMake(0, 59, 302, 26)];
     self.filterPlaceholderView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
     self.filterPlaceholderView.layer.cornerRadius = self.filterPlaceholderView.frame.size.height/2.f;
     self.filterPlaceholderView.center = CGPointMake(self.view.frame.size.width/2, self.filterPlaceholderView.center.y);
     self.filterPlaceholderView.alpha = 0.0f;
+    self.filterPlaceholderView.clipsToBounds = YES;
     
     HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"latest pods", @"memory banks"]];
-    segmentedControl.frame = CGRectMake(margin, margin, self.filterPlaceholderView.frame.size.width-margin*2, self.filterPlaceholderView.frame.size.height-margin*2);
+    segmentedControl.frame = CGRectMake(0, 0, self.filterPlaceholderView.frame.size.width, self.filterPlaceholderView.frame.size.height);
     [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    
+
     segmentedControl.backgroundColor = [UIColor clearColor];
     segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox;
-    segmentedControl.textColor = [UIColor whiteColor];
-    segmentedControl.selectedTextColor = [UIColor blackColor];
-    segmentedControl.font = [UIFont fontWithName:@"CourierNewPS-BoldMT" size:13.0f];
+    segmentedControl.titleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor whiteColor],
+                                              NSFontAttributeName : [UIFont fontWithName:@"CourierNewPS-BoldMT" size:13.0f]};
+
+    segmentedControl.selectedTitleTextAttributes = @{ NSForegroundColorAttributeName : [UIColor blackColor] };
+
     segmentedControl.selectionIndicatorColor = [UIColor colorWithRed:243.0f/255.0f green:200.0f/255.0f blue:0 alpha:1.0f];
     segmentedControl.selectionIndicatorBoxOpacity = 1.0f;
     

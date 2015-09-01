@@ -159,6 +159,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 
 - (void)awakeFromNib
 {
+	[super awakeFromNib];
 	[self setup];
 }
 
@@ -426,8 +427,6 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 
 - (void)layoutSubviews
 {
-	[super layoutSubviews];
-	
 	if (!_isTiling && (self.bounds.size.width>1024.0 || self.bounds.size.height>1024.0))
 	{
 		if (![self.layer isKindOfClass:[CATiledLayer class]])
@@ -440,6 +439,8 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 	{
 		[self layoutSubviewsInRect:CGRectInfinite];
 	}
+  
+    [super layoutSubviews];
 }
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
@@ -447,7 +448,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 	// needs clearing of background
 	CGRect rect = CGContextGetClipBoundingBox(ctx);
 	
-	if (_backgroundOffset.height || _backgroundOffset.width)
+	if (_backgroundOffset.height != 0 || _backgroundOffset.width != 0)
 	{
 		CGContextSetPatternPhase(ctx, _backgroundOffset);
 	}
@@ -577,6 +578,15 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 }
 
 #pragma mark - Sizing
+
+- (void)setBounds:(CGRect)bounds {
+
+    if (!CGSizeEqualToSize(self.bounds.size, bounds.size)) {
+        _layoutFrame = nil;
+        [self invalidateIntrinsicContentSize];
+    }
+    [super setBounds:bounds];
+}
 
 - (CGSize)intrinsicContentSize
 {

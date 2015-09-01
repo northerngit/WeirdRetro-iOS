@@ -199,6 +199,10 @@
         {
             [self drawMap:item];
         }
+        else if ( [item[@"type"] integerValue] == 7 )
+        {
+            [self drawTitleElement:item];
+        }
     }
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, height);
@@ -206,6 +210,25 @@
     if ( [self.post isBlogPost] )
         [self drawComments];
 
+}
+
+
+- (void) drawTitleElement:(NSDictionary*)item
+{
+    NSDictionary *options = kMainTextOptions;
+    NSData *data = [item[@"html"] dataUsingEncoding:NSUTF8StringEncoding];
+
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];
+
+    DTAttributedLabel* label = [[DTAttributedLabel alloc] initWithFrame:CGRectMake(15, height, self.view.frame.size.width-30, 10000)];
+    label.attributedString = attrString;
+    label.delegate = self;
+    label.backgroundColor = [UIColor clearColor];
+    [label sizeToFit];
+
+    [self.scrollView addSubview:label];
+
+    height += label.frame.size.height + 20;
 }
 
 
