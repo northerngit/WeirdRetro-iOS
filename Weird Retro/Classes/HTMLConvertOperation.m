@@ -170,10 +170,8 @@
     blogPost.url = blogTitle.attributes[@"href"];
     
     blogPost.blogPostId = [blogNode.attributes[@"id"] substringFromIndex:[@"blog-post-" length]];
-    blogPost.blogPostDate = blogDate.textContent;
-    
-//    DLog(@"%@, %@", blogPost.blogPostId, blogNode);
-    
+    blogPost.blogPostDate = [blogDate.textContent stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
     NSString* numberString = @"";
     NSScanner *scanner = [NSScanner scannerWithString:blogComments.textContent];
     NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
