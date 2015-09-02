@@ -4,56 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-AFNetworking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-CJAMacros.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-DTCoreText.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-DTFoundation.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-ECSlidingViewController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-HMSegmentedControl.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-HTMLReader.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-MBProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-OrderedDictionary.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SwipeView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Weird Retro-AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -99,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Weird Retro-SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Weird Retro-SwipeView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -109,120 +64,65 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>06C460004A2D61E52D50E60F</key>
+		<key>0023A1377F62EA9502C7134B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1FE934B1A4249AF89FC525C1</key>
+		<key>1AAC1AB40D266C24D7A8FFA3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>28FBA0A06A6F33D33AF9AB54</key>
+		<key>4A676E6C848E7A30CD672860</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>540A3BBBCCA7E84182452D00</key>
+		<key>64E793F1E1FB3E052AEAE078</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5CB7C3942DF2E936F6281EDB</key>
+		<key>86D414E26D31E3CEC97627BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>734BE06186126C84D6EB783A</key>
+		<key>886854E5BBD55E93267FC552</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7C90960091DE920F43E2C2B4</key>
+		<key>A9AFC53D280273F48C74D985</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8428C0B1439A46F4BC636303</key>
+		<key>AE1F88FF9289C48A1F4D4C9F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8720D6809242873D9AD1EED1</key>
+		<key>B7219106F2AE54F240F411BD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8CC174921984347B169CE745</key>
+		<key>C16C4E3D14FD9F0845BA558F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9C9DA23FF61A2475A3DD5009</key>
+		<key>C63D58C64472DD75B97F0D3A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D65C2F200C66427330E5FA9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A26FBF7D095A1453CBD1F3F6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ABFE44AB83DB3ED2792EB003</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B0553AEB81937792049868C1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B50A2D7903DD7BE19773EEF4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BC866B3449A0EAC9D7D5F19D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CE612EB977E3B8D4D78CB206</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D041979E60020B14416E3C73</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DB653EA971A3754C7FE4150B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DBF69EB4258D1DB223243B80</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E2F03104A5175D1FB0E0513C</key>
+		<key>DE027690351032DF48D1944B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -9,7 +9,7 @@
 #import "EscapePodsTableViewCell.h"
 #import "Post.h"
 #import "Managers.h"
-#import <AFNetworking/UIKit+AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation EscapePodsTableViewCell
 
@@ -36,6 +36,9 @@
     [super layoutSubviews];
     
     self.imgThumbnail.image = nil;
+    
+    [self.imgThumbnail sd_setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:self.post.thumbnailUrl]] placeholderImage:nil];
+    
 //    [self.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:self.post.thumbnailUrl]]];
     
     CGRect rectTitle = [self.lblTitle.text boundingRectWithSize:CGSizeMake(self.contentView.frame.size.width - 80, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.lblTitle.font} context:nil];

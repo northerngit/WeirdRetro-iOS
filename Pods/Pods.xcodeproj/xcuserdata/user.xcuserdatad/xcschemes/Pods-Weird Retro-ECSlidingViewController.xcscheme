@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B0553AEB81937792049868C1"
+               BlueprintIdentifier = "C63D58C64472DD75B97F0D3A"
                BuildableName = "libPods-Weird Retro-ECSlidingViewController.a"
                BlueprintName = "Pods-Weird Retro-ECSlidingViewController"
                ReferencedContainer = "container:Pods.xcodeproj">

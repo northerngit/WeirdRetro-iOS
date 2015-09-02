@@ -8,7 +8,7 @@
 
 #import "BlogPostTableViewCell.h"
 #import "Managers.h"
-#import <AFNetworking/UIKit+AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 @implementation BlogPostTableViewCell
@@ -44,8 +44,9 @@
     [super layoutSubviews];
     
     self.imgThumbnail.image = nil;
-//    [self.imgThumbnail setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:self.blogPost.thumbnailUrl]]];
     
+    [self.imgThumbnail sd_setImageWithURL:[NSURL URLWithString:[NETWORK.baseURL stringByAppendingPathComponent:self.blogPost.thumbnailUrl]] placeholderImage:nil];
+
     CGRect rectTitle = [self.lblTitle.text boundingRectWithSize:CGSizeMake(self.contentView.frame.size.width - 80, 100) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.lblTitle.font} context:nil];
 
     self.lblTitle.frame = CGRectMake(self.lblTitle.frame.origin.x, 10, rectTitle.size.width, rectTitle.size.height);

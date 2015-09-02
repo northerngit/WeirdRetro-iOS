@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		407C55D606BD7D49573603F6 /* libPods-Weird Retro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A18ED268A089EA3CFF57D6F1 /* libPods-Weird Retro.a */; };
 		AC478D6FC8E66A49116B8FBE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0F2BF7B1EF754C407EF799 /* libPods.a */; };
 		CE0689E61A873A3B00D69CFC /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0689E31A873A3B00D69CFC /* bg.png */; };
 		CE0689E71A873A3B00D69CFC /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0689E41A873A3B00D69CFC /* logo.png */; };
@@ -83,6 +84,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		59C2E4B98DAEB65FF7A5E41F /* Pods-Weird Retro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weird Retro.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weird Retro/Pods-Weird Retro.release.xcconfig"; sourceTree = "<group>"; };
+		A18ED268A089EA3CFF57D6F1 /* libPods-Weird Retro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weird Retro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0689E31A873A3B00D69CFC /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = Images/bg.png; sourceTree = "<group>"; };
 		CE0689E41A873A3B00D69CFC /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Images/logo.png; sourceTree = "<group>"; };
 		CE0689E51A873A3B00D69CFC /* vintage-tan-paper-texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "vintage-tan-paper-texture.jpg"; path = "Images/vintage-tan-paper-texture.jpg"; sourceTree = "<group>"; };
@@ -187,6 +190,7 @@
 		CED3D4491A7DC44F002F7FDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CED3D4541A7DC44F002F7FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED3D4551A7DC44F002F7FDC /* Weird_RetroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Weird_RetroTests.m; sourceTree = "<group>"; };
+		D2BCE6CF413A23272F757F5E /* Pods-Weird Retro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weird Retro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weird Retro/Pods-Weird Retro.debug.xcconfig"; sourceTree = "<group>"; };
 		DD0F2BF7B1EF754C407EF799 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E224A6AEAF271396FFA97523 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F8BF5B3D00D2BA9030603FAD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 			files = (
 				CE0BEFD71A8482CA00207752 /* CoreData.framework in Frameworks */,
 				AC478D6FC8E66A49116B8FBE /* libPods.a in Frameworks */,
+				407C55D606BD7D49573603F6 /* libPods-Weird Retro.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +215,7 @@
 			children = (
 				CE0BEFD61A8482CA00207752 /* CoreData.framework */,
 				DD0F2BF7B1EF754C407EF799 /* libPods.a */,
+				A18ED268A089EA3CFF57D6F1 /* libPods-Weird Retro.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,6 +225,8 @@
 			children = (
 				E224A6AEAF271396FFA97523 /* Pods.debug.xcconfig */,
 				F8BF5B3D00D2BA9030603FAD /* Pods.release.xcconfig */,
+				D2BCE6CF413A23272F757F5E /* Pods-Weird Retro.debug.xcconfig */,
+				59C2E4B98DAEB65FF7A5E41F /* Pods-Weird Retro.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -463,11 +471,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CED3D4591A7DC44F002F7FDC /* Build configuration list for PBXNativeTarget "Weird Retro" */;
 			buildPhases = (
-				BC36C6C3C68FCAC2D1779843 /* Check Pods Manifest.lock */,
+				9DA654CA1F4B34A9740B567F /* Check Pods Manifest.lock */,
 				CED3D4321A7DC44F002F7FDC /* Sources */,
 				CED3D4331A7DC44F002F7FDC /* Frameworks */,
 				CED3D4341A7DC44F002F7FDC /* Resources */,
-				62B9AB1A1924841661D0E13D /* Copy Pods Resources */,
+				0BEDF3FA19856FCBBC3838E3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -564,7 +572,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		62B9AB1A1924841661D0E13D /* Copy Pods Resources */ = {
+		0BEDF3FA19856FCBBC3838E3 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -576,10 +584,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weird Retro/Pods-Weird Retro-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BC36C6C3C68FCAC2D1779843 /* Check Pods Manifest.lock */ = {
+		9DA654CA1F4B34A9740B567F /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -732,7 +740,7 @@
 		};
 		CED3D45A1A7DC44F002F7FDC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E224A6AEAF271396FFA97523 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = D2BCE6CF413A23272F757F5E /* Pods-Weird Retro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -782,7 +790,7 @@
 		};
 		CED3D45B1A7DC44F002F7FDC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8BF5B3D00D2BA9030603FAD /* Pods.release.xcconfig */;
+			baseConfigurationReference = 59C2E4B98DAEB65FF7A5E41F /* Pods-Weird Retro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
