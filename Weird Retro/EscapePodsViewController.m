@@ -30,6 +30,8 @@
 @property (nonatomic, strong) NSArray *lastPods;
 @property (nonatomic, strong) UIView *filterPlaceholderView;
 @property (nonatomic, assign) NSInteger selectedFilterIndex;
+@property (nonatomic, strong) HMSegmentedControl *segmentedControl;
+
 
 @end
 
@@ -78,8 +80,10 @@
 - (void) configureFilter
 {
     if ( self.filterPlaceholderView )
+    {
         return;
-    
+    }
+        
     self.filterPlaceholderView = [[UIView alloc] initWithFrame: CGRectMake(0, 59, 302, 26)];
     self.filterPlaceholderView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.1f];
     self.filterPlaceholderView.layer.cornerRadius = self.filterPlaceholderView.frame.size.height/2.f;
@@ -102,7 +106,10 @@
     segmentedControl.selectionIndicatorBoxOpacity = 1.0f;
     
     segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationNone;
+    segmentedControl.selectedSegmentIndex = self.selectedFilterIndex;
     segmentedControl.shouldAnimateUserSelection = NO;
+    
+    self.segmentedControl = segmentedControl;
     
     [self.filterPlaceholderView addSubview:segmentedControl];
     [self.navigationController.navigationBar.superview addSubview:self.filterPlaceholderView];

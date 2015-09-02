@@ -729,9 +729,6 @@ static DataManager *sharedInstance = nil;
                     {
                         [CONVERTER convertPostToStructure:htmlMarkupPage withCompletion:^(WRPage* pageObjectPage) {
                             
-//                            ALog(@"%@", section.title);
-//                            ALog(@"%@", pageObjectPage.items);
-                            
                             NSArray* items = pageObjectPage.items;
                             NSMutableArray* sectionExistItems = [NSMutableArray arrayWithArray:[section.posts allObjects]];
                             
