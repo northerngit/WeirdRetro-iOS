@@ -76,8 +76,6 @@
                 [self refreshComments];
             }];
         }
-        
-//        [self reloadPost];
     }
     else
     {

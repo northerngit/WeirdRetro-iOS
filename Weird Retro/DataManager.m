@@ -652,6 +652,8 @@ static DataManager *sharedInstance = nil;
             
             NSArray* sectionsParameters = pageObject.items2;
             
+            NSLog(@"%@", sectionsParameters);
+            
             if ( sectionsParameters.count == 0 )
             {
                 if ( completion ) completion(nil);

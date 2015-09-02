@@ -41,6 +41,7 @@
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]];
     self.tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0);
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(30, 0, 0, 0);
     
     self.selectedFilterIndex = 0;
 }
@@ -52,7 +53,6 @@
 
     [self configureFilter];
 }
-
 
 
 - (void) viewDidAppear:(BOOL)animated

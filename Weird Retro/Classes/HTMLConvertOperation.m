@@ -117,7 +117,9 @@
         HTMLElement* aElement = [menuItem firstNodeMatchingSelector:@"a"];
         HTMLElement* spanElement = [aElement firstNodeMatchingSelector:@"span[class='wsite-menu-title']"];
         
-        [menuElements addObject:@{@"title":[spanElement textContent], @"url":aElement.attributes[@"href"]}];
+        NSString* s = [[spanElement textContent] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        [menuElements addObject:@{@"title":s, @"url":aElement.attributes[@"href"]}];
     }
     
     [menuElements removeLastObject];
