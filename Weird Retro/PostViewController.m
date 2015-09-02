@@ -165,6 +165,8 @@
         return;
     
     
+    NSLog(@"%@", postStructure);
+    
     [self drawTitle];
     
     for (NSDictionary* item in postStructure)
@@ -213,7 +215,7 @@
 
 - (void) drawTitleElement:(NSDictionary*)item
 {
-    NSDictionary *options = kMainTextOptions;
+    NSDictionary *options = kTitleTextOptions;
     NSData *data = [item[@"html"] dataUsingEncoding:NSUTF8StringEncoding];
 
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithHTMLData:data options:options documentAttributes:NULL];
@@ -227,6 +229,23 @@
     [self.scrollView addSubview:label];
 
     height += label.frame.size.height + 20;
+    
+    ////////
+    
+    
+//    UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(30, height, self.view.frame.size.width-60, 300)];
+//    [self.scrollView addSubview:lblTitle];
+//    
+//    lblTitle.font = [UIFont fontWithName:@"KomikaAxis" size:18.0];
+//    lblTitle.numberOfLines = 0;
+//    lblTitle.text = item[@"html"];
+//    lblTitle.textAlignment = NSTextAlignmentCenter;
+//    
+//    CGRect rect = [item[@"html"] boundingRectWithSize:lblTitle.frame.size options:NSStringDrawingUsesLineFragmentOrigin
+//                                             attributes:@{NSFontAttributeName:lblTitle.font} context:nil];
+//    
+//    lblTitle.frame = CGRectMake(lblTitle.frame.origin.x, lblTitle.frame.origin.y, lblTitle.frame.size.width, rect.size.height);
+//    height += ELEMENTS_SPACING*2 + lblTitle.frame.size.height;
 }
 
 
