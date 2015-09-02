@@ -613,8 +613,6 @@ static DataManager *sharedInstance = nil;
                         post.url = blogPost.url;
                     }
                     
-                    DLog(@"%@", blogPost.blogPostId);
-
                     post.title = blogPost.title;
                     post.thumbnailUrl = blogPost.thumbnailUrl;
                     post.content = blogPost.items;
@@ -686,6 +684,7 @@ static DataManager *sharedInstance = nil;
 
             for (Section* section in sectionsForDeletion)
                 [self deleteObject:section];
+            
             [self saveWithSuccess:nil failure:nil];
             
             
@@ -725,9 +724,13 @@ static DataManager *sharedInstance = nil;
             for (Section* section in sections)
             {
                 [NETWORK loadingHTMLFile:section.url withCompletion:^(NSError *errorInLoading, NSString *htmlMarkupPage) {
+                    
                     if ( !errorInLoading )
                     {
                         [CONVERTER convertPostToStructure:htmlMarkupPage withCompletion:^(WRPage* pageObjectPage) {
+                            
+//                            ALog(@"%@", section.title);
+//                            ALog(@"%@", pageObjectPage.items);
                             
                             NSArray* items = pageObjectPage.items;
                             NSMutableArray* sectionExistItems = [NSMutableArray arrayWithArray:[section.posts allObjects]];
@@ -735,6 +738,9 @@ static DataManager *sharedInstance = nil;
                             NSInteger postIndex = 0;
                             for (NSDictionary* postParams in items)
                             {
+                                if ( [postParams[@"type"] integerValue] != 3 )
+                                    continue;
+                                
                                 NSArray* postsTmp = [sectionExistItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"url = %@", postParams[@"link"]]];
                                 
                                 Post* post = nil;
