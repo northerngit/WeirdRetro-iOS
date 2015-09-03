@@ -31,14 +31,20 @@
 
 - (void)main
 {
+    self.pageObject = [[WRPage alloc] init];
+
     if ( !self.htmlMarkup || self.htmlMarkup.length == 0 )
+    {
+        if ( self.successFailureBlock )
+            self.successFailureBlock(self.pageObject);
+
         return;
-    
+    }
+        
     array = [NSMutableArray new];
     arraySkip = [NSMutableArray new];
     
     self.htmlDocument = [HTMLDocument documentWithString:self.htmlMarkup];
-    self.pageObject = [[WRPage alloc] init];
     
     HTMLElement* elementContent = [self.htmlDocument firstNodeMatchingSelector:@"[id=\"wsite-content\"]"];
 

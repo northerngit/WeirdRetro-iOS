@@ -138,9 +138,13 @@
     {
         NSArray* posts = [section.posts sortedArrayUsingDescriptors:@[descriptor]];
         dict[section.title] = posts;
+        
+        NSLog(@"+ %@", section.title);
     }
     
     self.sections = dict;
+    
+    
     
     ////////////
     

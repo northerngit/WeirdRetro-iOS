@@ -646,6 +646,11 @@ static DataManager *sharedInstance = nil;
             return;
         }
 
+//        NSString *qs = [[NSBundle mainBundle] pathForResource: @"html-without" ofType: @"html"];
+//        NSString *qs = [[NSBundle mainBundle] pathForResource: @"html-with" ofType: @"html"];
+        
+//        NSString* markup = [NSString stringWithContentsOfFile:qs encoding:NSUTF8StringEncoding error:nil];
+        
         [CONVERTER convertMainPage:htmlMarkup withCompletion:^(WRPage* pageObject) {
             
             NSArray* sectionsParameters = pageObject.items2;
@@ -656,7 +661,13 @@ static DataManager *sharedInstance = nil;
                 return;
             }
             
+            
             NSMutableArray* sectionsForDeletion = [NSMutableArray arrayWithArray:[self objects:@"Section"]];
+
+//            for (Section* s in sectionsForDeletion)
+//            {
+//                NSLog(@" -- %@", s.title);
+//            }
             
             __block NSUInteger index = 0;
             for (NSDictionary* sectionParameters in sectionsParameters)
@@ -671,7 +682,9 @@ static DataManager *sharedInstance = nil;
                 }
                 
                 if ( !section )
+                {
                     section = [self object:@"Section"];
+                }
                 
                 section.order = @(index);
                 section.title = sectionParameters[@"title"];
@@ -682,6 +695,8 @@ static DataManager *sharedInstance = nil;
             
             [self saveWithSuccess:nil failure:nil];
 
+//            NSLog(@"%@", sectionsForDeletion);
+            
             for (Section* section in sectionsForDeletion)
                 [self deleteObject:section];
             
@@ -717,7 +732,6 @@ static DataManager *sharedInstance = nil;
             [self saveWithSuccess:nil failure:nil];
             
             
-            
             NSArray* sections = [self objects:@"Section"];
             index = 0;
             
@@ -727,7 +741,11 @@ static DataManager *sharedInstance = nil;
                     
                     if ( !errorInLoading )
                     {
+//                        NSLog(@"start: %@", section.title);
+
                         [CONVERTER convertPostToStructure:htmlMarkupPage withCompletion:^(WRPage* pageObjectPage) {
+                            
+//                            NSLog(@"convert: %@", section.title);
                             
                             NSArray* items = pageObjectPage.items;
                             NSMutableArray* sectionExistItems = [NSMutableArray arrayWithArray:[section.posts allObjects]];
@@ -772,6 +790,9 @@ static DataManager *sharedInstance = nil;
                             [DATAMANAGER saveWithSuccess:nil failure:nil];
                             
                             index++;
+                            
+//                            NSLog(@"%d, %d", (int)index, (int)sections.count);
+                            
                             if ( index == sections.count && completion )
                                 completion(nil);
                             
