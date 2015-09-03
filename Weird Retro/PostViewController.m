@@ -164,10 +164,10 @@
     if ( !postStructure )
         return;
     
+//    NSLog(@"%@", postStructure);
     
-    NSLog(@"%@", postStructure);
-    
-    [self drawTitle];
+    if ( self.blogPost )
+        [self drawTitle];
     
     for (NSDictionary* item in postStructure)
     {

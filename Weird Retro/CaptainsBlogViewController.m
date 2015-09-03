@@ -107,6 +107,7 @@
         NSIndexPath* path = [self.tableView indexPathForCell:cell];
         
         PostViewController* controller = segue.destinationViewController;
+        controller.blogPost = YES;
         controller.postURL = [(BlogPost*)self.blogPosts[(NSUInteger)path.row] url];
     }
 }

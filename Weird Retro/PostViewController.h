@@ -29,4 +29,6 @@
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
 @property (strong, nonatomic) NSString* postURL;
 
+@property (assign, nonatomic) BOOL blogPost;
+
 @end
