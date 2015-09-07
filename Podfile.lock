@@ -34,7 +34,7 @@ PODS:
     - DTFoundation/Core
   - ECSlidingViewController (2.0.3)
   - HMSegmentedControl (1.5.2)
-  - HTMLReader (0.8.1)
+  - HTMLReader (0.8.2)
   - MBProgressHUD (0.9.1)
   - OrderedDictionary (1.2)
   - SDWebImage (3.7.3):
@@ -61,7 +61,7 @@ SPEC CHECKSUMS:
   DTFoundation: c9b3362b83f0017389082ec067ede719826a579d
   ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
-  HTMLReader: 9de5a559dc3c72f90ff794ac00a66ab990b4d0d2
+  HTMLReader: 2922aba4c1fff9c41aff3b20a3d5900a140b0585
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   OrderedDictionary: 9cc5d69c5c5314ad696ed1839190724e83d534c7
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
