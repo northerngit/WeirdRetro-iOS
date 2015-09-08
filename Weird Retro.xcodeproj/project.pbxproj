@@ -75,8 +75,6 @@
 		CEC0D2171A96F5FD00D0FBA1 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0D2161A96F5FD00D0FBA1 /* UINavigationBar+CustomHeight.m */; };
 		CEC0D2191A97121800D0FBA1 /* EscapePodsFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0D2181A97121800D0FBA1 /* EscapePodsFilterView.xib */; };
 		CEC0D21C1A97136E00D0FBA1 /* EscapePodsFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0D21B1A97136E00D0FBA1 /* EscapePodsFilterView.m */; };
-		CED24BAA1B98AA3600D13649 /* html-with.html in Resources */ = {isa = PBXBuildFile; fileRef = CED24BA91B98AA3600D13649 /* html-with.html */; };
-		CED24BAC1B98AC3000D13649 /* html-without.html in Resources */ = {isa = PBXBuildFile; fileRef = CED24BAB1B98AC3000D13649 /* html-without.html */; };
 		CED3D43C1A7DC44F002F7FDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43B1A7DC44F002F7FDC /* main.m */; };
 		CED3D43F1A7DC44F002F7FDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CED3D43E1A7DC44F002F7FDC /* AppDelegate.m */; };
 		CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED3D4431A7DC44F002F7FDC /* Main.storyboard */; };
@@ -182,8 +180,6 @@
 		CEC0D2181A97121800D0FBA1 /* EscapePodsFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EscapePodsFilterView.xib; sourceTree = "<group>"; };
 		CEC0D21A1A97136E00D0FBA1 /* EscapePodsFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EscapePodsFilterView.h; sourceTree = "<group>"; };
 		CEC0D21B1A97136E00D0FBA1 /* EscapePodsFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscapePodsFilterView.m; sourceTree = "<group>"; };
-		CED24BA91B98AA3600D13649 /* html-with.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "html-with.html"; path = "../../../../../Downloads/html-with.html"; sourceTree = "<group>"; };
-		CED24BAB1B98AC3000D13649 /* html-without.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "html-without.html"; path = "../../../../../Downloads/html-without.html"; sourceTree = "<group>"; };
 		CED3D4361A7DC44F002F7FDC /* Weird Retro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Weird Retro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED3D43A1A7DC44F002F7FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED3D43B1A7DC44F002F7FDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -341,8 +337,6 @@
 		CE212EF91A832D7A007EFD6E /* Example HTMLs */ = {
 			isa = PBXGroup;
 			children = (
-				CED24BAB1B98AC3000D13649 /* html-without.html */,
-				CED24BA91B98AA3600D13649 /* html-with.html */,
 				CE068A1E1A87495D00D69CFC /* postwithcomments.html */,
 				CE068A141A873A7C00D69CFC /* blogpage.html */,
 				CE068A151A873A7C00D69CFC /* fantomash.html */,
@@ -534,7 +528,6 @@
 				CE0AFF6A1A8BEFF700775A7B /* logo2.png in Resources */,
 				CE068A091A873A5B00D69CFC /* Lato-Light.ttf in Resources */,
 				CE068A111A873A5B00D69CFC /* Lato-ThinItalic.ttf in Resources */,
-				CED24BAA1B98AA3600D13649 /* html-with.html in Resources */,
 				CE068A061A873A5B00D69CFC /* Lato-Heavy.ttf in Resources */,
 				CE0AFF681A8BEA1200775A7B /* SIL Open Font License.txt in Resources */,
 				CE0AFF671A8BEA1200775A7B /* Inconsolata.otf in Resources */,
@@ -542,7 +535,6 @@
 				CE068A1A1A873A7C00D69CFC /* fantomash.html in Resources */,
 				CE068A1F1A87495D00D69CFC /* postwithcomments.html in Resources */,
 				CED3D4451A7DC44F002F7FDC /* Main.storyboard in Resources */,
-				CED24BAC1B98AC3000D13649 /* html-without.html in Resources */,
 				CE068A1D1A873A7C00D69CFC /* superhero.html in Resources */,
 				CE068A031A873A5B00D69CFC /* Lato-BoldItalic.ttf in Resources */,
 				CE0E63B71A892D2900AE7B63 /* back@2x.png in Resources */,
