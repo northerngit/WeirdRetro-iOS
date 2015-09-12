@@ -91,8 +91,6 @@ static DataManager *sharedInstance = nil;
  */
 - (NSManagedObjectContext *)managedObjectContext
 {
-    [__managedObjectContext mergeChangesFromContextDidSaveNotification:nil];
-    
     if (__threadContext != nil && ![NSThread isMainThread])
         return __threadContext;
     
@@ -185,19 +183,6 @@ static DataManager *sharedInstance = nil;
         [__threadContext setPersistentStoreCoordinator:coordinator];
         [__threadContext setMergePolicy:NSOverwriteMergePolicy];
     }
-}
-
-- (void) clearThreadContext
-{
-    [__managedObjectContext setMergePolicy:NSOverwriteMergePolicy];
-    [__threadContext setMergePolicy:NSOverwriteMergePolicy];
-    
-    [__managedObjectContext mergeChangesFromContextDidSaveNotification:nil];
-    [__threadContext mergeChangesFromContextDidSaveNotification:nil];
-    
-    __threadContext = nil;
-    
-    
 }
 
 

@@ -32,7 +32,6 @@ typedef void(^FailureSaving)(NSError *error);
 - (void) saveContext;
 - (void) discardChanges;
 - (void) startThreadContext;
-- (void) clearThreadContext;
 
 
 
